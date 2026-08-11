@@ -2265,3 +2265,558 @@ button {
 
 
 }
+
+
+/* ============================================================
+   OJAMBO & OJAMBO — PREMIUM CLIENT LOGO WALL
+   ============================================================ */
+
+.clients-section {
+    width: 100%;
+    padding: 150px 0;
+    background: var(--ink);
+    color: var(--cream);
+    overflow: hidden;
+}
+
+
+/* ------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------ */
+
+.clients-heading {
+    width: min(
+        calc(100% - (var(--side-padding) * 2)),
+        var(--container)
+    );
+
+    margin-inline: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 320px;
+
+    gap: 80px;
+    align-items: end;
+
+    margin-bottom: 90px;
+}
+
+
+.clients-heading .eyebrow {
+    color: rgba(255,255,255,.55);
+}
+
+
+.clients-heading h2 {
+    margin: 20px 0 0;
+
+    font-family: var(--serif);
+    font-size: clamp(55px, 7vw, 105px);
+
+    line-height: .87;
+    letter-spacing: -.05em;
+    font-weight: 400;
+}
+
+
+.clients-heading h2 span {
+    display: block;
+    color: rgba(255,255,255,.35);
+}
+
+
+.clients-intro {
+    margin: 0;
+
+    color: rgba(255,255,255,.5);
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* ------------------------------------------------------------
+   LOGO WALL
+   ------------------------------------------------------------ */
+
+.client-logo-wall {
+
+    width: min(
+        calc(100% - (var(--side-padding) * 2)),
+        var(--container)
+    );
+
+    margin-inline: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(12, 1fr);
+
+    border-top: 1px solid var(--line-light);
+    border-left: 1px solid var(--line-light);
+}
+
+
+/* ------------------------------------------------------------
+   BASE CLIENT CARD
+   ------------------------------------------------------------ */
+
+.client-logo {
+
+    min-height: 250px;
+
+    padding: 35px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: var(--cream);
+
+    border-right: 1px solid var(--line-light);
+    border-bottom: 1px solid var(--line-light);
+
+    text-decoration: none;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        background .4s var(--ease),
+        transform .4s var(--ease);
+}
+
+
+.client-logo::after {
+
+    content: "↗";
+
+    position: absolute;
+
+    top: 28px;
+    right: 28px;
+
+    font-size: 14px;
+
+    opacity: 0;
+
+    transform: translate(-5px, 5px);
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+}
+
+
+.client-logo:hover {
+
+    background: rgba(255,255,255,.045);
+
+}
+
+
+.client-logo:hover::after {
+
+    opacity: .55;
+
+    transform: translate(0,0);
+
+}
+
+
+/* ------------------------------------------------------------
+   TEXT
+   ------------------------------------------------------------ */
+
+.client-main {
+
+    display: block;
+
+    line-height: .9;
+
+    color: var(--cream);
+}
+
+
+.client-sub {
+
+    display: block;
+
+    margin-top: 14px;
+
+    color: rgba(255,255,255,.42);
+
+    font-family: var(--sans);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
+}
+
+
+.client-country {
+
+    display: inline-block;
+
+    margin-top: 10px;
+
+    color: var(--gold);
+
+    font-family: var(--sans);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .2em;
+
+    text-transform: uppercase;
+}
+
+
+/* ============================================================
+   CLIENT 01 — KENLLOYD
+   ============================================================ */
+
+.client-kenlloyd {
+
+    grid-column: span 4;
+
+}
+
+
+.client-kenlloyd .client-main {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: clamp(32px, 3vw, 48px);
+
+    font-weight: 900;
+
+    letter-spacing: -.09em;
+}
+
+
+/* ============================================================
+   CLIENT 02 — PIONEER
+   ============================================================ */
+
+.client-pioneer {
+
+    grid-column: span 4;
+
+}
+
+
+.client-pioneer .client-main {
+
+    font-family: var(--serif);
+
+    font-size: clamp(43px, 4vw, 62px);
+
+    font-style: italic;
+
+    font-weight: 400;
+
+    letter-spacing: -.06em;
+}
+
+
+.client-pioneer .client-sub {
+
+    font-weight: 800;
+}
+
+
+/* ============================================================
+   CLIENT 03 — CAPITAL
+   ============================================================ */
+
+.client-capital {
+
+    grid-column: span 4;
+
+}
+
+
+.client-capital .client-main {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: clamp(31px, 3vw, 45px);
+
+    font-weight: 300;
+
+    letter-spacing: .14em;
+}
+
+
+/* ============================================================
+   CLIENT 04 — ELSMED
+   ============================================================ */
+
+.client-elsmed {
+
+    grid-column: span 5;
+
+}
+
+
+.client-elsmed .client-main {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: clamp(35px, 3.5vw, 52px);
+
+    font-weight: 800;
+
+    letter-spacing: -.06em;
+}
+
+
+.client-elsmed .client-sub {
+
+    letter-spacing: .09em;
+}
+
+
+/* ============================================================
+   CLIENT 05 — RETURN HOPE
+   ============================================================ */
+
+.client-returnhope {
+
+    grid-column: span 4;
+
+}
+
+
+.client-returnhope .client-main {
+
+    font-family: var(--serif);
+
+    font-size: clamp(38px, 3.5vw, 52px);
+
+    font-weight: 400;
+
+    line-height: .82;
+
+    letter-spacing: -.04em;
+}
+
+
+.client-returnhope .client-sub {
+
+    letter-spacing: .18em;
+}
+
+
+/* ============================================================
+   CLIENT 06 — CHRISTIAN LIFE MINISTRIES
+   ============================================================ */
+
+.client-christian {
+
+    grid-column: span 3;
+
+}
+
+
+.client-christian .client-main {
+
+    font-family: var(--serif);
+
+    font-size: clamp(34px, 3vw, 44px);
+
+    font-style: italic;
+
+    line-height: .88;
+}
+
+
+.client-christian .client-sub {
+
+    font-size: 8px;
+
+    letter-spacing: .11em;
+}
+
+
+/* ============================================================
+   CLIENT 07 — KIRK TECHNICALS
+   ============================================================ */
+
+.client-kirk {
+
+    grid-column: span 5;
+
+}
+
+
+.client-kirk .client-main {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: clamp(40px, 4vw, 58px);
+
+    font-weight: 900;
+
+    letter-spacing: -.09em;
+}
+
+
+.client-kirk .client-sub {
+
+    letter-spacing: .24em;
+}
+
+
+/* ============================================================
+   INTERNATIONAL FOOTER LINE
+   ============================================================ */
+
+.clients-footer {
+
+    width: min(
+        calc(100% - (var(--side-padding) * 2)),
+        var(--container)
+    );
+
+    margin: 45px auto 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    color: rgba(255,255,255,.35);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .2em;
+}
+
+
+.clients-line {
+
+    height: 1px;
+
+    flex: 1;
+
+    background: var(--line-light);
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .clients-section {
+
+        padding: 100px 0;
+
+    }
+
+
+    .clients-heading {
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+        margin-bottom: 60px;
+
+    }
+
+
+    .client-logo-wall {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+
+    .client-logo {
+
+        grid-column: span 1 !important;
+
+        min-height: 220px;
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .clients-section {
+
+        padding: 90px 0;
+
+    }
+
+
+    .clients-heading {
+
+        display: block;
+
+    }
+
+
+    .clients-intro {
+
+        margin-top: 30px;
+
+    }
+
+
+    .client-logo-wall {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .client-logo {
+
+        grid-column: span 1 !important;
+
+        min-height: 190px;
+
+        padding: 28px;
+
+    }
+
+
+    .client-main {
+
+        font-size: 38px !important;
+
+    }
+
+
+    .clients-footer {
+
+        margin-top: 30px;
+
+        gap: 12px;
+
+    }
+
+}
