@@ -1254,4 +1254,61 @@ kayanja: {
 
         });
 
+
+
+         const teamMembers = document.querySelectorAll(
+        "[data-team-member]"
+    );
+
+    teamMembers.forEach(member => {
+
+        const photoPath = member.dataset.photo;
+
+        if (!photoPath) {
+            // No photograph supplied.
+            // Keep the existing initials.
+            return;
+        }
+
+        const placeholder = member.querySelector(
+            ".photo-placeholder"
+        );
+
+        if (!placeholder) return;
+
+        const image = document.createElement("img");
+
+        image.className = "team-photo-image";
+
+        image.src = photoPath;
+
+        image.alt = member.querySelector("h3")
+            ? `${member.querySelector("h3").textContent.trim()} — Ojambo & Ojambo Advocates`
+            : "Ojambo & Ojambo Advocates team member";
+
+        image.loading = "lazy";
+
+        image.decoding = "async";
+
+        /* Successful image */
+        image.addEventListener("load", () => {
+
+            placeholder.classList.add("has-photo");
+
+        });
+
+        /* Failed image → initials remain */
+        image.addEventListener("error", () => {
+
+            image.remove();
+
+            placeholder.classList.remove("has-photo");
+
+        });
+
+        placeholder.prepend(image);
+
+    });
+
+
 });

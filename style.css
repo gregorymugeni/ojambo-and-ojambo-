@@ -3025,6 +3025,87 @@ button {
 
 
 
+
+
+/* =========================================================
+   TEAM PHOTOGRAPHS + INITIAL FALLBACK
+   Ojambo & Ojambo Advocates
+   ========================================================= */
+
+.team-photo {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Actual staff photograph */
+.team-photo-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    opacity: 0;
+    transform: scale(1.06);
+    transition:
+        opacity 0.7s cubic-bezier(.22,.61,.36,1),
+        transform 1.1s cubic-bezier(.22,.61,.36,1);
+    z-index: 1;
+}
+
+/* Photograph loaded successfully */
+.photo-placeholder.has-photo .team-photo-image {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Initials remain available as fallback */
+.team-initials {
+    position: relative;
+    z-index: 2;
+    transition:
+        opacity 0.45s ease,
+        transform 0.6s cubic-bezier(.22,.61,.36,1);
+}
+
+/* Hide initials when a real photo exists */
+.photo-placeholder.has-photo .team-initials {
+    opacity: 0;
+    transform: scale(.85);
+    pointer-events: none;
+}
+
+/* Keep the existing numbering above photographs */
+.team-photo-index,
+.team-photo-mark {
+    position: relative;
+    z-index: 4;
+}
+
+/* Subtle photographic movement when hovering */
+.team-member:hover .team-photo-image {
+    transform: scale(1.035);
+}
+
+/* Premium image treatment */
+.team-photo-image {
+    filter: saturate(.92) contrast(1.03);
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .team-photo-image {
+        object-position: center top;
+    }
+
+}
+
+
+
+
+
 /* ============================================================
    15. FINAL CTA
    ============================================================ */
