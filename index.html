@@ -3,47 +3,437 @@
 <head>
     <meta charset="UTF-8">
 
-    <!--
-        Makes the website responsive on phones, tablets and desktops.
-    -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- =========================================================
+         BASIC DOCUMENT / RESPONSIVE META
+    ========================================================== -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <!--
-        SEO title.
-        We are intentionally positioning the firm around Uganda + international clients.
-    -->
-    <title>Ojambo & Ojambo Advocates | Legal Counsel in Uganda</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta
-        name="description"
-        content="Ojambo & Ojambo Advocates provides legal counsel and representation in Uganda for businesses, investors, institutions and individuals."
-    >
+    <title>Ojambo &amp; Ojambo Advocates | Legal Counsel in Uganda</title>
 
-    <!--
-        Google Fonts:
-        DM Serif Display gives us the sophisticated editorial/legal heading style.
-        Manrope provides a modern, highly readable body font.
-    -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description"
+          content="Strategic legal advice and representation for international clients, investors, businesses, institutions and individuals with interests in Uganda.">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <meta name="author"
+          content="Ojambo &amp; Ojambo Advocates">
 
-    <!--
-        Font Awesome is only used for small interface icons.
-    -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+    <meta name="publisher"
+          content="Ojambo &amp; Ojambo Advocates">
 
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <meta name="application-name"
+          content="Ojambo &amp; Ojambo Advocates">
+
+    <meta name="subject"
+          content="Legal counsel and representation in Uganda">
+
+    <meta name="category"
+          content="Legal Services">
+
+    <meta name="classification"
+          content="Law Firm, Legal Services, Advocates">
+
+    <meta name="keywords"
+          content="Ojambo & Ojambo Advocates,
+          Ojambo and Ojambo Advocates,
+          O&O Advocates,
+          advocates Uganda,
+          lawyers Uganda,
+          law firm Uganda,
+          Kampala lawyers,
+          legal counsel Uganda,
+          corporate law Uganda,
+          commercial law Uganda,
+          foreign investment Uganda,
+          land law Uganda,
+          real estate law Uganda,
+          dispute resolution Uganda,
+          employment law Uganda,
+          regulatory advisory Uganda,
+          international clients Uganda">
+
+    <!-- =========================================================
+         SEARCH ENGINE CRAWLING
+    ========================================================== -->
+    <meta name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <meta name="googlebot"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <meta name="bingbot"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <!-- =========================================================
+         CANONICAL URL
+    ========================================================== -->
+    <link rel="canonical"
+          href="https://oandoadvocates.onrender.com/">
+
+    <!-- =========================================================
+         GEO / LOCAL SEO
+    ========================================================== -->
+    <meta name="geo.region" content="UG-C">
+    <meta name="geo.placename" content="Kampala, Uganda">
+
+    <!-- =========================================================
+         BROWSER / UI
+    ========================================================== -->
+    <meta name="theme-color" content="#202326">
+    <meta name="msapplication-TileColor" content="#202326">
+
+    <meta name="color-scheme" content="light dark">
+
+    <meta name="referrer"
+          content="strict-origin-when-cross-origin">
+
+    <meta name="format-detection"
+          content="telephone=yes">
+
+    <!-- =========================================================
+         APPLE / IOS
+    ========================================================== -->
+    <meta name="apple-mobile-web-app-title"
+          content="O&O Advocates">
+
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+
+    <!-- =========================================================
+         MICROSOFT
+    ========================================================== -->
+    <meta name="msapplication-config"
+          content="/browserconfig.xml">
+
+    <!-- =========================================================
+         OPEN GRAPH / FACEBOOK / WHATSAPP / LINKEDIN
+    ========================================================== -->
+    <meta property="og:type"
+          content="website">
+
+    <meta property="og:site_name"
+          content="Ojambo &amp; Ojambo Advocates">
+
+    <meta property="og:title"
+          content="Ojambo &amp; Ojambo Advocates | Legal Counsel in Uganda">
+
+    <meta property="og:description"
+          content="Strategic legal advice and representation for international clients, investors, businesses, institutions and individuals with interests in Uganda.">
+
+    <meta property="og:url"
+          content="https://oandoadvocates.onrender.com/">
+
+    <meta property="og:locale"
+          content="en_UG">
+
+    <meta property="og:image"
+          content="https://oandoadvocates.onrender.com/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png">
+
+    <meta property="og:image:secure_url"
+          content="https://oandoadvocates.onrender.com/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png">
+
+    <meta property="og:image:type"
+          content="image/png">
+
+    <meta property="og:image:width"
+          content="1200">
+
+    <meta property="og:image:height"
+          content="630">
+
+    <meta property="og:image:alt"
+          content="Ojambo & Ojambo Advocates — O&O premium legal identity">
+
+    <!-- =========================================================
+         TWITTER / X
+    ========================================================== -->
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="Ojambo &amp; Ojambo Advocates | Legal Counsel in Uganda">
+
+    <meta name="twitter:description"
+          content="Strategic legal advice and representation for clients navigating Uganda.">
+
+    <meta name="twitter:image"
+          content="https://oandoadvocates.onrender.com/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png">
+
+    <meta name="twitter:image:alt"
+          content="Ojambo & Ojambo Advocates O&O brand mark">
+
+    <!-- =========================================================
+         FAVICONS / BRAND ICONS
+    ========================================================== -->
+
+    <!-- Modern browsers -->
+    <link rel="icon"
+          href="/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png"
+          type="image/svg+xml">
+
+    <!-- Standard PNG favicon -->
+    <link rel="icon"
+          href="/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png"
+          sizes="32x32"
+          type="image/png">
+
+    <link rel="icon"
+          href="/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png"
+          sizes="16x16"
+          type="image/png">
+
+    <!-- iPhone / iPad -->
+    <link rel="apple-touch-icon"
+          href="/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png"
+          sizes="180x180">
+
+    <!-- Safari pinned tab -->
+    <link rel="mask-icon"
+          href="/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png"
+          color="#c9a35b">
+
+    <!-- PWA -->
+    <link rel="manifest"
+          href="/site.webmanifest">
+
+    <!-- =========================================================
+         FONTS
+    ========================================================== -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- =========================================================
+         FONT AWESOME
+    ========================================================== -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- YOUR EXISTING CSS -->
+    <link rel="stylesheet"
+          href="style.css">
+
+    <!-- =========================================================
+         STRUCTURED DATA / JSON-LD
+         Helps Google understand the firm, website, lawyers,
+         services and FAQ content.
+    ========================================================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+
+        {
+          "@type": "LegalService",
+          "@id": "https://oandoadvocates.onrender.com/#firm",
+
+          "name": "Ojambo & Ojambo Advocates",
+
+          "alternateName": [
+            "Ojambo and Ojambo Advocates",
+            "O&O Advocates"
+          ],
+
+          "url": "https://oandoadvocates.onrender.com/",
+
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://oandoadvocates.onrender.com/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png"
+          },
+
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://oandoadvocates.onrender.com/ChatGPT Image Sep 15, 2026, 11_33_00 AM.png",
+            "width": 1200,
+            "height": 630
+          },
+
+          "description":
+            "Strategic legal advice and representation for international clients, investors, businesses, institutions and individuals with interests in Uganda.",
+
+          "areaServed": {
+            "@type": "Country",
+            "name": "Uganda"
+          },
+
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress":
+              "NAIGAGA COMPLEX 1ST FLOOR B01, PLOT 42 LUTHULI RISE BUGOLOBI",
+            "addressLocality": "Kampala",
+            "addressCountry": "UG"
+          },
+
+          "telephone": "+256707266256",
+
+          "email": "ojamborobert@gmail.com",
+
+          "knowsAbout": [
+            "Corporate and Commercial Law",
+            "Foreign Investment",
+            "Real Estate and Land Law",
+            "Dispute Resolution",
+            "Employment and Labour Law",
+            "Regulatory and Advisory Services"
+          ],
+
+          "serviceType": [
+            "Corporate & Commercial",
+            "Foreign Investment",
+            "Real Estate & Land",
+            "Dispute Resolution",
+            "Employment & Labour",
+            "Regulatory & Advisory"
+          ]
+        },
+
+        {
+          "@type": "WebSite",
+          "@id": "https://oandoadvocates.onrender.com/#website",
+
+          "url": "https://oandoadvocates.onrender.com/",
+
+          "name": "Ojambo & Ojambo Advocates",
+
+          "description":
+            "Legal counsel and representation in Uganda.",
+
+          "publisher": {
+            "@id": "https://oandoadvocates.onrender.com/#firm"
+          },
+
+          "inLanguage": "en-UG"
+        },
+
+        {
+          "@type": "WebPage",
+          "@id": "https://oandoadvocates.onrender.com/#webpage",
+
+          "url": "https://oandoadvocates.onrender.com/",
+
+          "name":
+            "Ojambo & Ojambo Advocates | Legal Counsel in Uganda",
+
+          "description":
+            "Strategic legal advice and representation for clients navigating Uganda.",
+
+          "isPartOf": {
+            "@id": "https://oandoadvocates.onrender.com/#website"
+          },
+
+          "about": {
+            "@id": "https://oandoadvocates.onrender.com/#firm"
+          },
+
+          "inLanguage": "en-UG"
+        },
+
+        {
+          "@type": "Person",
+          "@id": "https://oandoadvocates.onrender.com/#ojambo-robert-mugeni",
+
+          "name": "Ojambo Robert Mugeni",
+
+          "jobTitle": "Partner / Advocate",
+
+          "worksFor": {
+            "@id": "https://oandoadvocates.onrender.com/#firm"
+          }
+        },
+
+        {
+          "@type": "Person",
+          "@id": "https://oandoadvocates.onrender.com/#ben-mukeswe",
+
+          "name": "Ben Mukeswe",
+
+          "jobTitle": "Partner / Advocate",
+
+          "worksFor": {
+            "@id": "https://oandoadvocates.onrender.com/#firm"
+          }
+        },
+
+        {
+          "@type": "Person",
+          "@id": "https://oandoadvocates.onrender.com/#peter-ojambo",
+
+          "name": "Peter Ojambo",
+
+          "jobTitle": "Advocate",
+
+          "worksFor": {
+            "@id": "https://oandoadvocates.onrender.com/#firm"
+          }
+        },
+
+        {
+          "@type": "FAQPage",
+          "@id": "https://oandoadvocates.onrender.com/#faq",
+
+          "mainEntity": [
+
+            {
+              "@type": "Question",
+              "name": "Where is Ojambo & Ojambo Advocates located?",
+
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text":
+                  "Ojambo & Ojambo Advocates is located at NAIGAGA COMPLEX 1ST FLOOR B01, PLOT 42 LUTHULI RISE BUGOLOBI, Kampala, Uganda."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "What areas of law does the firm handle?",
+
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text":
+                  "The firm provides legal services in Corporate & Commercial, Foreign Investment, Real Estate & Land, Dispute Resolution, Employment & Labour, and Regulatory & Advisory matters."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "Does the firm advise international clients?",
+
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text":
+                  "Yes. Ojambo & Ojambo Advocates provides strategic legal advice and representation for international clients, investors, businesses, institutions and individuals with interests in Uganda."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "How can I contact the firm?",
+
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text":
+                  "You can contact Ojambo & Ojambo Advocates by telephone at +256707266256 or by email at ojamborobert@gmail.com."
+              }
+            }
+
+          ]
+        }
+
+      ]
+    }
+    </script>
 </head>
-
 <body>
 
     <!-- =========================================================
