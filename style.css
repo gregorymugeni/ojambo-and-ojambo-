@@ -25,6 +25,302 @@
 /* ============================================================
    01. DESIGN TOKENS
    ============================================================ */
+.interactive-location {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border: 1px solid rgba(201, 163, 91, 0.25);
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+}
+
+.interactive-location:hover {
+    transform: translateY(-3px);
+    border-color: rgba(201, 163, 91, 0.7);
+    background: rgba(201, 163, 91, 0.06);
+}
+
+.interactive-location > i:first-child {
+    color: #c9a35b;
+    font-size: 22px;
+}
+
+.interactive-location span {
+    flex: 1;
+}
+
+.interactive-location strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.interactive-location small {
+    opacity: .7;
+    line-height: 1.6;
+}
+
+.interactive-location > i:last-child {
+    opacity: .45;
+}
+
+
+/* ============================================================
+   UGANDA LEGAL RESOURCES
+   Uses the exact Clients visual system.
+   ============================================================ */
+
+/* ============================================================
+   UGANDA LEGAL RESOURCES
+   Same visual system as Clients,
+   but every institution gets its own brand treatment.
+   ============================================================ */
+
+.legal-resource-card {
+    grid-column: span 4;
+}
+
+
+/* ------------------------------------------------------------
+   URSB
+   Strong institutional wordmark
+   ------------------------------------------------------------ */
+
+.resource-ursb .client-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(38px, 3.5vw, 54px);
+    font-weight: 900;
+    letter-spacing: -.08em;
+}
+
+.resource-ursb .client-sub {
+    letter-spacing: .12em;
+}
+
+
+/* ------------------------------------------------------------
+   URA
+   Clean authoritative corporate treatment
+   ------------------------------------------------------------ */
+
+.resource-ura .client-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(38px, 3.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+.resource-ura .client-sub {
+    letter-spacing: .16em;
+}
+
+
+/* ------------------------------------------------------------
+   JUDICIARY
+   Formal / authoritative
+   ------------------------------------------------------------ */
+
+.resource-judiciary .client-main {
+    font-family: var(--serif);
+    font-size: clamp(34px, 3.2vw, 50px);
+    font-weight: 400;
+    letter-spacing: -.055em;
+}
+
+.resource-judiciary .client-sub {
+    letter-spacing: .13em;
+}
+
+
+/* ------------------------------------------------------------
+   ULRC
+   Editorial legal identity
+   ------------------------------------------------------------ */
+
+.resource-ulrc .client-main {
+    font-family: var(--serif);
+    font-size: clamp(40px, 3.7vw, 56px);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -.06em;
+}
+
+.resource-ulrc .client-sub {
+    letter-spacing: .12em;
+}
+
+
+/* ------------------------------------------------------------
+   BANK OF UGANDA
+   Premium institutional treatment
+   ------------------------------------------------------------ */
+
+.resource-bou .client-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(36px, 3.3vw, 50px);
+    font-weight: 300;
+    letter-spacing: .16em;
+}
+
+.resource-bou .client-sub {
+    letter-spacing: .2em;
+}
+
+
+
+
+/* ============================================================
+   UGANDA LEGAL RESOURCES
+   Desktop: 3 balanced columns
+   Tablet: 2 columns
+   Mobile: 1 column
+   ============================================================ */
+
+.legal-resource-wall {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.legal-resource-card {
+    grid-column: span 1;
+    min-height: 250px;
+}
+
+
+/* ============================================================
+   RESOURCE TYPOGRAPHY
+   Each institution keeps its own visual identity.
+   ============================================================ */
+
+.resource-ursb .client-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(38px, 3.5vw, 54px);
+    font-weight: 900;
+    letter-spacing: -.08em;
+}
+
+.resource-ursb .client-sub {
+    letter-spacing: .12em;
+}
+
+
+.resource-ura .client-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(38px, 3.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+.resource-ura .client-sub {
+    letter-spacing: .16em;
+}
+
+
+.resource-judiciary .client-main {
+    font-family: var(--serif);
+    font-size: clamp(34px, 3.2vw, 50px);
+    font-weight: 400;
+    letter-spacing: -.055em;
+}
+
+.resource-judiciary .client-sub {
+    letter-spacing: .13em;
+}
+
+
+.resource-ulrc .client-main {
+    font-family: var(--serif);
+    font-size: clamp(40px, 3.7vw, 56px);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -.06em;
+}
+
+.resource-ulrc .client-sub {
+    letter-spacing: .12em;
+}
+
+
+.resource-bou .client-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(36px, 3.3vw, 50px);
+    font-weight: 300;
+    letter-spacing: .16em;
+}
+
+.resource-bou .client-sub {
+    letter-spacing: .2em;
+}
+
+
+.resource-uia .client-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(34px, 3vw, 48px);
+    font-weight: 800;
+    letter-spacing: -.07em;
+}
+
+.resource-uia .client-sub {
+    letter-spacing: .14em;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .legal-resource-wall {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .legal-resource-card {
+        grid-column: span 1 !important;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .legal-resource-wall {
+        grid-template-columns: 1fr;
+    }
+
+    .legal-resource-card {
+        grid-column: span 1 !important;
+    }
+
+}
+
+
+
+
+/* ------------------------------------------------------------
+   UGANDA INVESTMENT AUTHORITY
+   Modern corporate treatment
+   ------------------------------------------------------------ */
+
+.resource-uia .client-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(34px, 3vw, 48px);
+    font-weight: 800;
+    letter-spacing: -.07em;
+}
+
+.resource-uia .client-sub {
+    letter-spacing: .14em;
+}
+
 
 :root {
 
