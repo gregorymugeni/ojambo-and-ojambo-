@@ -2411,6 +2411,620 @@ button {
     color: var(--muted);
 }
 
+
+
+/* ============================================================
+   OJAMBO & OJAMBO — PREMIUM PEOPLE SECTION
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   TEAM INTRO
+   ------------------------------------------------------------ */
+
+.team-intro {
+    max-width: 540px;
+    margin: 32px 0 0;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(17, 17, 17, .62);
+}
+
+
+/* ------------------------------------------------------------
+   TEAM GROUP
+   ------------------------------------------------------------ */
+
+.team-group {
+    margin-top: 105px;
+}
+
+.team-group-last {
+    margin-bottom: 20px;
+}
+
+
+/* ------------------------------------------------------------
+   GROUP HEADER
+   ------------------------------------------------------------ */
+
+.team-group-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    padding-bottom: 25px;
+    margin-bottom: 38px;
+    border-bottom: 1px solid var(--line);
+}
+
+.team-group-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    border: 1px solid rgba(17, 17, 17, .18);
+    border-radius: 50%;
+
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .12em;
+
+    transition:
+        background .35s ease,
+        color .35s ease,
+        transform .35s var(--ease);
+}
+
+.team-group:hover .team-group-number {
+    background: var(--ink);
+    color: var(--cream);
+    transform: rotate(8deg);
+}
+
+.team-group-eyebrow {
+    margin: 0 0 8px;
+
+    font-family: var(--sans);
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: .2em;
+    text-transform: uppercase;
+
+    color: rgba(17, 17, 17, .45);
+}
+
+.team-group-heading h3 {
+    margin: 0;
+
+    font-family: var(--serif);
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 400;
+    line-height: .95;
+}
+
+
+/* ------------------------------------------------------------
+   TEAM GRID
+   ------------------------------------------------------------ */
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.team-grid-two {
+    max-width: 900px;
+}
+
+.team-grid-one {
+    max-width: 620px;
+}
+
+
+/* ------------------------------------------------------------
+   TEAM MEMBER
+   ------------------------------------------------------------ */
+
+.team-member {
+    position: relative;
+
+    min-width: 0;
+
+    background: var(--cream);
+
+    border: 1px solid rgba(17, 17, 17, .13);
+
+    overflow: hidden;
+
+    transition:
+        transform .65s var(--ease),
+        box-shadow .65s var(--ease),
+        border-color .4s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(17, 17, 17, .28);
+
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, .10);
+}
+
+
+/* ------------------------------------------------------------
+   TEAM PHOTO
+   ------------------------------------------------------------ */
+
+.team-photo {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1.08;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dedbd3 0%,
+            #f0eee8 48%,
+            #d5d1c7 100%
+        );
+}
+
+.photo-placeholder {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(255,255,255,.8),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #e8e5dd,
+            #d1cec5
+        );
+}
+
+
+/* ------------------------------------------------------------
+   INITIALS
+   ------------------------------------------------------------ */
+
+.team-initials {
+    position: relative;
+    z-index: 2;
+
+    font-family: var(--serif);
+    font-size: clamp(70px, 9vw, 135px);
+
+    line-height: 1;
+
+    color: rgba(17,17,17,.13);
+
+    transition:
+        transform .8s var(--ease),
+        color .5s ease;
+}
+
+.team-member:hover .team-initials {
+    transform: scale(1.08) translateY(-5px);
+    color: rgba(17,17,17,.20);
+}
+
+
+/* ------------------------------------------------------------
+   PHOTO INDEX
+   ------------------------------------------------------------ */
+
+.team-photo-index {
+    position: absolute;
+
+    top: 22px;
+    left: 22px;
+
+    z-index: 4;
+
+    font-family: var(--sans);
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: .16em;
+
+    color: rgba(17,17,17,.55);
+}
+
+
+/* ------------------------------------------------------------
+   PHOTO MARK
+   ------------------------------------------------------------ */
+
+.team-photo-mark {
+    position: absolute;
+
+    right: 22px;
+    bottom: 20px;
+
+    z-index: 4;
+
+    font-family: var(--sans);
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: .18em;
+
+    color: rgba(17,17,17,.45);
+
+    transition:
+        transform .5s var(--ease),
+        color .4s ease;
+}
+
+.team-member:hover .team-photo-mark {
+    transform: translateX(-5px);
+    color: rgba(17,17,17,.75);
+}
+
+
+/* ------------------------------------------------------------
+   PHOTO OVERLAY
+   ------------------------------------------------------------ */
+
+.team-photo-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 55%,
+            rgba(0,0,0,.10)
+        );
+
+    opacity: .55;
+
+    transition:
+        opacity .5s ease;
+}
+
+.team-member:hover .team-photo-overlay {
+    opacity: .9;
+}
+
+
+/* ------------------------------------------------------------
+   TEAM INFORMATION
+   ------------------------------------------------------------ */
+
+.team-info {
+    position: relative;
+
+    padding: 28px 28px 30px;
+}
+
+.team-role-label {
+    margin-bottom: 12px;
+
+    font-family: var(--sans);
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: .18em;
+    text-transform: uppercase;
+
+    color: rgba(17,17,17,.48);
+}
+
+.team-info h3 {
+    margin: 0;
+
+    font-family: var(--serif);
+    font-size: clamp(30px, 3vw, 42px);
+    font-weight: 400;
+
+    line-height: .95;
+
+    transition:
+        transform .45s var(--ease);
+}
+
+.team-member:hover .team-info h3 {
+    transform: translateX(4px);
+}
+
+.team-info > p {
+    margin: 12px 0 0;
+
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    color: rgba(17,17,17,.52);
+}
+
+
+/* ------------------------------------------------------------
+   DIVIDER
+   ------------------------------------------------------------ */
+
+.team-divider {
+    width: 100%;
+    height: 1px;
+
+    margin: 24px 0 18px;
+
+    background: var(--line);
+
+    transform-origin: left;
+
+    transition:
+        transform .7s var(--ease);
+}
+
+.team-member:hover .team-divider {
+    transform: scaleX(.72);
+}
+
+
+/* ------------------------------------------------------------
+   CONTACT LINKS
+   ------------------------------------------------------------ */
+
+.advocate-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.advocate-contact-link {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding-bottom: 5px;
+
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    color: var(--ink);
+
+    text-decoration: none;
+}
+
+.advocate-contact-link::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 1px;
+
+    background: var(--ink);
+
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition:
+        transform .45s var(--ease);
+}
+
+.advocate-contact-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.advocate-contact-link span {
+    display: inline-block;
+
+    transition:
+        transform .45s var(--ease);
+}
+
+.advocate-contact-link:hover span {
+    transform: translate(3px, -3px);
+}
+
+
+/* ------------------------------------------------------------
+   FEATURED FOUNDING PARTNERS
+   ------------------------------------------------------------ */
+
+.team-member-featured {
+    border-color: rgba(17,17,17,.20);
+}
+
+.team-member-featured .team-photo {
+    aspect-ratio: 1 / 1.15;
+}
+
+
+/* ------------------------------------------------------------
+   ADMINISTRATOR
+   ------------------------------------------------------------ */
+
+.team-member-admin {
+    max-width: 620px;
+}
+
+
+/* ------------------------------------------------------------
+   SCROLL REVEAL
+   ------------------------------------------------------------ */
+
+.team-member.scroll-reveal {
+    opacity: 0;
+    transform: translateY(45px);
+    transition:
+        opacity .9s var(--ease),
+        transform .9s var(--ease);
+}
+
+.team-member.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ------------------------------------------------------------
+   STAGGER
+   ------------------------------------------------------------ */
+
+.team-member:nth-child(2) {
+    transition-delay: .08s;
+}
+
+.team-member:nth-child(3) {
+    transition-delay: .16s;
+}
+
+.team-member:nth-child(4) {
+    transition-delay: .24s;
+}
+
+
+/* ------------------------------------------------------------
+   REDUCED MOTION
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .team-member,
+    .team-initials,
+    .team-photo-mark,
+    .team-info h3,
+    .team-divider,
+    .team-group-number,
+    .advocate-contact-link span {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .team-member.scroll-reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   TABLET
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+
+    .team-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .team-info {
+        padding: 22px;
+    }
+
+    .team-info h3 {
+        font-size: 32px;
+    }
+
+    .team-group {
+        margin-top: 80px;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+
+    .team-intro {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .team-group {
+        margin-top: 65px;
+    }
+
+    .team-group-heading {
+        gap: 16px;
+        margin-bottom: 25px;
+    }
+
+    .team-group-number {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+    }
+
+    .team-group-heading h3 {
+        font-size: 32px;
+    }
+
+    .team-grid,
+    .team-grid-two,
+    .team-grid-one {
+        grid-template-columns: 1fr;
+        max-width: none;
+    }
+
+    .team-member-featured .team-photo {
+        aspect-ratio: 1 / 1.05;
+    }
+
+    .team-info h3 {
+        font-size: 34px;
+    }
+
+    .team-photo {
+        aspect-ratio: 1 / 1.08;
+    }
+
+    .team-initials {
+        font-size: 105px;
+    }
+
+}
+
+
+
 /* ============================================================
    15. FINAL CTA
    ============================================================ */

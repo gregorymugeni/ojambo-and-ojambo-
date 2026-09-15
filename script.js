@@ -533,6 +533,129 @@ practiceItems.forEach(item => {
 });
 
 
+
+
+/* ============================================================
+   OJAMBO & OJAMBO — TEAM MICROINTERACTIONS
+   ============================================================ */
+
+(function () {
+
+    const teamMembers = document.querySelectorAll(
+        '[data-team-member]'
+    );
+
+    if (!teamMembers.length) return;
+
+
+    /* ----------------------------------------------------------
+       SCROLL REVEAL
+       ---------------------------------------------------------- */
+
+    const teamObserver = new IntersectionObserver(
+        (entries, observer) => {
+
+            entries.forEach((entry) => {
+
+                if (!entry.isIntersecting) return;
+
+                entry.target.classList.add('is-visible');
+
+                observer.unobserve(entry.target);
+
+            });
+
+        },
+        {
+            threshold: 0.16,
+            rootMargin: '0px 0px -60px 0px'
+        }
+    );
+
+
+    teamMembers.forEach((member, index) => {
+
+        /*
+         * Slightly stagger each card so the team section
+         * doesn't appear all at once.
+         */
+
+        member.style.transitionDelay =
+            `${Math.min(index * 80, 320)}ms`;
+
+        teamObserver.observe(member);
+
+
+        /* ------------------------------------------------------
+           SUBTLE POINTER MOVEMENT
+           ------------------------------------------------------ */
+
+        member.addEventListener('pointermove', (event) => {
+
+            /*
+             * Disable the tilt effect on touch devices.
+             */
+
+            if (window.matchMedia(
+                '(hover: none)'
+            ).matches) {
+                return;
+            }
+
+            const rect = member.getBoundingClientRect();
+
+            const x =
+                (event.clientX - rect.left) /
+                rect.width;
+
+            const y =
+                (event.clientY - rect.top) /
+                rect.height;
+
+
+            const moveX =
+                (x - 0.5) * 5;
+
+            const moveY =
+                (y - 0.5) * 5;
+
+
+            const photo =
+                member.querySelector('.team-photo');
+
+
+            if (photo) {
+
+                photo.style.transform =
+                    `translate3d(${moveX}px, ${moveY}px, 0) scale(1.012)`;
+
+            }
+
+        });
+
+
+        /* ------------------------------------------------------
+           RESET POINTER EFFECT
+           ------------------------------------------------------ */
+
+        member.addEventListener('pointerleave', () => {
+
+            const photo =
+                member.querySelector('.team-photo');
+
+            if (photo) {
+
+                photo.style.transform =
+                    '';
+
+            }
+
+        });
+
+    });
+
+
+})();
 /* ============================================================
    OJAMBO & OJAMBO ADVOCATES
    PREMIUM SCROLL REVEAL ENGINE
