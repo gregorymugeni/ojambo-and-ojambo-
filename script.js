@@ -540,6 +540,513 @@ practiceItems.forEach(item => {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+
+
+    /* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   INTERACTIVE LEGAL INSIGHTS
+   ============================================================ */
+
+
+    const reader = document.getElementById("insightReader");
+    const readerPanel = document.querySelector(".insight-reader-panel");
+    const readerClose = document.getElementById("insightReaderClose");
+    const readerBackdrop = document.querySelector(".insight-reader-backdrop");
+
+    const readerCategory =
+        document.getElementById("insightReaderCategory");
+
+    const readerTime =
+        document.getElementById("insightReaderTime");
+
+    const readerTitle =
+        document.getElementById("insightReaderTitle");
+
+    const readerBody =
+        document.getElementById("insightReaderBody");
+
+    const readerProgress =
+        document.getElementById("insightReaderProgress");
+
+    const filters =
+        document.querySelectorAll(".insight-filter");
+
+    const cards =
+        document.querySelectorAll(".insight-card");
+
+    const readButtons =
+        document.querySelectorAll(".insight-read");
+
+
+    /*
+     * ----------------------------------------------------------
+     * INSIGHT CONTENT
+     * ----------------------------------------------------------
+     *
+     * These are editorial summaries for the website.
+     * They are intentionally framed as general information,
+     * not legal advice.
+     */
+
+    const insights = {
+
+        investment: {
+
+            category: "INVESTMENT",
+
+            time: "6 MIN READ",
+
+            title:
+                "Doing Business in Uganda: Legal Considerations for Foreign Investors",
+
+            body: `
+                <p>
+                    Uganda offers opportunities for businesses and
+                    investors operating across a range of sectors.
+                    Entering the market, however, requires an
+                    understanding of the legal and regulatory
+                    environment in which the investment will operate.
+                </p>
+
+                <p>
+                    <strong>Start with the structure.</strong>
+                    Investors should consider the appropriate business
+                    structure, ownership arrangements, governance
+                    requirements and the nature of the activities the
+                    proposed business will undertake.
+                </p>
+
+                <p>
+                    Regulatory requirements can also differ depending
+                    on the sector. Licensing, tax, employment,
+                    investment and other compliance obligations may
+                    need to be considered before operations begin.
+                </p>
+
+                <p>
+                    <strong>Due diligence matters.</strong>
+                    Before committing capital, investors should conduct
+                    appropriate legal and commercial due diligence on
+                    counterparties, assets, contracts and regulatory
+                    requirements.
+                </p>
+
+                <p>
+                    The legal issues surrounding an investment can be
+                    highly specific to its structure, sector and
+                    circumstances. Professional legal advice should
+                    therefore be obtained before taking action.
+                </p>
+            `
+        },
+
+
+        property: {
+
+            category: "PROPERTY",
+
+            time: "5 MIN READ",
+
+            title:
+                "Buying Property in Uganda: Key Legal Considerations",
+
+            body: `
+                <p>
+                    Property transactions require careful legal
+                    due diligence before a buyer commits to a
+                    transaction.
+                </p>
+
+                <p>
+                    <strong>Title verification is fundamental.</strong>
+                    A purchaser should establish the status of the
+                    property and verify the relevant ownership and
+                    registration information before proceeding.
+                </p>
+
+                <p>
+                    The transaction should also be considered in the
+                    context of the applicable land tenure, contractual
+                    arrangements, restrictions and any interests that
+                    may affect the property.
+                </p>
+
+                <p>
+                    Buyers should pay particular attention to the
+                    documentation supporting the transaction and the
+                    obligations of each party before completion.
+                </p>
+
+                <p>
+                    Property transactions can involve significant
+                    financial commitments. Independent legal due
+                    diligence can help identify issues that should be
+                    addressed before a transaction proceeds.
+                </p>
+            `
+        },
+
+
+        corporate: {
+
+            category: "CORPORATE",
+
+            time: "7 MIN READ",
+
+            title:
+                "Establishing a Business in Uganda: What International Clients Should Know",
+
+            body: `
+                <p>
+                    Establishing a business in a new jurisdiction
+                    involves more than registering a company. The
+                    proposed activities, ownership structure and
+                    regulatory environment should all be considered
+                    from the outset.
+                </p>
+
+                <p>
+                    <strong>Structure the business carefully.</strong>
+                    Investors should consider the most appropriate
+                    corporate structure, governance arrangements,
+                    ownership interests and contractual relationships.
+                </p>
+
+                <p>
+                    Regulatory compliance is another important
+                    consideration. Depending on the nature of the
+                    business, different licensing, employment, tax
+                    and sector-specific requirements may apply.
+                </p>
+
+                <p>
+                    Contracts should also clearly establish the rights
+                    and obligations of the parties involved. This can
+                    be particularly important where international
+                    investors are working with local partners,
+                    suppliers or service providers.
+                </p>
+
+                <p>
+                    International clients should obtain advice
+                    tailored to their particular proposed structure
+                    and activities before establishing or expanding
+                    operations in Uganda.
+                </p>
+            `
+        },
+kayanja: {
+
+    category: "CASE IN FOCUS",
+
+    time: "4 MIN READ",
+
+    title:
+        "Defamation Proceedings: A High-Profile Criminal Trial in Uganda",
+
+    body: `
+        <p>
+            <strong>Publicly reported matter.</strong>
+            Ojambo & Ojambo Advocates has been involved in the
+            defence representation in a high-profile criminal
+            proceeding before the Mwanga II Magistrate's Court
+            in Kampala.
+        </p>
+
+        <p>
+            The matter concerns allegations made against Pastor
+            Robert Kayanja and proceedings involving nine accused
+            persons. The case began in July 2023 and has involved
+            multiple stages of defence testimony and court
+            proceedings.
+        </p>
+
+        <p>
+            The Daily Monitor reported on July 9, 2025 that the
+            court warned the defence over continued adjournments.
+            The report stated that defence lawyer Robert Ojambo
+            was unable to proceed on that particular day because
+            of illness, while another member of the defence team
+            requested an adjournment.
+        </p>
+
+        <p>
+            The prosecution objected to the postponement, while
+            the presiding magistrate expressed concern about the
+            history of delays and indicated that the court would
+            expect the matter to proceed without further
+            unnecessary adjournments.
+        </p>
+
+        <p>
+            The case illustrates the importance of careful trial
+            management, effective defence representation and
+            adherence to procedural requirements in complex
+            criminal proceedings.
+        </p>
+
+        <p class="insight-source">
+            Source:
+            <a
+                href="https://www.monitor.co.ug/uganda/news/national/court-warns-defence-over-delays-in-pastor-kayanja-s-defamation-trial-5112104"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Daily Monitor — Court warns defence over delays
+                in Pastor Kayanja's defamation trial ↗
+            </a>
+        </p>
+
+        <p class="insight-disclaimer">
+            This case note is based on publicly reported information
+            and is provided for general informational purposes.
+            It does not disclose confidential client information
+            or constitute legal advice.
+        </p>
+    `
+}
+    };
+
+
+    /* ============================================================
+       FILTERING
+       ============================================================ */
+
+    filters.forEach(filter => {
+
+        filter.addEventListener("click", () => {
+
+            const selected =
+                filter.dataset.filter;
+
+
+            filters.forEach(button => {
+
+                const active =
+                    button === filter;
+
+                button.classList.toggle(
+                    "active",
+                    active
+                );
+
+                button.setAttribute(
+                    "aria-selected",
+                    active ? "true" : "false"
+                );
+
+            });
+
+
+            cards.forEach(card => {
+
+                const category =
+                    card.dataset.category;
+
+                const show =
+                    selected === "all" ||
+                    category === selected;
+
+                if (show) {
+
+                    card.classList.remove(
+                        "is-hidden"
+                    );
+
+                    requestAnimationFrame(() => {
+
+                        card.style.opacity = "1";
+                        card.style.transform =
+                            "translateY(0)";
+
+                    });
+
+                } else {
+
+                    card.style.opacity = "0";
+                    card.style.transform =
+                        "translateY(20px)";
+
+                    setTimeout(() => {
+
+                        card.classList.add(
+                            "is-hidden"
+                        );
+
+                    }, 350);
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+    /* ============================================================
+       OPEN INSIGHT
+       ============================================================ */
+
+    function openInsight(key) {
+
+        const insight =
+            insights[key];
+
+        if (!insight) {
+            return;
+        }
+
+
+        readerCategory.textContent =
+            insight.category;
+
+        readerTime.textContent =
+            insight.time;
+
+        readerTitle.textContent =
+            insight.title;
+
+        readerBody.innerHTML =
+            insight.body;
+
+
+        reader.classList.add("open");
+
+        reader.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.classList.add(
+            "insight-reader-open"
+        );
+
+
+        readerPanel.scrollTop = 0;
+
+        readerProgress.style.width = "0%";
+
+
+        setTimeout(() => {
+
+            readerClose.focus();
+
+        }, 100);
+
+    }
+
+
+    /* ============================================================
+       CLOSE INSIGHT
+       ============================================================ */
+
+    function closeInsight() {
+
+        reader.classList.remove("open");
+
+        reader.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "insight-reader-open"
+        );
+
+        readerProgress.style.width =
+            "0%";
+
+    }
+
+
+    readButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                openInsight(
+                    button.dataset.insight
+                );
+
+            }
+        );
+
+    });
+
+
+    readerClose.addEventListener(
+        "click",
+        closeInsight
+    );
+
+
+    readerBackdrop.addEventListener(
+        "click",
+        closeInsight
+    );
+
+
+    /* ============================================================
+       ESCAPE KEY
+       ============================================================ */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                reader.classList.contains("open")
+            ) {
+
+                closeInsight();
+
+            }
+
+        }
+    );
+
+
+    /* ============================================================
+       READING PROGRESS
+       ============================================================ */
+
+    readerPanel.addEventListener(
+        "scroll",
+        () => {
+
+            const scrollTop =
+                readerPanel.scrollTop;
+
+            const scrollHeight =
+                readerPanel.scrollHeight -
+                readerPanel.clientHeight;
+
+            if (scrollHeight <= 0) {
+
+                readerProgress.style.width =
+                    "100%";
+
+                return;
+
+            }
+
+            const progress =
+                (scrollTop / scrollHeight) * 100;
+
+            readerProgress.style.width =
+                `${Math.min(
+                    100,
+                    Math.max(0, progress)
+                )}%`;
+
+        }
+    );
+
+
     /*
        Respect users who have requested reduced motion.
        The CSS fallback also handles this, but avoiding the

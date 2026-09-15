@@ -1802,98 +1802,614 @@ button {
 /* ============================================================
    14. INSIGHTS
    ============================================================ */
+/* ============================================================
+   INTERACTIVE LEGAL INSIGHTS
+   ============================================================ */
 
-.insights-heading {
 
+/* ------------------------------------------------------------
+   INSIGHTS INTRO
+   ------------------------------------------------------------ */
+
+.insights-intro {
+    max-width: 320px;
+}
+
+.insights-intro p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* ------------------------------------------------------------
+   FILTERS
+   ------------------------------------------------------------ */
+
+.insight-filters {
     display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 55px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 15px;
+}
 
-    align-items: flex-end;
+.insight-filter {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 10px 14px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    transition:
+        color .35s var(--ease),
+        transform .35s var(--ease);
+}
 
-    justify-content: space-between;
+.insight-filter::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: -16px;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .45s var(--ease);
+}
 
-    margin-bottom: 80px;
+.insight-filter:hover {
+    color: var(--ink);
+    transform: translateY(-2px);
+}
 
+.insight-filter.active {
+    color: var(--ink);
+}
+
+.insight-filter.active::after {
+    transform: scaleX(1);
 }
 
 
-.insight-grid {
-
-    display: grid;
-
-    grid-template-columns: repeat(3,1fr);
-
-    gap: 20px;
-
-}
-
+/* ------------------------------------------------------------
+   CARD
+   ------------------------------------------------------------ */
 
 .insight-card {
+    position: relative;
+    min-height: 330px;
+    padding-top: 25px;
 
     border-top: 1px solid var(--line);
 
-    padding-top: 25px;
-
-    min-height: 330px;
-
     display: flex;
-
     flex-direction: column;
 
     transition:
-        transform .4s var(--ease);
-
+        transform .55s var(--ease),
+        opacity .4s ease,
+        filter .4s ease;
 }
 
+.insight-card.is-hidden {
+    display: none;
+}
 
 .insight-card:hover {
-
-    transform: translateY(-8px);
-
+    transform: translateY(-10px);
 }
 
+
+/* ------------------------------------------------------------
+   CARD TOP
+   ------------------------------------------------------------ */
+
+.insight-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .insight-category {
-
     font-size: 9px;
-
     letter-spacing: .16em;
-
     color: var(--gold);
-
     font-weight: 800;
-
 }
 
+.insight-number {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: rgba(32,35,38,.35);
+}
+
+
+/* ------------------------------------------------------------
+   CARD TITLE
+   ------------------------------------------------------------ */
 
 .insight-card h3 {
-
     font-family: var(--serif);
-
     font-size: 31px;
-
     line-height: 1.08;
-
     font-weight: 400;
 
-    margin-top: 60px;
+    margin: 60px 0 0;
 
+    max-width: 390px;
+
+    transition:
+        transform .55s var(--ease);
+}
+
+.insight-card:hover h3 {
+    transform: translateX(5px);
 }
 
 
-.insight-link {
+/* ------------------------------------------------------------
+   CARD FOOTER
+   ------------------------------------------------------------ */
 
+.insight-card-bottom {
     margin-top: auto;
 
-    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
+    padding-top: 35px;
+}
+
+.insight-meta {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    color: var(--muted);
+}
+
+.insight-read {
+    border: 0;
+    background: transparent;
+
+    padding: 8px 0;
+
+    font-family: var(--sans);
+    font-size: 10px;
     font-weight: 800;
 
     text-transform: uppercase;
-
     letter-spacing: .08em;
+
+    color: var(--ink);
+
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    transition:
+        color .35s ease,
+        gap .45s var(--ease);
+}
+
+.insight-read span {
+    font-size: 14px;
+    transition: transform .45s var(--ease);
+}
+
+.insight-read:hover {
+    color: var(--gold);
+    gap: 11px;
+}
+
+.insight-read:hover span {
+    transform: translate(3px, -3px);
+}
+
+
+/* ============================================================
+   INSIGHT READER
+   ============================================================ */
+
+.insight-reader {
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: visibility 0s linear .6s;
+}
+
+.insight-reader.open {
+    visibility: visible;
+    pointer-events: auto;
+
+    transition-delay: 0s;
+}
+
+
+/* ------------------------------------------------------------
+   BACKDROP
+   ------------------------------------------------------------ */
+
+.insight-reader-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(14,17,19,.72);
+
+    backdrop-filter: blur(12px);
+
+    opacity: 0;
+
+    transition: opacity .55s ease;
+}
+
+.insight-reader.open .insight-reader-backdrop {
+    opacity: 1;
+}
+
+
+/* ------------------------------------------------------------
+   READER PANEL
+   ------------------------------------------------------------ */
+
+.insight-reader-panel {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: min(760px, 100%);
+    height: 100%;
+
+    background: var(--cream);
+
+    display: flex;
+    flex-direction: column;
+
+    transform: translateX(100%);
+
+    transition:
+        transform .75s cubic-bezier(.77,0,.18,1);
+}
+
+.insight-reader.open .insight-reader-panel {
+    transform: translateX(0);
+}
+
+
+/* ------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------ */
+
+.insight-reader-header {
+    flex-shrink: 0;
+
+    padding: 32px 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.insight-reader-header > div {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.insight-reader-category {
+    color: var(--gold);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .15em;
+}
+
+.insight-reader-time {
+    color: var(--muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .12em;
+}
+
+.insight-reader-close {
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid var(--line);
+    background: transparent;
+
+    border-radius: 50%;
+
+    font-size: 26px;
+    font-weight: 300;
+
+    cursor: pointer;
+
+    display: grid;
+    place-items: center;
+
+    transition:
+        background .35s ease,
+        color .35s ease,
+        transform .45s var(--ease);
+}
+
+.insight-reader-close:hover {
+    background: var(--ink);
+    color: var(--cream);
+    transform: rotate(90deg);
+}
+
+
+/* ------------------------------------------------------------
+   READING PROGRESS
+   ------------------------------------------------------------ */
+
+.insight-reader-progress {
+    height: 2px;
+    background: rgba(32,35,38,.08);
+    flex-shrink: 0;
+}
+
+.insight-reader-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--gold);
+
+    transition: width .08s linear;
+}
+
+
+/* ------------------------------------------------------------
+   CONTENT
+   ------------------------------------------------------------ */
+
+.insight-reader-content {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 75px 70px 100px;
+
+    scrollbar-width: thin;
+}
+
+.insight-reader-kicker {
+    margin: 0 0 25px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .18em;
+    color: var(--muted);
+}
+
+.insight-reader-content h2 {
+    margin: 0 0 55px;
+
+    max-width: 650px;
+
+    font-family: var(--serif);
+    font-size: clamp(48px, 5vw, 76px);
+    line-height: .94;
+    letter-spacing: -.04em;
+    font-weight: 400;
+}
+
+.insight-reader-body {
+    max-width: 600px;
+
+    font-size: 15px;
+    line-height: 1.9;
+
+    color: var(--ink);
+}
+
+.insight-reader-body p {
+    margin: 0 0 28px;
+}
+
+.insight-reader-body strong {
+    font-weight: 800;
+}
+
+
+/* ------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------ */
+
+.insight-reader-footer {
+    flex-shrink: 0;
+
+    padding: 25px 45px;
+
+    border-top: 1px solid var(--line);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .12em;
+}
+
+.insight-reader-footer > span {
+    color: var(--muted);
+}
+
+.insight-reader-footer a {
+    color: var(--ink);
+
+    text-decoration: none;
+
+    transition: color .3s ease;
+}
+
+.insight-reader-footer a:hover {
+    color: var(--gold);
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    .insight-filters {
+        overflow-x: auto;
+        padding-bottom: 14px;
+        margin-bottom: 40px;
+        scrollbar-width: none;
+    }
+
+    .insight-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .insight-filter {
+        flex-shrink: 0;
+    }
+
+    .insight-card {
+        min-height: 280px;
+    }
+
+    .insight-card h3 {
+        font-size: 28px;
+        margin-top: 45px;
+    }
+
+    .insight-reader-panel {
+        width: 100%;
+    }
+
+    .insight-reader-header {
+        padding: 22px 20px;
+    }
+
+    .insight-reader-content {
+        padding: 55px 25px 80px;
+    }
+
+    .insight-reader-content h2 {
+        font-size: clamp(42px, 12vw, 62px);
+        margin-bottom: 40px;
+    }
+
+    .insight-reader-body {
+        font-size: 14px;
+    }
+
+    .insight-reader-footer {
+        padding: 20px;
+    }
+
+    .insight-reader-footer > span {
+        display: none;
+    }
 
 }
 
+/* ============================================================
+   CASE IN FOCUS
+   ============================================================ */
+
+.insight-case-card {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(201,163,91,.07),
+            transparent 55%
+        );
+}
+
+.insight-case-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 3px;
+    height: 0;
+
+    background: var(--gold);
+
+    transition:
+        height .7s var(--ease);
+}
+
+.insight-case-card:hover::before {
+    height: 100%;
+}
+
+.insight-case-label {
+    margin-top: 28px;
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .14em;
+
+    color: var(--muted);
+}
+
+.insight-source {
+    margin-top: 45px !important;
+
+    padding-top: 25px;
+
+    border-top: 1px solid var(--line);
+
+    font-size: 10px !important;
+    line-height: 1.7 !important;
+}
+
+.insight-source a {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 4px;
+}
+
+.insight-disclaimer {
+    margin-top: 35px !important;
+
+    padding: 18px;
+
+    background: rgba(32,35,38,.04);
+
+    font-size: 10px !important;
+    line-height: 1.7 !important;
+
+    color: var(--muted);
+}
 
 /* ============================================================
    15. FINAL CTA
