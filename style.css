@@ -2112,60 +2112,362 @@ button {
 }
 
 
+
+
 /* ============================================================
-   17. REVEAL ANIMATIONS
+   17. PREMIUM SCROLL MICRO-ANIMATIONS
    ============================================================ */
 
-.reveal {
+/*
+   The site uses two animation systems:
+
+   1. .reveal
+      Immediate entrance animation used by the hero.
+
+   2. .scroll-reveal
+      Scroll-triggered animation used throughout the page.
+
+   The scroll system intentionally uses:
+   - opacity
+   - transform
+   - filter
+   - clip-path
+
+   No expensive continuous animation is used.
+*/
+
+
+/* ------------------------------------------------------------
+   BASE SCROLL REVEAL
+   ------------------------------------------------------------ */
+
+.scroll-reveal {
 
     opacity: 0;
 
-    transform: translateY(35px);
+    transform:
+        translate3d(0, 45px, 0)
+        scale(.985);
 
-    animation: revealIn 1s var(--ease) forwards;
+    filter: blur(6px);
+
+    transition:
+        opacity .9s var(--ease),
+        transform 1.05s var(--ease),
+        filter .9s var(--ease);
+
+    will-change:
+        opacity,
+        transform,
+        filter;
+}
+
+
+.scroll-reveal.is-visible {
+
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+
+    filter: blur(0);
 
 }
 
 
-.hero-content .reveal:nth-child(1) {
+/* ------------------------------------------------------------
+   SOFTER TEXT REVEAL
+   ------------------------------------------------------------ */
 
-    animation-delay: .35s;
+.scroll-reveal-text {
 
-}
+    opacity: 0;
 
+    transform: translate3d(0, 28px, 0);
 
-.hero-content .reveal:nth-child(2) {
-
-    animation-delay: .5s;
-
-}
-
-
-.hero-content .reveal:nth-child(3) {
-
-    animation-delay: .65s;
+    transition:
+        opacity .8s var(--ease),
+        transform .9s var(--ease);
 
 }
 
 
-.hero-content .reveal:nth-child(4) {
+.scroll-reveal-text.is-visible {
 
-    animation-delay: .8s;
+    opacity: 1;
+
+    transform: translate3d(0, 0, 0);
 
 }
 
 
-@keyframes revealIn {
+/* ------------------------------------------------------------
+   EDITORIAL HEADING REVEAL
+   ------------------------------------------------------------ */
 
-    to {
+.scroll-heading {
+
+    opacity: 0;
+
+    transform:
+        translate3d(0, 55px, 0);
+
+    filter: blur(8px);
+
+    transition:
+        opacity 1s var(--ease),
+        transform 1.15s var(--ease),
+        filter 1s var(--ease);
+
+}
+
+
+.scroll-heading.is-visible {
+
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0);
+
+    filter: blur(0);
+
+}
+
+
+/* ------------------------------------------------------------
+   SECTION NUMBER
+   Slides in from the left.
+   ------------------------------------------------------------ */
+
+.scroll-number {
+
+    opacity: 0;
+
+    transform: translate3d(-25px, 0, 0);
+
+    transition:
+        opacity .7s var(--ease),
+        transform .8s var(--ease);
+
+}
+
+
+.scroll-number.is-visible {
+
+    opacity: 1;
+
+    transform: translate3d(0, 0, 0);
+
+}
+
+
+/* ------------------------------------------------------------
+   IMAGE REVEAL
+   Creates a luxury editorial image wipe.
+   ------------------------------------------------------------ */
+
+.scroll-image {
+
+    overflow: hidden;
+
+    clip-path: inset(0 100% 0 0);
+
+    transition:
+        clip-path 1.25s cubic-bezier(.77,0,.18,1);
+
+}
+
+
+.scroll-image.is-visible {
+
+    clip-path: inset(0 0 0 0);
+
+}
+
+
+/* Image itself has a tiny delayed scale.
+   This creates depth without looking like a slideshow. */
+
+.scroll-image img {
+
+    transform: scale(1.08);
+
+    transition:
+        transform 1.5s var(--ease);
+
+}
+
+
+.scroll-image.is-visible img {
+
+    transform: scale(1);
+
+}
+
+
+/* ------------------------------------------------------------
+   STAGGER SYSTEM
+   Elements reveal in sequence.
+   ------------------------------------------------------------ */
+
+.scroll-stagger > * {
+
+    opacity: 0;
+
+    transform:
+        translate3d(0, 30px, 0);
+
+    transition:
+        opacity .75s var(--ease),
+        transform .85s var(--ease);
+
+}
+
+
+.scroll-stagger.is-visible > *:nth-child(1) {
+    transition-delay: .05s;
+}
+
+.scroll-stagger.is-visible > *:nth-child(2) {
+    transition-delay: .12s;
+}
+
+.scroll-stagger.is-visible > *:nth-child(3) {
+    transition-delay: .19s;
+}
+
+.scroll-stagger.is-visible > *:nth-child(4) {
+    transition-delay: .26s;
+}
+
+.scroll-stagger.is-visible > *:nth-child(5) {
+    transition-delay: .33s;
+}
+
+.scroll-stagger.is-visible > *:nth-child(6) {
+    transition-delay: .40s;
+}
+
+.scroll-stagger.is-visible > *:nth-child(7) {
+    transition-delay: .47s;
+}
+
+.scroll-stagger.is-visible > *:nth-child(8) {
+    transition-delay: .54s;
+}
+
+
+.scroll-stagger.is-visible > * {
+
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0);
+
+}
+
+
+/* ------------------------------------------------------------
+   LINE DRAW
+   ------------------------------------------------------------ */
+
+.scroll-line-reveal {
+
+    transform:
+        scaleX(0);
+
+    transform-origin: left center;
+
+    transition:
+        transform 1s var(--ease);
+
+}
+
+
+.scroll-line-reveal.is-visible {
+
+    transform:
+        scaleX(1);
+
+}
+
+
+/* ------------------------------------------------------------
+   CLIENT / RESOURCE CARDS
+   Slightly more elegant entrance.
+   ------------------------------------------------------------ */
+
+.client-logo.scroll-reveal {
+
+    transform:
+        translate3d(0, 35px, 0)
+        scale(.97);
+
+}
+
+
+.client-logo.scroll-reveal.is-visible {
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+
+}
+
+
+/* ------------------------------------------------------------
+   PRACTICE ITEMS
+   ------------------------------------------------------------ */
+
+.practice-item.scroll-reveal {
+
+    transform:
+        translate3d(0, 35px, 0);
+
+}
+
+
+.practice-item.scroll-reveal.is-visible {
+
+    transform:
+        translate3d(0, 0, 0);
+
+}
+
+
+/* ------------------------------------------------------------
+   ACCESSIBILITY
+   Respect reduced-motion preferences.
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .scroll-reveal,
+    .scroll-reveal-text,
+    .scroll-heading,
+    .scroll-number,
+    .scroll-image,
+    .scroll-stagger > *,
+    .scroll-line-reveal,
+    .client-logo.scroll-reveal,
+    .practice-item.scroll-reveal {
 
         opacity: 1;
 
-        transform: translateY(0);
+        transform: none;
+
+        filter: none;
+
+        clip-path: none;
+
+        transition: none;
 
     }
 
 }
+
+
 
 
 /* ============================================================

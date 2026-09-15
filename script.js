@@ -531,3 +531,97 @@ practiceItems.forEach(item => {
     });
 
 });
+
+
+/* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   PREMIUM SCROLL REVEAL ENGINE
+   ============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /*
+       Respect users who have requested reduced motion.
+       The CSS fallback also handles this, but avoiding the
+       observer makes the browser do less work.
+    */
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+    if (reducedMotion) {
+        return;
+    }
+
+
+    /*
+       IntersectionObserver is much more efficient than listening
+       to scroll events continuously.
+
+       threshold:
+       The animation begins when approximately 12% of an element
+       enters the viewport.
+    */
+
+    const observer = new IntersectionObserver(
+        (entries, observerInstance) => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+
+                /*
+                   Add the state that activates the CSS animation.
+                */
+
+                entry.target.classList.add("is-visible");
+
+
+                /*
+                   We only animate each element once.
+
+                   This makes the page feel deliberate instead of
+                   repeatedly animating every time the user scrolls
+                   back and forth.
+                */
+
+                observerInstance.unobserve(entry.target);
+
+            });
+
+        },
+        {
+            threshold: 0.12,
+
+            rootMargin:
+                "0px 0px -8% 0px"
+        }
+    );
+
+
+    /*
+       Observe all scroll animation elements.
+    */
+
+    document
+        .querySelectorAll(`
+            .scroll-reveal,
+            .scroll-reveal-text,
+            .scroll-heading,
+            .scroll-number,
+            .scroll-image,
+            .scroll-stagger,
+            .scroll-line-reveal
+        `)
+        .forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+});
