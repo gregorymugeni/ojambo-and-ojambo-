@@ -294,127 +294,6 @@ faqItems.forEach(item => {
 
 
 
-/* ============================================================
-   05. INTERSECTION OBSERVER
-   ============================================================
-
-   Adds subtle entrance animations as sections enter the
-   visitor's viewport.
-
-   This is intentionally restrained.
-
-   A premium legal website should feel calm rather than
-   overloaded with animation.
-   ============================================================ */
-
-const observerOptions = {
-
-    threshold: 0.12
-
-};
-
-
-const revealObserver =
-    new IntersectionObserver(
-        (entries, observer) => {
-
-            entries.forEach(entry => {
-
-                if (!entry.isIntersecting) return;
-
-
-                entry.target.classList.add("visible");
-
-
-                observer.unobserve(entry.target);
-
-            });
-
-        },
-
-        observerOptions
-    );
-
-
-
-/*
-    Elements that should gently appear as the visitor
-    scrolls through the page.
-*/
-
-const animatedElements =
-    document.querySelectorAll(
-        ".display-heading, " +
-        ".about-image, " +
-        ".about-content, " +
-        ".practice-item, " +
-        ".client-card, " +
-        ".team-member, " +
-        ".insight-card"
-    );
-
-
-animatedElements.forEach(element => {
-
-    element.style.opacity = "0";
-
-    element.style.transform =
-        "translateY(25px)";
-
-
-    element.style.transition =
-        "opacity .8s cubic-bezier(.22,.61,.36,1), " +
-        "transform .8s cubic-bezier(.22,.61,.36,1)";
-
-
-    revealObserver.observe(element);
-
-});
-
-
-
-/* ============================================================
-   06. REVEAL STATE
-   ============================================================
-
-   Instead of adding another CSS animation class,
-   we simply update the inline values when an element
-   becomes visible.
-   ============================================================ */
-
-const styleReveal = () => {
-
-    document
-        .querySelectorAll(".visible")
-        .forEach(element => {
-
-            element.style.opacity = "1";
-
-            element.style.transform =
-                "translateY(0)";
-
-        });
-
-};
-
-
-/*
-    Run this repeatedly through a very lightweight
-    animation frame loop.
-
-    This avoids unnecessary scroll listeners.
-*/
-
-function revealLoop() {
-
-    styleReveal();
-
-    requestAnimationFrame(revealLoop);
-
-}
-
-
-revealLoop();
 
 
 
@@ -1523,44 +1402,223 @@ kayanja: {
        The animation begins when approximately 12% of an element
        enters the viewport.
     */
+/* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   PERSISTENT PREMIUM SCROLL ANIMATION ENGINE
+   ============================================================
 
-    const observer = new IntersectionObserver(
-        (entries, observerInstance) => {
+   Behaviour:
+   ------------------------------------------------------------
+   • Animates elements when they ENTER the viewport
+   • Resets them when they LEAVE the viewport
+   • Animates them again when they ENTER
+   • Works repeatedly while scrolling up and down
+   • Supports all existing animation classes
+   • Keeps stagger animations intact
+   • Mobile friendly
+   • Respects prefers-reduced-motion
+   • No continuous scroll listener
+   ============================================================ */
+
+
+  
+
+    /* ============================================================
+       SELECT ALL SCROLL ANIMATED ELEMENTS
+       ============================================================ */
+
+    const scrollAnimatedElements = document.querySelectorAll(`
+        .scroll-reveal,
+        .scroll-reveal-text,
+        .scroll-heading,
+        .scroll-number,
+        .scroll-image,
+        .scroll-stagger,
+        .scroll-line-reveal,
+        .client-logo.scroll-reveal,
+        .practice-item.scroll-reveal,
+        .team-member.scroll-reveal
+    `);
+
+
+    if (!scrollAnimatedElements.length) {
+        return;
+    }
+
+
+    /* ============================================================
+       ACCESSIBILITY
+       ------------------------------------------------------------
+       If the visitor prefers reduced motion, everything remains
+       visible without animation.
+       ============================================================ */
+
+    if (reducedMotion) {
+
+        scrollAnimatedElements.forEach(element => {
+
+            element.classList.add("is-visible");
+
+        });
+
+        return;
+    }
+
+
+    /* ============================================================
+       INTERSECTION OBSERVER
+       ------------------------------------------------------------
+       IMPORTANT:
+
+       We DO NOT use observer.unobserve().
+
+       That is what allows the animation to happen again every
+       time the element comes back into the viewport.
+       ============================================================ */
+
+    const scrollObserver = new IntersectionObserver(
+        (entries) => {
 
             entries.forEach(entry => {
 
-                if (!entry.isIntersecting) {
+                const element = entry.target;
+
+
+                /* =================================================
+                   ELEMENT ENTERED VIEWPORT
+                   ================================================= */
+
+                if (entry.isIntersecting) {
+
+                    element.classList.add("is-visible");
+
                     return;
                 }
 
 
-                /*
-                   Add the state that activates the CSS animation.
-                */
+                /* =================================================
+                   ELEMENT LEFT VIEWPORT
+                   -------------------------------------------------
+                   Remove the state so the next entrance triggers
+                   the animation again.
+                   ================================================= */
 
-                entry.target.classList.add("is-visible");
-
-
-                /*
-                   We only animate each element once.
-
-                   This makes the page feel deliberate instead of
-                   repeatedly animating every time the user scrolls
-                   back and forth.
-                */
-
-                observerInstance.unobserve(entry.target);
+                element.classList.remove("is-visible");
 
             });
 
         },
         {
+            /*
+             * Start slightly before the element is fully visible.
+             * This makes the animation feel intentional rather
+             * than waiting until the element is already on screen.
+             */
             threshold: 0.12,
 
-            rootMargin:
-                "0px 0px -8% 0px"
+            /*
+             * Gives the animation a little breathing room.
+             */
+            rootMargin: "0px 0px -8% 0px"
         }
     );
+
+
+    /* ============================================================
+       OBSERVE EVERYTHING
+       ============================================================ */
+
+    scrollAnimatedElements.forEach(element => {
+
+        scrollObserver.observe(element);
+
+    });
+
+
+    /* ============================================================
+       HANDLE ELEMENTS ALREADY IN VIEW
+       ------------------------------------------------------------
+       Useful when the page loads halfway down because of:
+       • anchor links
+       • browser restoration
+       • refresh
+       • mobile browser restoration
+       ============================================================ */
+
+    requestAnimationFrame(() => {
+
+        scrollAnimatedElements.forEach(element => {
+
+            const rect =
+                element.getBoundingClientRect();
+
+            const viewportHeight =
+                window.innerHeight ||
+                document.documentElement.clientHeight;
+
+
+            if (
+                rect.top < viewportHeight &&
+                rect.bottom > 0
+            ) {
+
+                element.classList.add("is-visible");
+
+            }
+
+        });
+
+    });
+
+
+    /* ============================================================
+       OPTIONAL: RE-CHECK AFTER RESIZE
+       ------------------------------------------------------------
+       Helps when switching between:
+       • desktop
+       • tablet
+       • mobile
+       • browser resize
+       ============================================================ */
+
+    let resizeTimer;
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            clearTimeout(resizeTimer);
+
+            resizeTimer = setTimeout(() => {
+
+                scrollAnimatedElements.forEach(element => {
+
+                    const rect =
+                        element.getBoundingClientRect();
+
+                    const viewportHeight =
+                        window.innerHeight ||
+                        document.documentElement.clientHeight;
+
+
+                    if (
+                        rect.top < viewportHeight &&
+                        rect.bottom > 0
+                    ) {
+
+                        element.classList.add("is-visible");
+
+                    }
+
+                });
+
+            }, 150);
+
+        },
+        { passive: true }
+    );
+
+
 
 
     /*
