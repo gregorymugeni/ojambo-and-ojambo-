@@ -294,127 +294,6 @@ faqItems.forEach(item => {
 
 
 
-/* ============================================================
-   05. INTERSECTION OBSERVER
-   ============================================================
-
-   Adds subtle entrance animations as sections enter the
-   visitor's viewport.
-
-   This is intentionally restrained.
-
-   A premium legal website should feel calm rather than
-   overloaded with animation.
-   ============================================================ */
-
-const observerOptions = {
-
-    threshold: 0.12
-
-};
-
-
-const revealObserver =
-    new IntersectionObserver(
-        (entries, observer) => {
-
-            entries.forEach(entry => {
-
-                if (!entry.isIntersecting) return;
-
-
-                entry.target.classList.add("visible");
-
-
-                observer.unobserve(entry.target);
-
-            });
-
-        },
-
-        observerOptions
-    );
-
-
-
-/*
-    Elements that should gently appear as the visitor
-    scrolls through the page.
-*/
-
-const animatedElements =
-    document.querySelectorAll(
-        ".display-heading, " +
-        ".about-image, " +
-        ".about-content, " +
-        ".practice-item, " +
-        ".client-card, " +
-        ".team-member, " +
-        ".insight-card"
-    );
-
-
-animatedElements.forEach(element => {
-
-    element.style.opacity = "0";
-
-    element.style.transform =
-        "translateY(25px)";
-
-
-    element.style.transition =
-        "opacity .8s cubic-bezier(.22,.61,.36,1), " +
-        "transform .8s cubic-bezier(.22,.61,.36,1)";
-
-
-    revealObserver.observe(element);
-
-});
-
-
-
-/* ============================================================
-   06. REVEAL STATE
-   ============================================================
-
-   Instead of adding another CSS animation class,
-   we simply update the inline values when an element
-   becomes visible.
-   ============================================================ */
-
-const styleReveal = () => {
-
-    document
-        .querySelectorAll(".visible")
-        .forEach(element => {
-
-            element.style.opacity = "1";
-
-            element.style.transform =
-                "translateY(0)";
-
-        });
-
-};
-
-
-/*
-    Run this repeatedly through a very lightweight
-    animation frame loop.
-
-    This avoids unnecessary scroll listeners.
-*/
-
-function revealLoop() {
-
-    styleReveal();
-
-    requestAnimationFrame(revealLoop);
-
-}
-
-
-revealLoop();
 
 
 
@@ -656,6 +535,335 @@ practiceItems.forEach(item => {
 
 
 })();
+
+
+
+
+/* =========================================================
+   EXPERTISE INTERACTION ENGINE
+   Ojambo & Ojambo Advocates
+
+   - Cursor spotlight
+   - Expand / collapse
+   - Animated arrow
+   - One open practice area at a time
+   - Keyboard accessibility
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const practiceList =
+        document.querySelector(".practice-list");
+
+    if (!practiceList) return;
+
+
+    const practices =
+        practiceList.querySelectorAll(".practice-item");
+
+
+    /* =====================================================
+       ADD INTERACTIVE CONTROLS
+       ===================================================== */
+
+    practices.forEach((practice, index) => {
+
+        const number =
+            practice.querySelector(".practice-number");
+
+        const main =
+            practice.querySelector(".practice-main");
+
+        const title =
+            practice.querySelector("h3");
+
+        const description =
+            practice.querySelector("p");
+
+
+        if (!main || !title || !description) {
+            return;
+        }
+
+
+        /* Make the row keyboard accessible */
+
+        practice.setAttribute(
+            "tabindex",
+            "0"
+        );
+
+        practice.setAttribute(
+            "role",
+            "button"
+        );
+
+        practice.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+
+        /* =================================================
+           ARROW
+           ================================================= */
+
+        const interaction =
+            document.createElement("span");
+
+        interaction.className =
+            "practice-interaction";
+
+        interaction.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        interaction.innerHTML = "↗";
+
+
+        /*
+         * The original third grid column was previously
+         * unused because the arrow markup is commented out.
+         */
+
+        practice.appendChild(
+            interaction
+        );
+
+
+        /* =================================================
+           EXPANDABLE CONTENT
+           ================================================= */
+
+        const expand =
+            document.createElement("div");
+
+        expand.className =
+            "practice-expand";
+
+        expand.innerHTML = `
+
+            <div class="practice-expand-inner">
+
+                <div class="practice-expand-content">
+
+                    <div class="practice-detail-line"></div>
+
+                    <div class="practice-detail-label">
+                        Practice area
+                    </div>
+
+                    <p>
+                        ${description.textContent.trim()}
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        practice.appendChild(
+            expand
+        );
+
+
+        /* =================================================
+           CURSOR MICRO-INTERACTION
+           ================================================= */
+
+        practice.addEventListener(
+            "mousemove",
+            event => {
+
+                const rect =
+                    practice.getBoundingClientRect();
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+
+                practice.style.setProperty(
+                    "--practice-x",
+                    `${x}px`
+                );
+
+                practice.style.setProperty(
+                    "--practice-y",
+                    `${y}px`
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           OPEN / CLOSE
+           ================================================= */
+
+        const togglePractice = () => {
+
+            const isOpen =
+                practice.classList.contains(
+                    "is-expanded"
+                );
+
+
+            /*
+             * Close every other practice area.
+             */
+
+            practices.forEach(other => {
+
+                other.classList.remove(
+                    "is-expanded"
+                );
+
+                other.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            });
+
+
+            /*
+             * If this one wasn't already open,
+             * open it.
+             */
+
+            if (!isOpen) {
+
+                practice.classList.add(
+                    "is-expanded"
+                );
+
+                practice.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+                practiceList.classList.add(
+                    "has-expanded"
+                );
+
+            } else {
+
+                practiceList.classList.remove(
+                    "has-expanded"
+                );
+
+            }
+
+        };
+
+
+        /* =================================================
+           CLICK
+           ================================================= */
+
+        practice.addEventListener(
+            "click",
+            event => {
+
+                /*
+                 * Prevent accidental double-triggering
+                 * if another interactive element exists.
+                 */
+
+                if (
+                    event.target.closest(
+                        "a, button"
+                    )
+                ) {
+                    return;
+                }
+
+                togglePractice();
+
+            }
+        );
+
+
+        /* =================================================
+           KEYBOARD
+           ================================================= */
+
+        practice.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    togglePractice();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           STAGGERED NUMBER REVEAL
+           ================================================= */
+
+        if (number) {
+
+            number.style.transitionDelay =
+                `${index * 40}ms`;
+
+        }
+
+    });
+
+
+    /* =====================================================
+       KEEP LIST STATE CORRECT
+       ===================================================== */
+
+    const observer =
+        new MutationObserver(() => {
+
+            const anyOpen =
+                practiceList.querySelector(
+                    ".practice-item.is-expanded"
+                );
+
+            practiceList.classList.toggle(
+                "has-expanded",
+                Boolean(anyOpen)
+            );
+
+        });
+
+
+    observer.observe(
+        practiceList,
+        {
+            subtree: true,
+            attributes: true,
+            attributeFilter: [
+                "class"
+            ]
+        }
+    );
+
+});
+
+
+
 /* ============================================================
    OJAMBO & OJAMBO ADVOCATES
    PREMIUM SCROLL REVEAL ENGINE
@@ -1194,44 +1402,223 @@ kayanja: {
        The animation begins when approximately 12% of an element
        enters the viewport.
     */
+/* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   PERSISTENT PREMIUM SCROLL ANIMATION ENGINE
+   ============================================================
 
-    const observer = new IntersectionObserver(
-        (entries, observerInstance) => {
+   Behaviour:
+   ------------------------------------------------------------
+   • Animates elements when they ENTER the viewport
+   • Resets them when they LEAVE the viewport
+   • Animates them again when they ENTER
+   • Works repeatedly while scrolling up and down
+   • Supports all existing animation classes
+   • Keeps stagger animations intact
+   • Mobile friendly
+   • Respects prefers-reduced-motion
+   • No continuous scroll listener
+   ============================================================ */
+
+
+  
+
+    /* ============================================================
+       SELECT ALL SCROLL ANIMATED ELEMENTS
+       ============================================================ */
+
+    const scrollAnimatedElements = document.querySelectorAll(`
+        .scroll-reveal,
+        .scroll-reveal-text,
+        .scroll-heading,
+        .scroll-number,
+        .scroll-image,
+        .scroll-stagger,
+        .scroll-line-reveal,
+        .client-logo.scroll-reveal,
+        .practice-item.scroll-reveal,
+        .team-member.scroll-reveal
+    `);
+
+
+    if (!scrollAnimatedElements.length) {
+        return;
+    }
+
+
+    /* ============================================================
+       ACCESSIBILITY
+       ------------------------------------------------------------
+       If the visitor prefers reduced motion, everything remains
+       visible without animation.
+       ============================================================ */
+
+    if (reducedMotion) {
+
+        scrollAnimatedElements.forEach(element => {
+
+            element.classList.add("is-visible");
+
+        });
+
+        return;
+    }
+
+
+    /* ============================================================
+       INTERSECTION OBSERVER
+       ------------------------------------------------------------
+       IMPORTANT:
+
+       We DO NOT use observer.unobserve().
+
+       That is what allows the animation to happen again every
+       time the element comes back into the viewport.
+       ============================================================ */
+
+    const scrollObserver = new IntersectionObserver(
+        (entries) => {
 
             entries.forEach(entry => {
 
-                if (!entry.isIntersecting) {
+                const element = entry.target;
+
+
+                /* =================================================
+                   ELEMENT ENTERED VIEWPORT
+                   ================================================= */
+
+                if (entry.isIntersecting) {
+
+                    element.classList.add("is-visible");
+
                     return;
                 }
 
 
-                /*
-                   Add the state that activates the CSS animation.
-                */
+                /* =================================================
+                   ELEMENT LEFT VIEWPORT
+                   -------------------------------------------------
+                   Remove the state so the next entrance triggers
+                   the animation again.
+                   ================================================= */
 
-                entry.target.classList.add("is-visible");
-
-
-                /*
-                   We only animate each element once.
-
-                   This makes the page feel deliberate instead of
-                   repeatedly animating every time the user scrolls
-                   back and forth.
-                */
-
-                observerInstance.unobserve(entry.target);
+                element.classList.remove("is-visible");
 
             });
 
         },
         {
+            /*
+             * Start slightly before the element is fully visible.
+             * This makes the animation feel intentional rather
+             * than waiting until the element is already on screen.
+             */
             threshold: 0.12,
 
-            rootMargin:
-                "0px 0px -8% 0px"
+            /*
+             * Gives the animation a little breathing room.
+             */
+            rootMargin: "0px 0px -8% 0px"
         }
     );
+
+
+    /* ============================================================
+       OBSERVE EVERYTHING
+       ============================================================ */
+
+    scrollAnimatedElements.forEach(element => {
+
+        scrollObserver.observe(element);
+
+    });
+
+
+    /* ============================================================
+       HANDLE ELEMENTS ALREADY IN VIEW
+       ------------------------------------------------------------
+       Useful when the page loads halfway down because of:
+       • anchor links
+       • browser restoration
+       • refresh
+       • mobile browser restoration
+       ============================================================ */
+
+    requestAnimationFrame(() => {
+
+        scrollAnimatedElements.forEach(element => {
+
+            const rect =
+                element.getBoundingClientRect();
+
+            const viewportHeight =
+                window.innerHeight ||
+                document.documentElement.clientHeight;
+
+
+            if (
+                rect.top < viewportHeight &&
+                rect.bottom > 0
+            ) {
+
+                element.classList.add("is-visible");
+
+            }
+
+        });
+
+    });
+
+
+    /* ============================================================
+       OPTIONAL: RE-CHECK AFTER RESIZE
+       ------------------------------------------------------------
+       Helps when switching between:
+       • desktop
+       • tablet
+       • mobile
+       • browser resize
+       ============================================================ */
+
+    let resizeTimer;
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            clearTimeout(resizeTimer);
+
+            resizeTimer = setTimeout(() => {
+
+                scrollAnimatedElements.forEach(element => {
+
+                    const rect =
+                        element.getBoundingClientRect();
+
+                    const viewportHeight =
+                        window.innerHeight ||
+                        document.documentElement.clientHeight;
+
+
+                    if (
+                        rect.top < viewportHeight &&
+                        rect.bottom > 0
+                    ) {
+
+                        element.classList.add("is-visible");
+
+                    }
+
+                });
+
+            }, 150);
+
+        },
+        { passive: true }
+    );
+
+
 
 
     /*

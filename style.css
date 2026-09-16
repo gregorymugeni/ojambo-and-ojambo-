@@ -5050,3 +5050,476 @@ button {
     }
 
 }
+
+
+
+/* ============================================================
+   O&O PREMIUM PWA INSTALL BANNER
+   ============================================================ */
+
+.oo-install-banner {
+    position: fixed;
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    opacity: 0;
+    transform:
+        translate3d(0, 35px, 0)
+        scale(.98);
+
+    transition:
+        opacity .65s cubic-bezier(.22,.61,.36,1),
+        transform .75s cubic-bezier(.22,.61,.36,1);
+}
+
+
+/* ------------------------------------------------------------
+   ACTIVE
+   ------------------------------------------------------------ */
+
+.oo-install-banner.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0,0,0)
+        scale(1);
+
+    pointer-events: auto;
+}
+
+
+/* ------------------------------------------------------------
+   INNER CARD
+   ------------------------------------------------------------ */
+
+.oo-install-inner {
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        auto
+        minmax(0,1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 24px;
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    padding:
+        18px
+        54px
+        18px
+        18px;
+
+    background:
+        rgba(16,20,23,.96);
+
+    border:
+        1px solid rgba(201,163,91,.28);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.30),
+        0 8px 30px rgba(0,0,0,.18);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    overflow: hidden;
+}
+
+
+/* ------------------------------------------------------------
+   SUBTLE GOLD LIGHT
+   ------------------------------------------------------------ */
+
+.oo-install-inner::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -100px;
+    left: 8%;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(201,163,91,.12),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------
+   BRAND MARK
+   ------------------------------------------------------------ */
+
+.oo-install-mark {
+
+    position: relative;
+
+    width: 58px;
+    height: 58px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border:
+        1px solid rgba(201,163,91,.65);
+
+    color: #f4f0e7;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 15px;
+
+    letter-spacing: -.08em;
+}
+
+
+/* Gold corner detail */
+
+.oo-install-mark::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    right: -1px;
+    bottom: -1px;
+
+    background: #c9a35b;
+}
+
+
+/* ------------------------------------------------------------
+   CONTENT
+   ------------------------------------------------------------ */
+
+.oo-install-content {
+
+    position: relative;
+
+    min-width: 0;
+}
+
+
+.oo-install-eyebrow {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-family: var(--sans);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+
+    color:
+        rgba(201,163,91,.85);
+}
+
+
+.oo-install-content h3 {
+
+    margin: 0;
+
+    color: #f4f0e7;
+
+    font-family: var(--serif);
+
+    font-size: 27px;
+
+    font-weight: 400;
+
+    line-height: .95;
+
+    letter-spacing: -.025em;
+}
+
+
+.oo-install-content p {
+
+    margin: 7px 0 0;
+
+    max-width: 560px;
+
+    color:
+        rgba(244,240,231,.52);
+
+    font-family: var(--sans);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* ------------------------------------------------------------
+   INSTALL BUTTON
+   ------------------------------------------------------------ */
+
+.oo-install-button {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    min-width: 118px;
+
+    padding:
+        14px
+        18px;
+
+    border:
+        1px solid rgba(201,163,91,.75);
+
+    background: #c9a35b;
+
+    color: #101417;
+
+    font-family: var(--sans);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: .11em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background .35s ease,
+        color .35s ease,
+        transform .45s var(--ease),
+        box-shadow .35s ease;
+}
+
+
+.oo-install-button span {
+
+    display: inline-block;
+
+    font-size: 14px;
+
+    transition:
+        transform .4s var(--ease);
+}
+
+
+.oo-install-button:hover {
+
+    background: #f4f0e7;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.22);
+}
+
+
+.oo-install-button:hover span {
+
+    transform:
+        translate(3px,-3px);
+}
+
+
+/* ------------------------------------------------------------
+   CLOSE BUTTON
+   ------------------------------------------------------------ */
+
+.oo-install-close {
+
+    position: absolute;
+
+    top: 10px;
+    right: 12px;
+
+    width: 26px;
+    height: 26px;
+
+    display: grid;
+    place-items: center;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color:
+        rgba(244,240,231,.42);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        color .3s ease,
+        transform .35s ease;
+}
+
+
+.oo-install-close:hover {
+
+    color: #f4f0e7;
+
+    transform: rotate(90deg);
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 700px) {
+
+    .oo-install-banner {
+
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+    }
+
+
+    .oo-install-inner {
+
+        grid-template-columns:
+            auto
+            minmax(0,1fr);
+
+        gap: 14px;
+
+        padding:
+            15px
+            45px
+            15px
+            15px;
+    }
+
+
+    .oo-install-mark {
+
+        width: 48px;
+        height: 48px;
+
+        font-size: 12px;
+    }
+
+
+    .oo-install-content h3 {
+
+        font-size: 23px;
+    }
+
+
+    .oo-install-content p {
+
+        font-size: 10px;
+
+        line-height: 1.45;
+    }
+
+
+    .oo-install-button {
+
+        grid-column: 2;
+
+        justify-self: start;
+
+        min-width: 105px;
+
+        padding:
+            11px
+            15px;
+
+        font-size: 8px;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   VERY SMALL PHONES
+   ------------------------------------------------------------ */
+
+@media (max-width: 380px) {
+
+    .oo-install-content h3 {
+
+        font-size: 20px;
+    }
+
+    .oo-install-content p {
+
+        max-width: 220px;
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   REDUCED MOTION
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .oo-install-banner,
+    .oo-install-button,
+    .oo-install-button span,
+    .oo-install-close {
+
+        transition: none !important;
+    }
+
+}
