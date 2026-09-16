@@ -2,7 +2,40 @@
    OJAMBO & OJAMBO ADVOCATES
    INTERACTION / ANIMATION SCRIPT
    ============================================================ */
+/*
+ * ============================================================
+ * O&O ADVOCATES — SERVICE WORKER REGISTRATION
+ * ============================================================
+ */
 
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker
+            .register("/service-worker.js", {
+                scope: "/"
+            })
+            .then(registration => {
+
+                console.log(
+                    "[O&O PWA] Service worker registered:",
+                    registration.scope
+                );
+
+            })
+            .catch(error => {
+
+                console.error(
+                    "[O&O PWA] Service worker registration failed:",
+                    error
+                );
+
+            });
+
+    });
+
+}
 
 /* ============================================================
    01. PAGE LOADER
@@ -1899,8 +1932,7 @@ kayanja: {
         `)
         .forEach(element => {
 
-            observer.observe(element);
-
+scrollObserver.observe(element);
         });
 
 
