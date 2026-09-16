@@ -4201,7 +4201,7 @@ clientsReader.innerHTML = `
        ============================================================ */
 
     const backdrop =
-        reader.querySelector(
+       clientsReader.querySelector(
             ".clients-reader-backdrop"
         );
 
