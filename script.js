@@ -2937,9 +2937,9 @@ practiceItems.forEach(item => {
        ============================================================ */
 
     const OO_READER_IMAGES = [
-        "/capital-logistics.jpg",
-        "/pioneer-bus.jpg",
-        "/group-photo.jpg"
+        "/capitallogistics.png",
+        "/pioneerbus.png",
+        "/Christian Life Minitires.png"
     ];
 
 
