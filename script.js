@@ -8883,7 +8883,8 @@ if (
 
         returnhope: [
 '/return hope.png'    ,
-'return hope.jpg'
+'return hope.jpg',
+'ChatGPT Image Sep 16, 2026, 08_37_05 PM.png'
     ],
 
         christian: [
@@ -8907,14 +8908,15 @@ if (
     const OO_RESOURCE_IMAGE_POOLS = {
 
         ursb: [
+            'ChatGPT Image Sep 16, 2026, 08_42_30 PM.png',
             "/1663823898254.jpg",
             "/images (6).jpg"
         ],
 
         ura: [
-            "/DxV2us4WsAAOr-c.jpg",
             'images (2).jpg',
-            'f90a3f94-2527-4124-9b5b-9d6efff3bd0f.jpg'
+            'f90a3f94-2527-4124-9b5b-9d6efff3bd0f.jpg',
+            'ChatGPT Image Sep 16, 2026, 08_27_03 PM.png'
         ],
 
         judiciary: [
