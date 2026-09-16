@@ -834,243 +834,1323 @@ practiceItems.forEach(item => {
 })();
 
 
-/* =========================================================
-   EXPERTISE INTERACTION ENGINE
-   Ojambo & Ojambo Advocates
+/* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   PREMIUM EXPERTISE READER
+   ============================================================
 
-   - Cursor spotlight
-   - Expand / collapse
-   - Animated arrow
-   - One open practice area at a time
-   - Keyboard accessibility
-   ========================================================= */
+   This replaces the old expandable Expertise rows.
+
+   EXPERIENCE
+   ------------------------------------------------------------
+   • Click any practice area
+   • Dark cinematic backdrop appears
+   • Editorial reader slides in from the right
+   • Large visual image
+   • Practice number + category
+   • Large editorial heading
+   • Detailed explanation
+   • "What we cover" list
+   • Relevant official resources
+   • Consultation CTA
+   • Previous / next practice navigation
+   • Reading progress indicator
+   • ESC to close
+   • Backdrop click to close
+   • Keyboard navigation
+   • Touch / mobile optimized
+   • Respects reduced motion
+   ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const practiceList =
-        document.querySelector(".practice-list");
+    const practiceItems =
+        document.querySelectorAll(".practice-item");
 
-    if (!practiceList) return;
-
-
-    const practices =
-        practiceList.querySelectorAll(".practice-item");
+    if (!practiceItems.length) return;
 
 
-    /* =====================================================
-       ADD INTERACTIVE CONTROLS
-       ===================================================== */
+    /* ============================================================
+       PRACTICE AREA CONTENT
+       ------------------------------------------------------------
+       The original page descriptions remain the foundation.
 
-    practices.forEach((practice, index) => {
+       The additional copy is intentionally written as general
+       informational website content rather than specific legal
+       advice or promises about outcomes.
+       ============================================================ */
 
-        const number =
-            practice.querySelector(".practice-number");
+    const practiceAreas = {
 
-        const main =
-            practice.querySelector(".practice-main");
+        corporate: {
 
-        const title =
-            practice.querySelector("h3");
+            number: "01",
 
-        const description =
-            practice.querySelector("p");
+            category: "CORPORATE & COMMERCIAL",
+
+            shortTitle: "Corporate & Commercial",
+
+            title:
+                "Building businesses with legal clarity.",
+
+            intro:
+                "Legal counsel for companies, commercial relationships, transactions and business operations in Uganda.",
+
+            image:
+                "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=88",
+
+            imageAlt:
+                "Contemporary professional business environment",
+
+            overview: `
+                <p>
+                    Businesses make legal decisions at almost every
+                    stage of their development — from choosing a
+                    structure and establishing relationships to
+                    negotiating agreements and managing ongoing
+                    commercial obligations.
+                </p>
+
+                <p>
+                    Our corporate and commercial practice is designed
+                    around those decisions. We provide legal counsel
+                    for companies and organisations navigating
+                    commercial activity in Uganda, with attention to
+                    the practical implications of each transaction or
+                    business relationship.
+                </p>
+
+                <p>
+                    The objective is straightforward: help clients
+                    understand the legal dimensions of a commercial
+                    decision before that decision becomes a problem.
+                </p>
+            `,
+
+            focus: [
+                "Corporate structuring",
+                "Commercial agreements",
+                "Business transactions",
+                "Shareholder and governance matters",
+                "Ongoing corporate advisory",
+                "Commercial relationships"
+            ],
+
+            contextTitle:
+                "For businesses making consequential decisions.",
+
+            context:
+                "Whether establishing a new business relationship, reviewing an agreement or considering a transaction, legal advice can help identify obligations, risks and issues that deserve attention before a decision is implemented.",
+
+            resources: [
+                {
+                    label: "Uganda Registration Services Bureau",
+                    short: "URSB",
+                    url: "https://ursb.go.ug/"
+                },
+                {
+                    label: "Uganda Revenue Authority",
+                    short: "URA",
+                    url: "https://ura.go.ug/"
+                }
+            ]
+
+        },
 
 
-        if (!main || !title || !description) {
-            return;
+        investment: {
+
+            number: "02",
+
+            category: "FOREIGN INVESTMENT",
+
+            shortTitle: "Foreign Investment",
+
+            title:
+                "Entering Uganda with greater legal clarity.",
+
+            intro:
+                "Supporting international investors navigating Uganda's legal and commercial environment.",
+
+            image:
+                "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1800&q=88",
+
+            imageAlt:
+                "Business professionals discussing an investment",
+
+            overview: `
+                <p>
+                    Entering a new market requires more than identifying
+                    a commercial opportunity. Investors must understand
+                    the legal environment in which the proposed
+                    investment will operate.
+                </p>
+
+                <p>
+                    This can involve considering ownership structures,
+                    corporate arrangements, agreements, regulatory
+                    requirements, employment considerations and the
+                    legal status of assets or counterparties.
+                </p>
+
+                <p>
+                    We assist clients in approaching these questions
+                    from a Uganda-facing perspective, helping them
+                    identify the legal issues that should be considered
+                    before capital is committed or operations begin.
+                </p>
+            `,
+
+            focus: [
+                "Investment structuring",
+                "Market-entry considerations",
+                "Corporate establishment",
+                "Commercial agreements",
+                "Regulatory considerations",
+                "Legal due diligence"
+            ],
+
+            contextTitle:
+                "For international clients entering Uganda.",
+
+            context:
+                "Cross-border decisions often involve several legal and commercial considerations at once. A Uganda-focused legal review can help international clients understand the local dimensions of a proposed investment.",
+
+            resources: [
+                {
+                    label: "Uganda Investment Authority",
+                    short: "UIA",
+                    url: "https://ugandainvest.go.ug/"
+                },
+                {
+                    label: "Uganda Registration Services Bureau",
+                    short: "URSB",
+                    url: "https://ursb.go.ug/"
+                },
+                {
+                    label: "Bank of Uganda",
+                    short: "BOU",
+                    url: "https://bou.or.ug/"
+                },
+                {
+                    label: "Uganda Revenue Authority",
+                    short: "URA",
+                    url: "https://ura.go.ug/"
+                }
+            ]
+
+        },
+
+
+        property: {
+
+            number: "03",
+
+            category: "REAL ESTATE & LAND",
+
+            shortTitle: "Real Estate & Land",
+
+            title:
+                "Protecting value in property decisions.",
+
+            intro:
+                "Legal support involving property, acquisitions, leases, development, due diligence and disputes.",
+
+            image:
+                "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=88",
+
+            imageAlt:
+                "Modern property development",
+
+            overview: `
+                <p>
+                    Property transactions can involve substantial
+                    financial commitments and long-term consequences.
+                    The legal position of the property, the transaction
+                    documents and the interests of the parties should
+                    therefore be considered carefully.
+                </p>
+
+                <p>
+                    Our real estate and land practice covers legal
+                    support connected with acquisitions, leases,
+                    development, due diligence and property-related
+                    disputes.
+                </p>
+
+                <p>
+                    We approach property matters with a focus on
+                    documentation, ownership, contractual obligations
+                    and the particular circumstances surrounding the
+                    transaction.
+                </p>
+            `,
+
+            focus: [
+                "Property acquisitions",
+                "Land due diligence",
+                "Leases and tenancy arrangements",
+                "Property development",
+                "Transaction documentation",
+                "Land and property disputes"
+            ],
+
+            contextTitle:
+                "Because property decisions are rarely simple.",
+
+            context:
+                "Before a property transaction moves forward, clients may need to understand the legal position of the property, the documents involved and the obligations being assumed by each party.",
+
+            resources: [
+                {
+                    label: "Uganda Judiciary",
+                    short: "JUDICIARY",
+                    url: "https://judiciary.go.ug/"
+                },
+                {
+                    label: "Uganda Law Reform Commission",
+                    short: "ULRC",
+                    url: "https://ulrc.go.ug/"
+                }
+            ]
+
+        },
+
+
+        disputes: {
+
+            number: "04",
+
+            category: "DISPUTE RESOLUTION",
+
+            shortTitle: "Dispute Resolution",
+
+            title:
+                "When disagreement becomes a legal matter.",
+
+            intro:
+                "Strategic representation and advice in civil and commercial disputes.",
+
+            image:
+                "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1800&q=88",
+
+            imageAlt:
+                "Legal documents prepared for a dispute",
+
+            overview: `
+                <p>
+                    Commercial and civil disagreements can affect
+                    relationships, assets, contracts and business
+                    continuity. Once a dispute emerges, understanding
+                    the legal position and available procedural
+                    options becomes important.
+                </p>
+
+                <p>
+                    Our dispute resolution practice provides strategic
+                    advice and representation in civil and commercial
+                    disputes, with attention to the underlying facts,
+                    documentation and legal issues involved.
+                </p>
+
+                <p>
+                    Every dispute has its own circumstances. The
+                    appropriate approach therefore depends on the
+                    nature of the matter, the parties involved and the
+                    stage at which legal assistance is sought.
+                </p>
+            `,
+
+            focus: [
+                "Civil disputes",
+                "Commercial disputes",
+                "Contractual disagreements",
+                "Dispute strategy",
+                "Representation",
+                "Pre-litigation legal advice"
+            ],
+
+            contextTitle:
+                "For matters where the details matter.",
+
+            context:
+                "Early legal assessment can help clarify the issues in dispute, the relevant documents and the procedural position before the matter develops further.",
+
+            resources: [
+                {
+                    label: "Judiciary of Uganda",
+                    short: "JUDICIARY",
+                    url: "https://judiciary.go.ug/"
+                },
+                {
+                    label: "Uganda Law Reform Commission",
+                    short: "ULRC",
+                    url: "https://ulrc.go.ug/"
+                }
+            ]
+
+        },
+
+
+        employment: {
+
+            number: "05",
+
+            category: "EMPLOYMENT & LABOUR",
+
+            shortTitle: "Employment & Labour",
+
+            title:
+                "Clearer employment relationships.",
+
+            intro:
+                "Advice on employment relationships, contracts, compliance and workplace disputes.",
+
+            image:
+                "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=88",
+
+            imageAlt:
+                "Professional team meeting",
+
+            overview: `
+                <p>
+                    Employment relationships involve continuing
+                    obligations between employers and employees. Clear
+                    agreements and appropriate legal advice can be
+                    important when relationships are established,
+                    changed or brought to an end.
+                </p>
+
+                <p>
+                    Our employment and labour practice covers advice
+                    relating to employment relationships, contracts,
+                    compliance and workplace disputes.
+                </p>
+
+                <p>
+                    We focus on helping clients understand the legal
+                    considerations surrounding workplace decisions
+                    before those decisions are implemented.
+                </p>
+            `,
+
+            focus: [
+                "Employment contracts",
+                "Employment relationships",
+                "Workplace compliance",
+                "Employment documentation",
+                "Workplace disputes",
+                "Employment advisory"
+            ],
+
+            contextTitle:
+                "For employers and individuals navigating work.",
+
+            context:
+                "Employment matters can involve both contractual and practical considerations. The right legal review depends on the particular relationship, documents and circumstances involved.",
+
+            resources: [
+                {
+                    label: "Uganda Revenue Authority",
+                    short: "URA",
+                    url: "https://ura.go.ug/"
+                }
+            ]
+
+        },
+
+
+        regulatory: {
+
+            number: "06",
+
+            category: "REGULATORY & ADVISORY",
+
+            shortTitle: "Regulatory & Advisory",
+
+            title:
+                "Making complex requirements easier to navigate.",
+
+            intro:
+                "Legal advice for regulatory, compliance and wider advisory matters.",
+
+            image:
+                "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=88",
+
+            imageAlt:
+                "Professional documents and regulatory paperwork",
+
+            overview: `
+                <p>
+                    Regulatory questions can sit at the centre of
+                    business, investment and institutional decisions.
+                    Understanding the applicable requirements before
+                    acting can be an important part of responsible
+                    decision-making.
+                </p>
+
+                <p>
+                    Our regulatory and advisory practice provides legal
+                    guidance on matters where clients need to understand
+                    legal requirements, obligations and potential
+                    compliance considerations.
+                </p>
+
+                <p>
+                    The precise legal position will depend on the
+                    sector, activity and circumstances. We therefore
+                    approach advisory work around the specific question
+                    the client needs answered.
+                </p>
+            `,
+
+            focus: [
+                "Regulatory advisory",
+                "Compliance considerations",
+                "Business requirements",
+                "Institutional advisory",
+                "Sector-specific legal questions",
+                "Ongoing legal guidance"
+            ],
+
+            contextTitle:
+                "For decisions shaped by regulation.",
+
+            context:
+                "Where regulation affects a commercial or institutional decision, understanding the applicable requirements early can help clients plan the legal aspects of that decision.",
+
+            resources: [
+                {
+                    label: "Uganda Revenue Authority",
+                    short: "URA",
+                    url: "https://ura.go.ug/"
+                },
+                {
+                    label: "Bank of Uganda",
+                    short: "BOU",
+                    url: "https://bou.or.ug/"
+                },
+                {
+                    label: "Uganda Investment Authority",
+                    short: "UIA",
+                    url: "https://ugandainvest.go.ug/"
+                },
+                {
+                    label: "Uganda Registration Services Bureau",
+                    short: "URSB",
+                    url: "https://ursb.go.ug/"
+                }
+            ]
+
         }
 
-
-        /* Make the row keyboard accessible */
-
-        practice.setAttribute(
-            "tabindex",
-            "0"
-        );
-
-        practice.setAttribute(
-            "role",
-            "button"
-        );
-
-        practice.setAttribute(
-            "aria-expanded",
-            "false"
-        );
+    };
 
 
-        /* =================================================
-           ARROW
-           ================================================= */
+    /* ============================================================
+       BUILD THE READER
+       ------------------------------------------------------------
+       We create it dynamically so you do NOT have to add a second
+       large HTML block to index.html.
+       ============================================================ */
 
-        const interaction =
-            document.createElement("span");
+    const reader = document.createElement("div");
 
-        interaction.className =
-            "practice-interaction";
+    reader.className = "expertise-reader";
 
-        interaction.setAttribute(
-            "aria-hidden",
-            "true"
-        );
+    reader.id = "expertiseReader";
 
-        interaction.innerHTML = "↗";
+    reader.setAttribute("aria-hidden", "true");
+
+    reader.innerHTML = `
+
+        <div class="expertise-reader-backdrop"></div>
+
+        <article
+            class="expertise-reader-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="expertiseReaderTitle"
+        >
+
+            <!-- =================================================
+                 TOP BAR
+                 ================================================= -->
+
+            <header class="expertise-reader-header">
+
+                <div class="expertise-reader-brand">
+
+                    <span class="expertise-reader-mark">
+                        O&O
+                    </span>
+
+                    <span>
+                        OJAMBO & OJAMBO ADVOCATES
+                    </span>
+
+                </div>
 
 
-        /*
-         * The original third grid column was previously
-         * unused because the arrow markup is commented out.
-         */
+                <div class="expertise-reader-meta">
 
-        practice.appendChild(
-            interaction
-        );
+                    <span
+                        id="expertiseReaderCategory"
+                    >
+                        CORPORATE & COMMERCIAL
+                    </span>
+
+                    <span
+                        class="expertise-reader-index"
+                        id="expertiseReaderIndex"
+                    >
+                        01 / 06
+                    </span>
+
+                </div>
 
 
-        /* =================================================
-           EXPANDABLE CONTENT
-           ================================================= */
+                <button
+                    type="button"
+                    class="expertise-reader-close"
+                    id="expertiseReaderClose"
+                    aria-label="Close practice area"
+                >
+                    ×
+                </button>
 
-        const expand =
-            document.createElement("div");
+            </header>
 
-        expand.className =
-            "practice-expand";
 
-        expand.innerHTML = `
+            <!-- =================================================
+                 PROGRESS
+                 ================================================= -->
 
-            <div class="practice-expand-inner">
+            <div class="expertise-reader-progress">
 
-                <div class="practice-expand-content">
+                <span
+                    id="expertiseReaderProgress"
+                ></span>
 
-                    <div class="practice-detail-line"></div>
+            </div>
 
-                    <div class="practice-detail-label">
-                        Practice area
+
+            <!-- =================================================
+                 SCROLLABLE CONTENT
+                 ================================================= -->
+
+            <div
+                class="expertise-reader-content"
+                id="expertiseReaderContent"
+            >
+
+                <!-- HERO VISUAL -->
+
+                <div
+                    class="expertise-reader-visual"
+                    id="expertiseReaderVisual"
+                >
+
+                    <img
+                        id="expertiseReaderImage"
+                        src=""
+                        alt=""
+                    >
+
+                    <div class="expertise-reader-visual-overlay"></div>
+
+                    <span
+                        class="expertise-reader-big-number"
+                        id="expertiseReaderBigNumber"
+                    >
+                        01
+                    </span>
+
+                    <span class="expertise-reader-visual-label">
+                        O&O / PRACTICE
+                    </span>
+
+                </div>
+
+
+                <!-- EDITORIAL INTRO -->
+
+                <div class="expertise-reader-intro">
+
+                    <p
+                        class="expertise-reader-kicker"
+                        id="expertiseReaderKicker"
+                    >
+                        CORPORATE & COMMERCIAL
+                    </p>
+
+                    <h1
+                        id="expertiseReaderTitle"
+                    ></h1>
+
+                    <p
+                        class="expertise-reader-lead"
+                        id="expertiseReaderLead"
+                    ></p>
+
+                </div>
+
+
+                <!-- OVERVIEW -->
+
+                <div class="expertise-reader-section">
+
+                    <div class="expertise-reader-section-number">
+                        01
                     </div>
 
-                    <p>
-                        ${description.textContent.trim()}
-                    </p>
+                    <div>
+
+                        <p class="expertise-reader-section-label">
+                            THE PRACTICE
+                        </p>
+
+                        <div
+                            class="expertise-reader-body"
+                            id="expertiseReaderBody"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WHAT WE COVER -->
+
+                <div class="expertise-reader-section">
+
+                    <div class="expertise-reader-section-number">
+                        02
+                    </div>
+
+                    <div>
+
+                        <p class="expertise-reader-section-label">
+                            WHAT WE COVER
+                        </p>
+
+                        <div
+                            class="expertise-focus-list"
+                            id="expertiseReaderFocus"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTEXT -->
+
+                <div class="expertise-reader-context">
+
+                    <div class="expertise-reader-context-number">
+                        03
+                    </div>
+
+                    <div>
+
+                        <p class="expertise-reader-section-label">
+                            WHY IT MATTERS
+                        </p>
+
+                        <h2 id="expertiseReaderContextTitle"></h2>
+
+                        <p id="expertiseReaderContext"></p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OFFICIAL RESOURCES -->
+
+                <div class="expertise-reader-resources">
+
+                    <div>
+
+                        <p class="expertise-reader-section-label">
+                            RELEVANT RESOURCES
+                        </p>
+
+                        <h2>
+                            Official sources
+                            <span>for further reference.</span>
+                        </h2>
+
+                    </div>
+
+                    <div
+                        class="expertise-resource-list"
+                        id="expertiseReaderResources"
+                    ></div>
+
+                </div>
+
+
+                <!-- CONSULTATION -->
+
+                <div class="expertise-reader-cta">
+
+                    <div>
+
+                        <p class="expertise-reader-section-label">
+                            DISCUSS YOUR MATTER
+                        </p>
+
+                        <h2>
+                            Need counsel
+                            <span>for a specific matter?</span>
+                        </h2>
+
+                    </div>
+
+                    <a
+                        href="#contact"
+                        class="expertise-reader-cta-button"
+                        id="expertiseReaderCTA"
+                    >
+                        Book a Confidential Consultation
+                        <span>↗</span>
+                    </a>
 
                 </div>
 
             </div>
 
-        `;
+
+            <!-- =================================================
+                 PREVIOUS / NEXT
+                 ================================================= -->
+
+            <footer class="expertise-reader-footer">
+
+                <button
+                    type="button"
+                    id="expertiseReaderPrev"
+                    class="expertise-reader-nav"
+                >
+
+                    <span class="expertise-reader-nav-arrow">
+                        ←
+                    </span>
+
+                    <span>
+
+                        <small>
+                            PREVIOUS
+                        </small>
+
+                        <strong id="expertiseReaderPrevName">
+                            —
+                        </strong>
+
+                    </span>
+
+                </button>
 
 
-        practice.appendChild(
-            expand
-        );
+                <div class="expertise-reader-footer-center">
+                    O&O / EXPERTISE
+                </div>
 
 
-        /* =================================================
-           CURSOR MICRO-INTERACTION
-           ================================================= */
+                <button
+                    type="button"
+                    id="expertiseReaderNext"
+                    class="expertise-reader-nav expertise-reader-nav-next"
+                >
 
-        practice.addEventListener(
-            "mousemove",
-            event => {
+                    <span>
 
-                const rect =
-                    practice.getBoundingClientRect();
+                        <small>
+                            NEXT
+                        </small>
 
-                const x =
-                    event.clientX -
-                    rect.left;
+                        <strong id="expertiseReaderNextName">
+                            —
+                        </strong>
 
-                const y =
-                    event.clientY -
-                    rect.top;
+                    </span>
 
+                    <span class="expertise-reader-nav-arrow">
+                        →
+                    </span>
 
-                practice.style.setProperty(
-                    "--practice-x",
-                    `${x}px`
-                );
+                </button>
 
-                practice.style.setProperty(
-                    "--practice-y",
-                    `${y}px`
-                );
+            </footer>
 
-            }
-        );
+        </article>
+    `;
 
 
-        /* =================================================
-           OPEN / CLOSE
-           ================================================= */
-
-        const togglePractice = () => {
-
-            const isOpen =
-                practice.classList.contains(
-                    "is-expanded"
-                );
+    document.body.appendChild(reader);
 
 
-            /*
-             * Close every other practice area.
-             */
+    /* ============================================================
+       CACHE READER ELEMENTS
+       ============================================================ */
 
-            practices.forEach(other => {
+    const backdrop =
+        reader.querySelector(".expertise-reader-backdrop");
 
-                other.classList.remove(
-                    "is-expanded"
-                );
+    const panel =
+        reader.querySelector(".expertise-reader-panel");
 
-                other.setAttribute(
-                    "aria-expanded",
-                    "false"
+    const content =
+        document.getElementById("expertiseReaderContent");
+
+    const closeButton =
+        document.getElementById("expertiseReaderClose");
+
+    const category =
+        document.getElementById("expertiseReaderCategory");
+
+    const index =
+        document.getElementById("expertiseReaderIndex");
+
+    const image =
+        document.getElementById("expertiseReaderImage");
+
+    const bigNumber =
+        document.getElementById("expertiseReaderBigNumber");
+
+    const kicker =
+        document.getElementById("expertiseReaderKicker");
+
+    const title =
+        document.getElementById("expertiseReaderTitle");
+
+    const lead =
+        document.getElementById("expertiseReaderLead");
+
+    const body =
+        document.getElementById("expertiseReaderBody");
+
+    const focus =
+        document.getElementById("expertiseReaderFocus");
+
+    const contextTitle =
+        document.getElementById("expertiseReaderContextTitle");
+
+    const context =
+        document.getElementById("expertiseReaderContext");
+
+    const resources =
+        document.getElementById("expertiseReaderResources");
+
+    const progress =
+        document.getElementById("expertiseReaderProgress");
+
+    const prevButton =
+        document.getElementById("expertiseReaderPrev");
+
+    const nextButton =
+        document.getElementById("expertiseReaderNext");
+
+    const prevName =
+        document.getElementById("expertiseReaderPrevName");
+
+    const nextName =
+        document.getElementById("expertiseReaderNextName");
+
+
+    /* ============================================================
+       ORDER
+       ============================================================ */
+
+    const order = [
+        "corporate",
+        "investment",
+        "property",
+        "disputes",
+        "employment",
+        "regulatory"
+    ];
+
+
+    let currentIndex = 0;
+
+    let activePractice = null;
+
+
+    /* ============================================================
+       RENDER PRACTICE AREA
+       ============================================================ */
+
+    function renderPractice(key) {
+
+        const data =
+            practiceAreas[key];
+
+        if (!data) return;
+
+
+        currentIndex =
+            order.indexOf(key);
+
+        activePractice =
+            key;
+
+
+        /* --------------------------------------------------------
+           BASIC CONTENT
+           -------------------------------------------------------- */
+
+        category.textContent =
+            data.category;
+
+        index.textContent =
+            `${data.number} / 06`;
+
+        kicker.textContent =
+            data.category;
+
+        title.textContent =
+            data.title;
+
+        lead.textContent =
+            data.intro;
+
+        bigNumber.textContent =
+            data.number;
+
+
+        /* --------------------------------------------------------
+           IMAGE
+           -------------------------------------------------------- */
+
+        image.src =
+            data.image;
+
+        image.alt =
+            data.imageAlt;
+
+
+        /* --------------------------------------------------------
+           BODY
+           -------------------------------------------------------- */
+
+        body.innerHTML =
+            data.overview;
+
+
+        /* --------------------------------------------------------
+           FOCUS LIST
+           -------------------------------------------------------- */
+
+        focus.innerHTML =
+            data.focus
+                .map((item, i) => `
+
+                    <div class="expertise-focus-item">
+
+                        <span>
+                            ${String(i + 1).padStart(2, "0")}
+                        </span>
+
+                        <strong>
+                            ${item}
+                        </strong>
+
+                        <i>
+                            ↗
+                        </i>
+
+                    </div>
+
+                `)
+                .join("");
+
+
+        /* --------------------------------------------------------
+           CONTEXT
+           -------------------------------------------------------- */
+
+        contextTitle.textContent =
+            data.contextTitle;
+
+        context.textContent =
+            data.context;
+
+
+        /* --------------------------------------------------------
+           OFFICIAL RESOURCES
+           -------------------------------------------------------- */
+
+        resources.innerHTML =
+            data.resources
+                .map(resource => `
+
+                    <a
+                        href="${resource.url}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="expertise-resource"
+                    >
+
+                        <span class="expertise-resource-code">
+                            ${resource.short}
+                        </span>
+
+                        <span class="expertise-resource-name">
+                            ${resource.label}
+                        </span>
+
+                        <span class="expertise-resource-arrow">
+                            ↗
+                        </span>
+
+                    </a>
+
+                `)
+                .join("");
+
+
+        /* --------------------------------------------------------
+           PREVIOUS / NEXT
+           -------------------------------------------------------- */
+
+        const previousIndex =
+            (currentIndex - 1 + order.length) %
+            order.length;
+
+        const nextIndex =
+            (currentIndex + 1) %
+            order.length;
+
+
+        prevName.textContent =
+            practiceAreas[
+                order[previousIndex]
+            ].shortTitle;
+
+
+        nextName.textContent =
+            practiceAreas[
+                order[nextIndex]
+            ].shortTitle;
+
+
+        /* --------------------------------------------------------
+           RESET READING POSITION
+           -------------------------------------------------------- */
+
+        content.scrollTop = 0;
+
+        progress.style.width = "0%";
+
+
+        /* --------------------------------------------------------
+           SMALL CONTENT REVEAL
+           -------------------------------------------------------- */
+
+        reader.classList.remove("reader-content-ready");
+
+        requestAnimationFrame(() => {
+
+            requestAnimationFrame(() => {
+
+                reader.classList.add(
+                    "reader-content-ready"
                 );
 
             });
 
+        });
 
-            /*
-             * If this one wasn't already open,
-             * open it.
-             */
-
-            if (!isOpen) {
-
-                practice.classList.add(
-                    "is-expanded"
-                );
-
-                practice.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-                practiceList.classList.add(
-                    "has-expanded"
-                );
-
-            } else {
-
-                practiceList.classList.remove(
-                    "has-expanded"
-                );
-
-            }
-
-        };
+    }
 
 
-        /* =================================================
-           CLICK
-           ================================================= */
+    /* ============================================================
+       OPEN
+       ============================================================ */
 
-        practice.addEventListener(
+    function openPractice(key) {
+
+        renderPractice(key);
+
+
+        reader.classList.add("open");
+
+        reader.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "expertise-reader-open"
+        );
+
+
+        /*
+         * Focus the close button after the opening animation starts.
+         */
+        setTimeout(() => {
+
+            closeButton.focus();
+
+        }, 150);
+
+    }
+
+
+    /* ============================================================
+       CLOSE
+       ============================================================ */
+
+    function closePractice() {
+
+        reader.classList.remove("open");
+
+        reader.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "expertise-reader-open"
+        );
+
+        progress.style.width = "0%";
+
+    }
+
+
+    /* ============================================================
+       PREVIOUS
+       ============================================================ */
+
+    function openPrevious() {
+
+        const previousIndex =
+            (currentIndex - 1 + order.length) %
+            order.length;
+
+        renderPractice(
+            order[previousIndex]
+        );
+
+    }
+
+
+    /* ============================================================
+       NEXT
+       ============================================================ */
+
+    function openNext() {
+
+        const nextIndex =
+            (currentIndex + 1) %
+            order.length;
+
+        renderPractice(
+            order[nextIndex]
+        );
+
+    }
+
+
+    /* ============================================================
+       PRACTICE ROWS
+       ============================================================ */
+
+    practiceItems.forEach((item, index) => {
+
+        const titleElement =
+            item.querySelector("h3");
+
+        if (!titleElement) return;
+
+
+        const titleText =
+            titleElement.textContent
+                .trim()
+                .toLowerCase();
+
+
+        let key = null;
+
+
+        if (
+            titleText.includes("corporate")
+        ) {
+            key = "corporate";
+
+        } else if (
+            titleText.includes("foreign investment")
+        ) {
+            key = "investment";
+
+        } else if (
+            titleText.includes("real estate")
+        ) {
+            key = "property";
+
+        } else if (
+            titleText.includes("dispute")
+        ) {
+            key = "disputes";
+
+        } else if (
+            titleText.includes("employment")
+        ) {
+            key = "employment";
+
+        } else if (
+            titleText.includes("regulatory")
+        ) {
+            key = "regulatory";
+        }
+
+
+        if (!key) return;
+
+
+        /*
+         * Make the existing row behave like a button.
+         */
+
+        item.setAttribute(
+            "tabindex",
+            "0"
+        );
+
+        item.setAttribute(
+            "role",
+            "button"
+        );
+
+        item.setAttribute(
+            "aria-haspopup",
+            "dialog"
+        );
+
+
+        /*
+         * Store the key for debugging / future enhancements.
+         */
+
+        item.dataset.practice =
+            key;
+
+
+        /*
+         * CLICK
+         */
+
+        item.addEventListener(
             "click",
             event => {
 
                 /*
-                 * Prevent accidental double-triggering
-                 * if another interactive element exists.
+                 * If a future button/link is placed inside the row,
+                 * don't accidentally open twice.
                  */
 
                 if (
@@ -1081,17 +2161,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                togglePractice();
+                openPractice(key);
 
             }
         );
 
 
-        /* =================================================
-           KEYBOARD
-           ================================================= */
+        /*
+         * KEYBOARD
+         */
 
-        practice.addEventListener(
+        item.addEventListener(
             "keydown",
             event => {
 
@@ -1102,7 +2182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     event.preventDefault();
 
-                    togglePractice();
+                    openPractice(key);
 
                 }
 
@@ -1110,50 +2190,220 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* =================================================
-           STAGGERED NUMBER REVEAL
-           ================================================= */
+        /*
+         * Add a subtle "EXPLORE" state without changing
+         * the existing HTML.
+         */
 
-        if (number) {
-
-            number.style.transitionDelay =
-                `${index * 40}ms`;
-
-        }
+        item.style.setProperty(
+            "--practice-index",
+            `"${String(index + 1).padStart(2, "0")}"`
+        );
 
     });
 
 
-    /* =====================================================
-       KEEP LIST STATE CORRECT
-       ===================================================== */
+    /* ============================================================
+       CLOSE EVENTS
+       ============================================================ */
 
-    const observer =
-        new MutationObserver(() => {
-
-            const anyOpen =
-                practiceList.querySelector(
-                    ".practice-item.is-expanded"
-                );
-
-            practiceList.classList.toggle(
-                "has-expanded",
-                Boolean(anyOpen)
-            );
-
-        });
+    closeButton.addEventListener(
+        "click",
+        closePractice
+    );
 
 
-    observer.observe(
-        practiceList,
-        {
-            subtree: true,
-            attributes: true,
-            attributeFilter: [
-                "class"
-            ]
+    backdrop.addEventListener(
+        "click",
+        closePractice
+    );
+
+
+    /* ============================================================
+       NAVIGATION BUTTONS
+       ============================================================ */
+
+    prevButton.addEventListener(
+        "click",
+        openPrevious
+    );
+
+
+    nextButton.addEventListener(
+        "click",
+        openNext
+    );
+
+
+    /* ============================================================
+       KEYBOARD NAVIGATION
+       ============================================================ */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                !reader.classList.contains("open")
+            ) {
+                return;
+            }
+
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closePractice();
+
+                return;
+
+            }
+
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                openPrevious();
+
+                return;
+
+            }
+
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                openNext();
+
+            }
+
         }
     );
+
+
+    /* ============================================================
+       READING PROGRESS
+       ============================================================ */
+
+    content.addEventListener(
+        "scroll",
+        () => {
+
+            const scrollTop =
+                content.scrollTop;
+
+            const scrollHeight =
+                content.scrollHeight -
+                content.clientHeight;
+
+
+            if (
+                scrollHeight <= 0
+            ) {
+
+                progress.style.width =
+                    "100%";
+
+                return;
+
+            }
+
+
+            const percentage =
+                (
+                    scrollTop /
+                    scrollHeight
+                ) * 100;
+
+
+            progress.style.width =
+                `${Math.min(
+                    100,
+                    Math.max(
+                        0,
+                        percentage
+                    )
+                )}%`;
+
+        },
+        { passive: true }
+    );
+
+
+    /* ============================================================
+       SWIPE NAVIGATION
+       ------------------------------------------------------------
+       Mobile users can swipe left/right through practice areas.
+       ============================================================ */
+
+    let touchStartX = 0;
+
+    let touchStartY = 0;
+
+
+    content.addEventListener(
+        "touchstart",
+        event => {
+
+            const touch =
+                event.changedTouches[0];
+
+            touchStartX =
+                touch.clientX;
+
+            touchStartY =
+                touch.clientY;
+
+        },
+        { passive: true }
+    );
+
+
+    content.addEventListener(
+        "touchend",
+        event => {
+
+            const touch =
+                event.changedTouches[0];
+
+            const deltaX =
+                touch.clientX -
+                touchStartX;
+
+            const deltaY =
+                touch.clientY -
+                touchStartY;
+
+
+            /*
+             * Ignore mostly vertical scrolling.
+             */
+
+            if (
+                Math.abs(deltaX) < 70 ||
+                Math.abs(deltaX) < Math.abs(deltaY)
+            ) {
+                return;
+            }
+
+
+            if (deltaX < 0) {
+
+                openNext();
+
+            } else {
+
+                openPrevious();
+
+            }
+
+        },
+        { passive: true }
+    );
+
 
 });
 

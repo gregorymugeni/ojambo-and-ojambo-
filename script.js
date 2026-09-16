@@ -3242,4 +3242,1635 @@ scrollObserver.observe(element);
     });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   PREMIUM CLIENTS READER
+   ============================================================
+
+   CLIENT EXPERIENCE
+   ------------------------------------------------------------
+   The main Clients section remains intentionally minimal.
+
+   Clicking a client opens a full editorial reader containing:
+
+   • Large client identity
+   • Client number
+   • Organisation category
+   • Editorial introduction
+   • Publicly available organisation context
+   • Relationship / engagement section
+   • Relevant public resources
+   • Official website where verified
+   • Enquiry CTA
+   • Previous / Next navigation
+   • Reading progress
+   • Keyboard navigation
+   • Mobile swipe navigation
+   • Reduced-motion support
+
+   IMPORTANT:
+   ------------------------------------------------------------
+   We do not invent specific legal matters, confidential work,
+   transactions, outcomes or testimonials.
+
+   The reader only presents information that is appropriate for
+   public-facing firm positioning.
+   ============================================================ */
+
+
+    const clientCards =
+        document.querySelectorAll(".client-logo:not(.legal-resource-card)");
+
+    if (!clientCards.length) return;
+
+
+    /* ============================================================
+       CLIENT DATA
+       ============================================================ */
+
+    const clients = {
+
+        kenlloyd: {
+
+            number: "01",
+
+            category: "LOGISTICS · TRADE · BUSINESS",
+
+            name: "KENLLOYD",
+
+            subtitle: "LOGISTICS LIMITED",
+
+            title:
+                "Legal counsel around complex commercial environments.",
+
+            intro:
+                "A selected client relationship represented within the firm's corporate and commercial practice.",
+
+            mark:
+                "KENLLOYD",
+
+            description: `
+                <p>
+                    Kenlloyd Logistics Limited is a Ugandan company
+                    operating across logistics, petroleum marketing
+                    and commodity trading.
+                </p>
+
+                <p>
+                    The organisation's public profile describes a
+                    business that has diversified beyond its original
+                    clearing and forwarding activities into multiple
+                    commercial areas.
+                </p>
+
+                <p>
+                    For organisations operating across interconnected
+                    commercial activities, legal considerations can
+                    arise across contracts, corporate arrangements,
+                    regulatory requirements, transactions and ongoing
+                    business relationships.
+                </p>
+            `,
+
+            focus: [
+                "Corporate & commercial matters",
+                "Commercial relationships",
+                "Business transactions",
+                "Contractual considerations",
+                "Regulatory considerations",
+                "Ongoing legal advisory"
+            ],
+
+            contextTitle:
+                "Counsel for businesses operating across multiple commercial interests.",
+
+            context:
+                "The firm's corporate and commercial practice is structured to support organisations navigating business decisions, commercial relationships and legal obligations in Uganda.",
+
+            officialLabel:
+                "Kenlloyd Logistics",
+
+            officialUrl:
+                "https://www.kenlloyd-logistics.com/"
+
+        },
+
+
+        pioneer: {
+
+            number: "02",
+
+            category: "TRANSPORT · INFRASTRUCTURE · BUSINESS",
+
+            name: "pioneer",
+
+            subtitle: "EASY BUS",
+
+            title:
+                "Legal thinking for businesses that move people.",
+
+            intro:
+                "A selected client relationship within a business environment involving transport and commercial activity.",
+
+            mark:
+                "pioneer",
+
+            description: `
+                <p>
+                    Pioneer Easy Bus is a public transport business
+                    associated with bus operations in Kampala.
+                </p>
+
+                <p>
+                    Public records and reporting document the company's
+                    role in Kampala's urban transport environment,
+                    including its historical concession and related
+                    commercial and legal matters.
+                </p>
+
+                <p>
+                    Transport businesses operate within a particularly
+                    interconnected legal environment, where commercial,
+                    regulatory, contractual and operational questions
+                    can intersect.
+                </p>
+            `,
+
+            focus: [
+                "Commercial matters",
+                "Transport-sector considerations",
+                "Contractual relationships",
+                "Regulatory matters",
+                "Dispute-related issues",
+                "Business advisory"
+            ],
+
+            contextTitle:
+                "Where commercial activity meets regulation and infrastructure.",
+
+            context:
+                "The legal environment surrounding transport and infrastructure businesses can involve several parties and regulatory considerations at the same time.",
+
+            officialLabel:
+                "Public legal record — Uganda",
+
+            officialUrl:
+                "https://ulii.org/en/akn/ug/judgment/ughccd/2017/185/eng@2017-11-16"
+
+        },
+
+
+        capital: {
+
+            number: "03",
+
+            category: "LOGISTICS · PROCUREMENT · BUSINESS",
+
+            name: "CAPITAL",
+
+            subtitle: "LOGISTICS",
+
+            title:
+                "Commercial counsel for operational businesses.",
+
+            intro:
+                "A selected client relationship within the firm's business and commercial client portfolio.",
+
+            mark:
+                "CAPITAL",
+
+            description: `
+                <p>
+                    Capital Logistics is presented on the firm's
+                    website as one of its selected clients.
+                </p>
+
+                <p>
+                    Logistics and procurement businesses operate
+                    through commercial relationships involving
+                    suppliers, customers, contracts, property,
+                    personnel and regulatory requirements.
+                </p>
+
+                <p>
+                    Our broader corporate and commercial practice
+                    provides a legal framework for organisations
+                    dealing with these kinds of commercial decisions
+                    in Uganda.
+                </p>
+            `,
+
+            focus: [
+                "Commercial agreements",
+                "Business relationships",
+                "Procurement considerations",
+                "Corporate advisory",
+                "Contractual obligations",
+                "Regulatory considerations"
+            ],
+
+            contextTitle:
+                "Supporting commercial operations with legal clarity.",
+
+            context:
+                "Businesses with multiple operational relationships often need legal guidance that connects contracts, commercial decisions and regulatory considerations.",
+
+            officialLabel:
+                "Capital Logistics",
+
+            officialUrl:
+                "mailto:robertojambo@gmail.com?subject=Enquiry%20regarding%20Capital%20Logistics"
+
+        },
+
+
+        elsmed: {
+
+            number: "04",
+
+            category: "HEALTHCARE · TECHNOLOGY · INSTITUTIONS",
+
+            name: "ELSMED",
+
+            subtitle: "HEALTH CARE SOLUTIONS LTD",
+
+            title:
+                "Legal support where business meets healthcare.",
+
+            intro:
+                "A selected client relationship represented within the firm's broader business and institutional client portfolio.",
+
+            mark:
+                "ELSMED",
+
+            description: `
+                <p>
+                    Elsmed Health Care Solutions is presented on the
+                    firm's website as a selected client.
+                </p>
+
+                <p>
+                    Publicly available information describes the
+                    organisation's involvement in healthcare
+                    technology, medical equipment and healthcare
+                    infrastructure projects in Uganda.
+                </p>
+
+                <p>
+                    Organisations working in highly regulated
+                    environments may encounter legal questions
+                    involving commercial relationships, projects,
+                    contracts, regulatory requirements and
+                    institutional counterparties.
+                </p>
+            `,
+
+            focus: [
+                "Corporate & commercial matters",
+                "Healthcare-sector business",
+                "Commercial agreements",
+                "Project-related matters",
+                "Regulatory considerations",
+                "Institutional relationships"
+            ],
+
+            contextTitle:
+                "For organisations operating where regulation matters.",
+
+            context:
+                "Healthcare-related commercial activity can involve several contractual, institutional and regulatory dimensions, making clear legal analysis particularly important.",
+
+            officialLabel:
+                "Elsmed Health Care Solutions",
+
+            officialUrl:
+                "https://elsmedhealthcaresolutions.chromaticpaintsug.com/"
+
+        },
+
+
+        returnhope: {
+
+            number: "05",
+
+            category: "INTERNATIONAL · ORGANISATION · USA",
+
+            name: "RETURN HOPE",
+
+            subtitle: "INTERNATIONAL, INC.",
+
+            country: "USA",
+
+            title:
+                "Uganda-facing counsel for international organisations.",
+
+            intro:
+                "A selected international client relationship represented within the firm's portfolio.",
+
+            mark:
+                "RETURN HOPE",
+
+            description: `
+                <p>
+                    Return Hope International, Inc. is identified on
+                    the firm's website among its selected clients.
+                </p>
+
+                <p>
+                    International organisations working across
+                    jurisdictions may need local legal guidance when
+                    their activities, relationships or interests
+                    intersect with Uganda.
+                </p>
+
+                <p>
+                    Our practice is positioned to provide Uganda-facing
+                    legal advice to international clients, institutions
+                    and organisations navigating local legal and
+                    commercial considerations.
+                </p>
+            `,
+
+            focus: [
+                "Uganda-facing legal advice",
+                "International organisations",
+                "Institutional relationships",
+                "Local legal considerations",
+                "Commercial matters",
+                "Regulatory considerations"
+            ],
+
+            contextTitle:
+                "Local legal understanding for international organisations.",
+
+            context:
+                "International clients may require a local legal perspective when their activities, relationships or interests extend into Uganda.",
+
+            officialLabel:
+                "Contact O&O regarding this client enquiry",
+
+            officialUrl:
+                "mailto:robertojambo@gmail.com?subject=Enquiry%20regarding%20Return%20Hope%20International"
+
+        },
+
+
+        christian: {
+
+            number: "06",
+
+            category: "INSTITUTIONAL · ORGANISATION",
+
+            name: "Christian",
+
+            subtitle: "LIFE MINISTRIES",
+
+            title:
+                "Legal counsel for organisations with institutional responsibilities.",
+
+            intro:
+                "A selected client relationship within the firm's institutional portfolio.",
+
+            mark:
+                "Christian",
+
+            description: `
+                <p>
+                    Christian Life Ministries is presented on the
+                    firm's website as one of its selected clients.
+                </p>
+
+                <p>
+                    Organisations and institutions can encounter legal
+                    questions across governance, agreements, property,
+                    employment, regulatory matters and relationships
+                    with third parties.
+                </p>
+
+                <p>
+                    Our wider advisory practice is designed around
+                    understanding those legal questions in the context
+                    of the organisation involved.
+                </p>
+            `,
+
+            focus: [
+                "Institutional advisory",
+                "Governance considerations",
+                "Commercial agreements",
+                "Property matters",
+                "Employment matters",
+                "Regulatory considerations"
+            ],
+
+            contextTitle:
+                "Legal advice shaped around the organisation.",
+
+            context:
+                "Institutional clients can require legal advice across several areas at once, making context and careful issue identification important.",
+
+            officialLabel:
+                "Contact O&O regarding this client enquiry",
+
+            officialUrl:
+                "mailto:robertojambo@gmail.com?subject=Enquiry%20regarding%20Christian%20Life%20Ministries"
+
+        },
+
+
+        kirk: {
+
+            number: "07",
+
+            category: "TECHNICAL SERVICES · BUSINESS",
+
+            name: "KIRK",
+
+            subtitle: "TECHNICALS LTD",
+
+            title:
+                "Legal support for technical and commercial businesses.",
+
+            intro:
+                "A selected client relationship represented within the firm's business portfolio.",
+
+            mark:
+                "KIRK",
+
+            description: `
+                <p>
+                    Kirk Technicals Ltd is identified on the firm's
+                    website as a selected client.
+                </p>
+
+                <p>
+                    Technical businesses can operate through a network
+                    of contracts, suppliers, customers, employees and
+                    other commercial counterparties.
+                </p>
+
+                <p>
+                    Our corporate and commercial practice provides
+                    legal support around the agreements, relationships
+                    and business decisions that underpin those
+                    activities.
+                </p>
+            `,
+
+            focus: [
+                "Commercial agreements",
+                "Business relationships",
+                "Corporate advisory",
+                "Contractual matters",
+                "Employment considerations",
+                "Regulatory questions"
+            ],
+
+            contextTitle:
+                "Keeping commercial relationships legally clear.",
+
+            context:
+                "For technical and operational businesses, contracts and commercial relationships can form an important part of everyday activity.",
+
+            officialLabel:
+                "Contact O&O regarding this client enquiry",
+
+            officialUrl:
+                "mailto:robertojambo@gmail.com?subject=Enquiry%20regarding%20Kirk%20Technicals"
+
+        }
+
+    };
+
+
+    /* ============================================================
+       CLIENT ORDER
+       ============================================================ */
+
+    const order = [
+        "kenlloyd",
+        "pioneer",
+        "capital",
+        "elsmed",
+        "returnhope",
+        "christian",
+        "kirk"
+    ];
+
+
+    /* ============================================================
+       IDENTIFY CLIENT CARD
+       ============================================================ */
+
+    function getClientKey(card) {
+
+        if (
+            card.classList.contains("client-kenlloyd")
+        ) {
+            return "kenlloyd";
+        }
+
+        if (
+            card.classList.contains("client-pioneer")
+        ) {
+            return "pioneer";
+        }
+
+        if (
+            card.classList.contains("client-capital")
+        ) {
+            return "capital";
+        }
+
+        if (
+            card.classList.contains("client-elsmed")
+        ) {
+            return "elsmed";
+        }
+
+        if (
+            card.classList.contains("client-returnhope")
+        ) {
+            return "returnhope";
+        }
+
+        if (
+            card.classList.contains("client-christian")
+        ) {
+            return "christian";
+        }
+
+        if (
+            card.classList.contains("client-kirk")
+        ) {
+            return "kirk";
+        }
+
+        return null;
+
+    }
+
+
+    /* ============================================================
+       CREATE READER
+       ============================================================ */
+
+  const clientsReader =
+    document.createElement("div");
+
+clientsReader.className =
+    "clients-reader";
+
+clientsReader.id =
+    "clientsReader";
+
+clientsReader.setAttribute(
+    "aria-hidden",
+    "true"
+);
+
+clientsReader.innerHTML = `
+
+
+
+        <div class="clients-reader-backdrop"></div>
+
+        <article
+            class="clients-reader-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="clientsReaderTitle"
+        >
+
+            <header class="clients-reader-header">
+
+                <div class="clients-reader-brand">
+
+                    <span class="clients-reader-mark">
+                        O&O
+                    </span>
+
+                    <span>
+                        OJAMBO & OJAMBO ADVOCATES
+                    </span>
+
+                </div>
+
+
+                <div class="clients-reader-meta">
+
+                    <span id="clientsReaderCategory">
+                        SELECTED CLIENT
+                    </span>
+
+                    <span
+                        id="clientsReaderIndex"
+                        class="clients-reader-index"
+                    >
+                        01 / 07
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="clients-reader-close"
+                    id="clientsReaderClose"
+                    aria-label="Close client profile"
+                >
+                    ×
+                </button>
+
+            </header>
+
+
+            <div class="clients-reader-progress">
+                <span id="clientsReaderProgress"></span>
+            </div>
+
+
+            <div
+                class="clients-reader-content"
+                id="clientsReaderContent"
+            >
+
+                <!-- CLIENT HERO -->
+
+                <div class="clients-reader-visual">
+
+                    <div
+                        class="clients-reader-visual-grid"
+                    ></div>
+
+                    <div
+                        class="clients-reader-wordmark"
+                        id="clientsReaderWordmark"
+                    >
+                        KENLLOYD
+                    </div>
+
+                    <div
+                        class="clients-reader-submark"
+                        id="clientsReaderSubmark"
+                    >
+                        LOGISTICS LIMITED
+                    </div>
+
+                    <div
+                        class="clients-reader-country"
+                        id="clientsReaderCountry"
+                    ></div>
+
+                    <span class="clients-reader-visual-label">
+                        SELECTED CLIENT / O&O
+                    </span>
+
+                    <span
+                        class="clients-reader-big-number"
+                        id="clientsReaderNumber"
+                    >
+                        01
+                    </span>
+
+                </div>
+
+
+                <!-- INTRO -->
+
+                <div class="clients-reader-intro">
+
+                    <p
+                        class="clients-reader-kicker"
+                        id="clientsReaderKicker"
+                    >
+                        LOGISTICS · TRADE · BUSINESS
+                    </p>
+
+                    <h1
+                        id="clientsReaderTitle"
+                    ></h1>
+
+                    <p
+                        class="clients-reader-lead"
+                        id="clientsReaderLead"
+                    ></p>
+
+                </div>
+
+
+                <!-- ABOUT -->
+
+                <div class="clients-reader-section">
+
+                    <div class="clients-reader-section-number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <p class="clients-reader-section-label">
+                            CLIENT CONTEXT
+                        </p>
+
+                        <div
+                            class="clients-reader-body"
+                            id="clientsReaderBody"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOCUS -->
+
+                <div class="clients-reader-section">
+
+                    <div class="clients-reader-section-number">
+                        02
+                    </div>
+
+                    <div>
+
+                        <p class="clients-reader-section-label">
+                            RELEVANT COUNSEL
+                        </p>
+
+                        <div
+                            class="clients-focus-list"
+                            id="clientsReaderFocus"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTEXT -->
+
+                <div class="clients-reader-context">
+
+                    <div class="clients-reader-context-number">
+                        03
+                    </div>
+
+                    <div>
+
+                        <p class="clients-reader-section-label">
+                            THE O&O APPROACH
+                        </p>
+
+                        <h2
+                            id="clientsReaderContextTitle"
+                        ></h2>
+
+                        <p
+                            id="clientsReaderContext"
+                        ></p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PUBLIC LINK -->
+
+                <div class="clients-reader-resources">
+
+                    <div>
+
+                        <p class="clients-reader-section-label">
+                            RELEVANT LINK
+                        </p>
+
+                        <h2>
+                            Explore
+                            <span>the public record.</span>
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        id="clientsReaderResource"
+                        class="clients-resource-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <span
+                            class="clients-resource-code"
+                            id="clientsReaderResourceCode"
+                        >
+                            WEB
+                        </span>
+
+                        <span
+                            class="clients-resource-name"
+                            id="clientsReaderResourceName"
+                        >
+                            Official website
+                        </span>
+
+                        <span class="clients-resource-arrow">
+                            ↗
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- CTA -->
+
+                <div class="clients-reader-cta">
+
+                    <div>
+
+                        <p class="clients-reader-section-label">
+                            DISCUSS A MATTER
+                        </p>
+
+                        <h2>
+                            Need legal counsel
+                            <span>for your organisation?</span>
+                        </h2>
+
+                    </div>
+
+                    <a
+                        href="#contact"
+                        class="clients-reader-cta-button"
+                    >
+                        Book a Confidential Consultation
+                        <span>↗</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAV -->
+
+            <footer class="clients-reader-footer">
+
+                <button
+                    type="button"
+                    class="clients-reader-nav"
+                    id="clientsReaderPrev"
+                >
+
+                    <span class="clients-reader-nav-arrow">
+                        ←
+                    </span>
+
+                    <span>
+
+                        <small>
+                            PREVIOUS
+                        </small>
+
+                        <strong id="clientsReaderPrevName">
+                            —
+                        </strong>
+
+                    </span>
+
+                </button>
+
+
+                <div class="clients-reader-footer-center">
+                    O&O / SELECTED CLIENTS
+                </div>
+
+
+                <button
+                    type="button"
+                    class="clients-reader-nav clients-reader-nav-next"
+                    id="clientsReaderNext"
+                >
+
+                    <span>
+
+                        <small>
+                            NEXT
+                        </small>
+
+                        <strong id="clientsReaderNextName">
+                            —
+                        </strong>
+
+                    </span>
+
+                    <span class="clients-reader-nav-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </footer>
+
+        </article>
+    `;
+
+
+    document.body.appendChild(clientsReader);
+
+
+    /* ============================================================
+       ELEMENTS
+       ============================================================ */
+
+    const backdrop =
+        reader.querySelector(
+            ".clients-reader-backdrop"
+        );
+
+    const content =
+        document.getElementById(
+            "clientsReaderContent"
+        );
+
+    const closeButton =
+        document.getElementById(
+            "clientsReaderClose"
+        );
+
+    const category =
+        document.getElementById(
+            "clientsReaderCategory"
+        );
+
+    const index =
+        document.getElementById(
+            "clientsReaderIndex"
+        );
+
+    const number =
+        document.getElementById(
+            "clientsReaderNumber"
+        );
+
+    const wordmark =
+        document.getElementById(
+            "clientsReaderWordmark"
+        );
+
+    const submark =
+        document.getElementById(
+            "clientsReaderSubmark"
+        );
+
+    const country =
+        document.getElementById(
+            "clientsReaderCountry"
+        );
+
+    const kicker =
+        document.getElementById(
+            "clientsReaderKicker"
+        );
+
+    const title =
+        document.getElementById(
+            "clientsReaderTitle"
+        );
+
+    const lead =
+        document.getElementById(
+            "clientsReaderLead"
+        );
+
+    const body =
+        document.getElementById(
+            "clientsReaderBody"
+        );
+
+    const focus =
+        document.getElementById(
+            "clientsReaderFocus"
+        );
+
+    const contextTitle =
+        document.getElementById(
+            "clientsReaderContextTitle"
+        );
+
+    const context =
+        document.getElementById(
+            "clientsReaderContext"
+        );
+
+    const resource =
+        document.getElementById(
+            "clientsReaderResource"
+        );
+
+    const resourceCode =
+        document.getElementById(
+            "clientsReaderResourceCode"
+        );
+
+    const resourceName =
+        document.getElementById(
+            "clientsReaderResourceName"
+        );
+
+    const progress =
+        document.getElementById(
+            "clientsReaderProgress"
+        );
+
+    const prevButton =
+        document.getElementById(
+            "clientsReaderPrev"
+        );
+
+    const nextButton =
+        document.getElementById(
+            "clientsReaderNext"
+        );
+
+    const prevName =
+        document.getElementById(
+            "clientsReaderPrevName"
+        );
+
+    const nextName =
+        document.getElementById(
+            "clientsReaderNextName"
+        );
+
+
+    let currentIndex = 0;
+
+
+    /* ============================================================
+       RENDER CLIENT
+       ============================================================ */
+
+    function renderClient(key) {
+
+        const data =
+            clients[key];
+
+        if (!data) return;
+
+
+        currentIndex =
+            order.indexOf(key);
+
+
+        category.textContent =
+            data.category;
+
+        index.textContent =
+            `${data.number} / ${order.length}`;
+
+        number.textContent =
+            data.number;
+
+        wordmark.textContent =
+            data.mark;
+
+        submark.textContent =
+            data.subtitle;
+
+        country.textContent =
+            data.country || "";
+
+        kicker.textContent =
+            data.category;
+
+        title.textContent =
+            data.title;
+
+        lead.textContent =
+            data.intro;
+
+        body.innerHTML =
+            data.description;
+
+
+        /* --------------------------------------------------------
+           FOCUS
+           -------------------------------------------------------- */
+
+        focus.innerHTML =
+            data.focus
+                .map((item, index) => `
+
+                    <div class="clients-focus-item">
+
+                        <span>
+                            ${String(index + 1).padStart(2, "0")}
+                        </span>
+
+                        <strong>
+                            ${item}
+                        </strong>
+
+                        <i>
+                            ↗
+                        </i>
+
+                    </div>
+
+                `)
+                .join("");
+
+
+        /* --------------------------------------------------------
+           CONTEXT
+           -------------------------------------------------------- */
+
+        contextTitle.textContent =
+            data.contextTitle;
+
+        context.textContent =
+            data.context;
+
+
+        /* --------------------------------------------------------
+           PUBLIC LINK
+           -------------------------------------------------------- */
+
+        resource.href =
+            data.officialUrl;
+
+        resourceName.textContent =
+            data.officialLabel;
+
+
+        if (
+            data.officialUrl.startsWith("mailto:")
+        ) {
+
+            resourceCode.textContent =
+                "ENQUIRY";
+
+            resource.target =
+                "_self";
+
+        } else {
+
+            resourceCode.textContent =
+                "PUBLIC";
+
+            resource.target =
+                "_blank";
+
+        }
+
+
+        /* --------------------------------------------------------
+           PREVIOUS / NEXT
+           -------------------------------------------------------- */
+
+        const previousIndex =
+            (
+                currentIndex -
+                1 +
+                order.length
+            ) % order.length;
+
+
+        const nextIndex =
+            (
+                currentIndex +
+                1
+            ) % order.length;
+
+
+        prevName.textContent =
+            `${clients[
+                order[previousIndex]
+            ].name} ${
+                clients[
+                    order[previousIndex]
+                ].subtitle
+            }`;
+
+
+        nextName.textContent =
+            `${clients[
+                order[nextIndex]
+            ].name} ${
+                clients[
+                    order[nextIndex]
+                ].subtitle
+            }`;
+
+
+        /* --------------------------------------------------------
+           RESET
+           -------------------------------------------------------- */
+
+        content.scrollTop = 0;
+
+        progress.style.width =
+            "0%";
+
+
+       clientsReader.classList.remove(
+            "client-content-ready"
+        );
+
+
+        requestAnimationFrame(() => {
+
+            requestAnimationFrame(() => {
+
+                clientsReader.classList.add(
+                    "client-content-ready"
+                );
+
+            });
+
+        });
+
+    }
+
+
+    /* ============================================================
+       OPEN
+       ============================================================ */
+
+    function openClient(key) {
+
+        renderClient(key);
+
+        clientsReader.classList.add("open");
+
+        clientsReader.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "clients-reader-open"
+        );
+
+
+        setTimeout(() => {
+
+            closeButton.focus();
+
+        }, 150);
+
+    }
+
+
+    /* ============================================================
+       CLOSE
+       ============================================================ */
+
+    function closeClient() {
+
+       clientsReader.classList.remove(
+            "open"
+        );
+clientsReader.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "clients-reader-open"
+        );
+
+    }
+
+
+    /* ============================================================
+       PREVIOUS
+       ============================================================ */
+
+    function previousClient() {
+
+        const previousIndex =
+            (
+                currentIndex -
+                1 +
+                order.length
+            ) % order.length;
+
+
+        renderClient(
+            order[previousIndex]
+        );
+
+    }
+
+
+    /* ============================================================
+       NEXT
+       ============================================================ */
+
+    function nextClient() {
+
+        const nextIndex =
+            (
+                currentIndex +
+                1
+            ) % order.length;
+
+
+        renderClient(
+            order[nextIndex]
+        );
+
+    }
+
+
+    /* ============================================================
+       CONNECT CLIENT CARDS
+       ============================================================ */
+
+    clientCards.forEach(card => {
+
+        const key =
+            getClientKey(card);
+
+        if (!key) return;
+
+
+        /*
+         * Prevent the original mailto link from firing when
+         * the visitor wants to explore the client profile.
+         */
+
+        card.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                openClient(key);
+
+            }
+        );
+
+
+        /*
+         * Accessibility.
+         */
+
+        card.setAttribute(
+            "role",
+            "button"
+        );
+
+        card.setAttribute(
+            "tabindex",
+            "0"
+        );
+
+        card.setAttribute(
+            "aria-haspopup",
+            "dialog"
+        );
+
+
+        card.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    openClient(key);
+
+                }
+
+            }
+        );
+
+    });
+
+
+    /* ============================================================
+       CLOSE
+       ============================================================ */
+
+    closeButton.addEventListener(
+        "click",
+        closeClient
+    );
+
+
+    backdrop.addEventListener(
+        "click",
+        closeClient
+    );
+
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+
+    prevButton.addEventListener(
+        "click",
+        previousClient
+    );
+
+
+    nextButton.addEventListener(
+        "click",
+        nextClient
+    );
+
+
+    /* ============================================================
+       KEYBOARD
+       ============================================================ */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                !clientsReader.classList.contains("open")
+            ) {
+                return;
+            }
+
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeClient();
+
+                return;
+
+            }
+
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                previousClient();
+
+                return;
+
+            }
+
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                nextClient();
+
+            }
+
+        }
+    );
+
+
+    /* ============================================================
+       READING PROGRESS
+       ============================================================ */
+
+    content.addEventListener(
+        "scroll",
+        () => {
+
+            const scrollHeight =
+                content.scrollHeight -
+                content.clientHeight;
+
+
+            if (
+                scrollHeight <= 0
+            ) {
+
+                progress.style.width =
+                    "100%";
+
+                return;
+
+            }
+
+
+            const percentage =
+                (
+                    content.scrollTop /
+                    scrollHeight
+                ) * 100;
+
+
+            progress.style.width =
+                `${Math.min(
+                    100,
+                    Math.max(
+                        0,
+                        percentage
+                    )
+                )}%`;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ============================================================
+       MOBILE SWIPE
+       ============================================================ */
+
+    let touchStartX = 0;
+
+    let touchStartY = 0;
+
+
+    content.addEventListener(
+        "touchstart",
+        event => {
+
+            const touch =
+                event.changedTouches[0];
+
+            touchStartX =
+                touch.clientX;
+
+            touchStartY =
+                touch.clientY;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    content.addEventListener(
+        "touchend",
+        event => {
+
+            const touch =
+                event.changedTouches[0];
+
+            const deltaX =
+                touch.clientX -
+                touchStartX;
+
+            const deltaY =
+                touch.clientY -
+                touchStartY;
+
+
+            if (
+                Math.abs(deltaX) < 70 ||
+                Math.abs(deltaX) <
+                Math.abs(deltaY)
+            ) {
+                return;
+            }
+
+
+            if (deltaX < 0) {
+
+                nextClient();
+
+            } else {
+
+                previousClient();
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+
 });

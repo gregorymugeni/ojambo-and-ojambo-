@@ -7377,3 +7377,22 @@ body.expertise-reader-open {
     }
 
 }
+
+/* ============================================================
+   CLIENT CARD — FULL READER CUE
+   ============================================================ */
+
+.client-logo {
+    cursor: pointer;
+}
+
+.client-logo::after {
+    content: "EXPLORE ↗";
+}
+
+.client-logo:hover::after {
+    opacity: 1;
+    transform:
+        translateY(0)
+        translateX(0);
+}
