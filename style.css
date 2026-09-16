@@ -12752,3 +12752,310 @@ body.oo-consultation-open {
     }
 
 }
+
+
+
+/* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   CINEMATIC CLIENT + RESOURCE IMAGE MOTION
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   MOTION GALLERY
+   ------------------------------------------------------------ */
+
+.oo-reader-motion-gallery {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+
+    overflow: hidden;
+
+    background:
+        #111;
+
+}
+
+
+/* ------------------------------------------------------------
+   IMAGE LAYERS
+   ------------------------------------------------------------ */
+
+.oo-reader-motion-layer {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 1.4s cubic-bezier(.22,.61,.36,1),
+        visibility 1.4s ease;
+
+}
+
+
+/* ACTIVE IMAGE */
+
+.oo-reader-motion-layer.is-active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+/* ------------------------------------------------------------
+   IMAGE
+   ------------------------------------------------------------ */
+
+.oo-reader-motion-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    transform:
+        scale(1.04)
+        translate3d(0,0,0);
+
+    filter:
+        saturate(.82)
+        contrast(1.04)
+        brightness(.72);
+
+}
+
+
+/* ------------------------------------------------------------
+   KEN BURNS MOTION
+   ------------------------------------------------------------ */
+
+.oo-reader-motion-layer.is-active
+.oo-reader-motion-image {
+
+    animation:
+        ooReaderImageDrift
+        7s
+        cubic-bezier(.22,.61,.36,1)
+        forwards;
+
+}
+
+
+@keyframes ooReaderImageDrift {
+
+    0% {
+
+        transform:
+            scale(1.045)
+            translate3d(-.8%, -.4%, 0);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1.10)
+            translate3d(.8%, .5%, 0);
+
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   DARK CINEMATIC TREATMENT
+   ------------------------------------------------------------ */
+
+.oo-reader-motion-gallery::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(8,11,13,.28) 0%,
+            rgba(8,11,13,.12) 35%,
+            rgba(8,11,13,.74) 100%
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(8,11,13,.18),
+            transparent 45%,
+            rgba(8,11,13,.30)
+        );
+
+}
+
+
+/* ------------------------------------------------------------
+   SUBTLE GOLD ATMOSPHERE
+   ------------------------------------------------------------ */
+
+.oo-reader-motion-gallery::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+
+    height: 420px;
+
+    top: -180px;
+
+    right: -120px;
+
+    z-index: 4;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(201,163,91,.12),
+            transparent 68%
+        );
+
+    mix-blend-mode: screen;
+
+}
+
+
+/* ------------------------------------------------------------
+   KEEP EXISTING EDITORIAL CONTENT ABOVE IMAGE
+   ------------------------------------------------------------ */
+
+.clients-reader-visual > *:not(
+    .oo-reader-motion-gallery
+),
+.resources-reader-visual > *:not(
+    .oo-reader-motion-gallery
+) {
+
+    position: relative;
+
+    z-index: 5;
+
+}
+
+
+/* ------------------------------------------------------------
+   CLIENT WORDMARK / RESOURCE WORDMARK
+   ------------------------------------------------------------ */
+
+.clients-reader-wordmark,
+.clients-reader-submark,
+.clients-reader-country,
+.clients-reader-visual-label,
+.clients-reader-big-number,
+
+.resources-reader-wordmark,
+.resources-reader-submark,
+.resources-reader-country,
+.resources-reader-visual-label,
+.resources-reader-big-number {
+
+    text-shadow:
+        0 3px 25px rgba(0,0,0,.45);
+
+}
+
+
+/* ------------------------------------------------------------
+   EXTRA DEPTH AROUND THE WORDMARK
+   ------------------------------------------------------------ */
+
+.clients-reader-wordmark,
+.resources-reader-wordmark {
+
+    text-shadow:
+        0 4px 35px rgba(0,0,0,.55);
+
+}
+
+
+/* ------------------------------------------------------------
+   REDUCED MOTION
+   ------------------------------------------------------------ */
+
+.oo-reader-motion-gallery.reduced-motion
+.oo-reader-motion-image {
+
+    animation: none !important;
+
+    transform:
+        scale(1.01) !important;
+
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    .oo-reader-motion-image {
+
+        object-position: center;
+
+        filter:
+            saturate(.78)
+            contrast(1.02)
+            brightness(.68);
+
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   ACCESSIBILITY
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .oo-reader-motion-layer {
+
+        transition: none !important;
+
+    }
+
+    .oo-reader-motion-layer.is-active
+    .oo-reader-motion-image {
+
+        animation: none !important;
+
+        transform:
+            scale(1.01) !important;
+
+    }
+
+}

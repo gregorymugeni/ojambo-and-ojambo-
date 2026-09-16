@@ -10271,3 +10271,2484 @@ body.resources-reader-open {
     }
 
 }
+
+
+
+
+/* ================================================================
+   OJAMBO & OJAMBO ADVOCATES
+   PREMIUM PEOPLE + CONSULTATION EXPERIENCE
+   ================================================================ */
+
+
+/* ================================================================
+   SHARED PAGE LOCK
+   ================================================================ */
+
+html.oo-reader-active,
+body.oo-people-reader-open,
+body.oo-consultation-open {
+    overflow: hidden;
+}
+
+
+/* ================================================================
+   PEOPLE READER
+   ================================================================ */
+
+.oo-people-reader {
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 10050;
+
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        visibility 0s linear .7s;
+
+}
+
+
+.oo-people-reader.open {
+
+    visibility: visible;
+    pointer-events: auto;
+
+    transition-delay: 0s;
+
+}
+
+
+/* ================================================================
+   PEOPLE BACKDROP
+   ================================================================ */
+
+.oo-people-reader-backdrop {
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(183, 151, 82, .12),
+            transparent 30%
+        ),
+        rgba(8, 10, 12, .86);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    opacity: 0;
+
+    transition:
+        opacity .65s ease;
+
+}
+
+
+.oo-people-reader.open
+.oo-people-reader-backdrop {
+
+    opacity: 1;
+
+}
+
+
+/* ================================================================
+   PEOPLE PANEL
+   ================================================================ */
+
+.oo-people-reader-panel {
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: min(
+        920px,
+        94vw
+    );
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        var(--cream, #f4f0e8);
+
+    color:
+        var(--ink, #101417);
+
+    box-shadow:
+        -30px 0 100px
+        rgba(0,0,0,.30);
+
+    transform:
+        translateX(105%)
+        scale(.985);
+
+    opacity: .4;
+
+    transition:
+        transform .8s cubic-bezier(
+            .77,
+            0,
+            .18,
+            1
+        ),
+        opacity .5s ease;
+
+}
+
+
+.oo-people-reader.open
+.oo-people-reader-panel {
+
+    transform:
+        translateX(0)
+        scale(1);
+
+    opacity: 1;
+
+}
+
+
+/* ================================================================
+   PEOPLE HEADER
+   ================================================================ */
+
+.oo-people-reader-header {
+
+    flex: 0 0 auto;
+
+    min-height: 82px;
+
+    padding:
+        18px 28px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        auto;
+
+    align-items: center;
+
+    gap: 28px;
+
+    border-bottom:
+        1px solid
+        rgba(16,20,23,.10);
+
+}
+
+
+.oo-people-reader-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+
+}
+
+
+.oo-people-reader-mark {
+
+    width: 36px;
+    height: 36px;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+.oo-people-reader-brand-name {
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .15em;
+
+}
+
+
+.oo-people-reader-brand-sub {
+
+    margin-top: 3px;
+
+    font-size: 7px;
+
+    letter-spacing:
+        .20em;
+
+    opacity: .5;
+
+}
+
+
+.oo-people-reader-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+}
+
+
+.oo-people-reader-meta > span:first-child {
+
+    color:
+        var(--gold, #b79752);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .14em;
+
+}
+
+
+.oo-people-reader-index {
+
+    font-size: 9px;
+
+    letter-spacing:
+        .14em;
+
+    opacity: .5;
+
+}
+
+
+/* ================================================================
+   CLOSE
+   ================================================================ */
+
+.oo-people-reader-close {
+
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(16,20,23,.16);
+
+    background:
+        transparent;
+
+    color:
+        var(--ink, #101417);
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.oo-people-reader-close:hover {
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* ================================================================
+   PROGRESS
+   ================================================================ */
+
+.oo-people-reader-progress {
+
+    height: 2px;
+
+    background:
+        rgba(16,20,23,.07);
+
+    flex-shrink: 0;
+
+}
+
+
+.oo-people-reader-progress span {
+
+    display: block;
+
+    width: 0;
+
+    height: 100%;
+
+    background:
+        var(--gold, #b79752);
+
+    transition:
+        width .18s ease;
+
+}
+
+
+/* ================================================================
+   SCROLL AREA
+   ================================================================ */
+
+.oo-people-reader-content {
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    overscroll-behavior:
+        contain;
+
+    scrollbar-width:
+        thin;
+
+}
+
+
+/* ================================================================
+   HERO
+   ================================================================ */
+
+.oo-people-reader-hero {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, .9fr)
+        1.1fr;
+
+    min-height:
+        510px;
+
+    border-bottom:
+        1px solid
+        rgba(16,20,23,.10);
+
+}
+
+
+.oo-people-reader-visual {
+
+    position: relative;
+
+    min-height: 510px;
+
+    overflow: hidden;
+
+    background:
+        #202427;
+
+}
+
+
+.oo-people-reader-photo-fallback {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1c2023,
+            #34383a
+        );
+
+    color:
+        rgba(244,240,232,.9);
+
+}
+
+
+.oo-people-reader-photo-fallback span {
+
+    font-size:
+        clamp(
+            80px,
+            12vw,
+            150px
+        );
+
+    font-weight:
+        300;
+
+    letter-spacing:
+        -.08em;
+
+}
+
+
+.oo-people-reader-visual img {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transition:
+        opacity .5s ease,
+        transform 1.2s cubic-bezier(
+            .2,
+            .7,
+            .2,
+            1
+        );
+
+}
+
+
+.oo-people-reader.open
+.oo-people-reader-visual img {
+
+    transform:
+        scale(1.025);
+
+}
+
+
+.oo-people-reader-visual-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 45%,
+            rgba(0,0,0,.62)
+        );
+
+    pointer-events: none;
+
+}
+
+
+.oo-people-reader-big-number {
+
+    position: absolute;
+
+    left: 25px;
+    bottom: 22px;
+
+    color:
+        rgba(255,255,255,.88);
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .2em;
+
+}
+
+
+.oo-people-reader-visual-mark {
+
+    position: absolute;
+
+    top: 24px;
+    right: 24px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        .16em;
+
+}
+
+
+/* ================================================================
+   HERO TEXT
+   ================================================================ */
+
+.oo-people-reader-intro {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding:
+        60px 55px;
+
+}
+
+
+.oo-people-reader-kicker {
+
+    margin: 0 0 22px;
+
+    color:
+        var(--gold, #b79752);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        .20em;
+
+}
+
+
+.oo-people-reader-intro h1 {
+
+    margin: 0;
+
+    max-width:
+        560px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(
+            48px,
+            6vw,
+            82px
+        );
+
+    line-height:
+        .94;
+
+    letter-spacing:
+        -.055em;
+
+    font-weight:
+        400;
+
+}
+
+
+.oo-people-reader-lead {
+
+    max-width:
+        460px;
+
+    margin:
+        28px 0 0;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
+    opacity:
+        .65;
+
+}
+
+
+/* ================================================================
+   CONTENT SECTIONS
+   ================================================================ */
+
+.oo-people-reader-section {
+
+    padding:
+        65px 55px;
+
+    border-bottom:
+        1px solid
+        rgba(16,20,23,.10);
+
+}
+
+
+.oo-people-reader-section-muted {
+
+    background:
+        rgba(16,20,23,.025);
+
+}
+
+
+.oo-people-reader-section-label {
+
+    margin:
+        0 0 18px;
+
+    color:
+        var(--gold, #b79752);
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .20em;
+
+}
+
+
+.oo-people-reader-body {
+
+    max-width:
+        680px;
+
+}
+
+
+.oo-people-reader-body p {
+
+    margin:
+        0 0 20px;
+
+    font-size:
+        17px;
+
+    line-height:
+        1.85;
+
+    opacity:
+        .72;
+
+}
+
+
+.oo-people-reader-body p:last-child {
+
+    margin-bottom:
+        0;
+
+}
+
+
+.oo-people-reader-two-column {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        50px;
+
+}
+
+
+.oo-people-reader-two-column h2 {
+
+    margin:
+        0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        34px;
+
+    font-weight:
+        400;
+
+    letter-spacing:
+        -.035em;
+
+}
+
+
+.oo-people-reader-two-column p {
+
+    margin:
+        0;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
+    opacity:
+        .65;
+
+}
+
+
+/* ================================================================
+   CONTACT
+   ================================================================ */
+
+.oo-people-reader-contact {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr
+        auto;
+
+    gap:
+        40px;
+
+    align-items:
+        end;
+
+    padding:
+        65px 55px;
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+}
+
+
+.oo-people-reader-contact h2 {
+
+    margin:
+        0 0 15px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        42px;
+
+    line-height:
+        1;
+
+    font-weight:
+        400;
+
+}
+
+
+.oo-people-reader-contact p {
+
+    max-width:
+        480px;
+
+    margin:
+        0;
+
+    line-height:
+        1.7;
+
+    font-size:
+        13px;
+
+    opacity:
+        .58;
+
+}
+
+
+.oo-people-reader-contact
+.oo-people-reader-section-label {
+
+    color:
+        var(--gold, #b79752);
+
+}
+
+
+.oo-people-reader-contact-actions {
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+    flex-wrap:
+        wrap;
+
+}
+
+
+.oo-people-contact-button {
+
+    min-width:
+        115px;
+
+    padding:
+        14px 17px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    text-decoration:
+        none;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .12em;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.oo-people-contact-button:hover {
+
+    background:
+        rgba(255,255,255,.08);
+
+    border-color:
+        rgba(255,255,255,.45);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* ================================================================
+   CONSULTATION BUTTON
+   ================================================================ */
+
+.oo-people-reader-consultation {
+
+    width:
+        calc(100% - 110px);
+
+    margin:
+        35px 55px;
+
+    padding:
+        23px 25px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    border:
+        1px solid
+        rgba(16,20,23,.16);
+
+    background:
+        transparent;
+
+    color:
+        var(--ink, #101417);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .15em;
+
+    text-transform:
+        uppercase;
+
+    cursor:
+        pointer;
+
+    transition:
+        background .35s ease,
+        color .35s ease,
+        transform .35s ease;
+
+}
+
+
+.oo-people-reader-consultation strong {
+
+    font-size:
+        18px;
+
+}
+
+
+.oo-people-reader-consultation:hover {
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* ================================================================
+   FOOTER NAVIGATION
+   ================================================================ */
+
+.oo-people-reader-footer {
+
+    flex:
+        0 0 auto;
+
+    min-height:
+        72px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items:
+        center;
+
+    padding:
+        0 28px;
+
+    border-top:
+        1px solid
+        rgba(16,20,23,.10);
+
+}
+
+
+.oo-people-reader-nav {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    border:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        var(--ink, #101417);
+
+    cursor:
+        pointer;
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        .13em;
+
+    font-weight:
+        800;
+
+}
+
+
+.oo-people-reader-nav-next {
+
+    justify-content:
+        flex-end;
+
+}
+
+
+.oo-people-reader-nav span {
+
+    font-size:
+        20px;
+
+    transition:
+        transform .3s ease;
+
+}
+
+
+.oo-people-reader-nav:hover span {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+.oo-people-reader-nav:first-child:hover span {
+
+    transform:
+        translateX(-4px);
+
+}
+
+
+.oo-people-reader-nav small {
+
+    font-size:
+        8px;
+
+}
+
+
+.oo-people-reader-footer-center {
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        .18em;
+
+    opacity:
+        .45;
+
+}
+
+
+/* ================================================================
+   CONSULTATION READER
+   ================================================================ */
+
+.oo-consultation-reader {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10060;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        visibility 0s linear .7s;
+
+}
+
+
+.oo-consultation-reader.open {
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transition-delay:
+        0s;
+
+}
+
+
+/* ================================================================
+   CONSULTATION BACKDROP
+   ================================================================ */
+
+.oo-consultation-backdrop {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 75% 15%,
+            rgba(183,151,82,.12),
+            transparent 28%
+        ),
+        rgba(8,10,12,.88);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    opacity:
+        0;
+
+    transition:
+        opacity .65s ease;
+
+}
+
+
+.oo-consultation-reader.open
+.oo-consultation-backdrop {
+
+    opacity:
+        1;
+
+}
+
+
+/* ================================================================
+   CONSULTATION PANEL
+   ================================================================ */
+
+.oo-consultation-panel {
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    right:
+        0;
+
+    width:
+        min(
+            780px,
+            94vw
+        );
+
+    height:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    background:
+        var(--cream, #f4f0e8);
+
+    color:
+        var(--ink, #101417);
+
+    box-shadow:
+        -30px 0 100px
+        rgba(0,0,0,.3);
+
+    transform:
+        translateX(105%)
+        scale(.985);
+
+    opacity:
+        .3;
+
+    transition:
+        transform .8s cubic-bezier(
+            .77,
+            0,
+            .18,
+            1
+        ),
+        opacity .5s ease;
+
+}
+
+
+.oo-consultation-reader.open
+.oo-consultation-panel {
+
+    transform:
+        translateX(0)
+        scale(1);
+
+    opacity:
+        1;
+
+}
+
+
+/* ================================================================
+   CONSULTATION HEADER
+   ================================================================ */
+
+.oo-consultation-header {
+
+    min-height:
+        82px;
+
+    flex:
+        0 0 auto;
+
+    padding:
+        18px 28px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        auto;
+
+    align-items:
+        center;
+
+    gap:
+        25px;
+
+    border-bottom:
+        1px solid
+        rgba(16,20,23,.10);
+
+}
+
+
+.oo-consultation-brand {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+}
+
+
+.oo-consultation-mark {
+
+    width:
+        36px;
+
+    height:
+        36px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+}
+
+
+.oo-consultation-brand strong {
+
+    display:
+        block;
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        .15em;
+
+}
+
+
+.oo-consultation-brand span {
+
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    font-size:
+        7px;
+
+    letter-spacing:
+        .20em;
+
+    opacity:
+        .5;
+
+}
+
+
+.oo-consultation-step {
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .12em;
+
+}
+
+
+.oo-consultation-step small {
+
+    opacity:
+        .4;
+
+}
+
+
+.oo-consultation-close {
+
+    width:
+        44px;
+
+    height:
+        44px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    background:
+        transparent;
+
+    border:
+        1px solid
+        rgba(16,20,23,.16);
+
+    color:
+        var(--ink, #101417);
+
+    font-size:
+        24px;
+
+    cursor:
+        pointer;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.oo-consultation-close:hover {
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* ================================================================
+   CONSULTATION PROGRESS
+   ================================================================ */
+
+.oo-consultation-progress {
+
+    height:
+        2px;
+
+    background:
+        rgba(16,20,23,.07);
+
+}
+
+
+.oo-consultation-progress span {
+
+    display:
+        block;
+
+    width:
+        25%;
+
+    height:
+        100%;
+
+    background:
+        var(--gold, #b79752);
+
+    transition:
+        width .45s cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+
+}
+
+
+/* ================================================================
+   CONSULTATION CONTENT
+   ================================================================ */
+
+.oo-consultation-content {
+
+    position:
+        relative;
+
+    flex:
+        1;
+
+    overflow:
+        hidden;
+
+}
+
+
+.oo-consultation-screen {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    overflow-y:
+        auto;
+
+    padding:
+        clamp(
+            50px,
+            7vw,
+            90px
+        );
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+    transform:
+        translateX(30px);
+
+    transition:
+        opacity .4s ease,
+        transform .5s cubic-bezier(
+            .2,
+            .7,
+            .2,
+            1
+        );
+
+}
+
+
+.oo-consultation-screen.active {
+
+    opacity:
+        1;
+
+    pointer-events:
+        auto;
+
+    transform:
+        translateX(0);
+
+}
+
+
+/* ================================================================
+   CONSULTATION TYPOGRAPHY
+   ================================================================ */
+
+.oo-consultation-eyebrow {
+
+    margin:
+        0 0 24px;
+
+    color:
+        var(--gold, #b79752);
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .20em;
+
+}
+
+
+.oo-consultation-screen h1,
+.oo-consultation-screen h2 {
+
+    max-width:
+        600px;
+
+    margin:
+        0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-weight:
+        400;
+
+    letter-spacing:
+        -.055em;
+
+    line-height:
+        .96;
+
+}
+
+
+.oo-consultation-screen h1 {
+
+    font-size:
+        clamp(
+            55px,
+            7vw,
+            92px
+        );
+
+}
+
+
+.oo-consultation-screen h2 {
+
+    font-size:
+        clamp(
+            48px,
+            6vw,
+            76px
+        );
+
+}
+
+
+.oo-consultation-screen h1 span,
+.oo-consultation-screen h2 span {
+
+    display:
+        block;
+
+    color:
+        var(--gold, #b79752);
+
+}
+
+
+.oo-consultation-lead {
+
+    max-width:
+        550px;
+
+    margin:
+        30px 0 40px;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.85;
+
+    opacity:
+        .65;
+
+}
+
+
+.oo-consultation-muted {
+
+    max-width:
+        500px;
+
+    margin:
+        20px 0 35px;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.7;
+
+    opacity:
+        .55;
+
+}
+
+
+/* ================================================================
+   PRIMARY BUTTON
+   ================================================================ */
+
+.oo-consultation-primary {
+
+    min-width:
+        190px;
+
+    padding:
+        19px 22px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        30px;
+
+    border:
+        0;
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .15em;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.oo-consultation-primary:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.16);
+
+}
+
+
+/* ================================================================
+   MATTER OPTIONS
+   ================================================================ */
+
+.oo-consultation-options {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        1px;
+
+    margin-top:
+        40px;
+
+    background:
+        rgba(16,20,23,.12);
+
+    border:
+        1px solid
+        rgba(16,20,23,.12);
+
+}
+
+
+.oo-consultation-options button {
+
+    min-height:
+        78px;
+
+    padding:
+        18px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        32px 1fr auto;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    text-align:
+        left;
+
+    border:
+        0;
+
+    background:
+        var(--cream, #f4f0e8);
+
+    color:
+        var(--ink, #101417);
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    transition:
+        background .3s ease,
+        padding .3s ease;
+
+}
+
+
+.oo-consultation-options button span {
+
+    color:
+        var(--gold, #b79752);
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        .12em;
+
+}
+
+
+.oo-consultation-options button strong {
+
+    font-size:
+        16px;
+
+    opacity:
+        .35;
+
+}
+
+
+.oo-consultation-options button:hover {
+
+    background:
+        rgba(16,20,23,.055);
+
+    padding-left:
+        23px;
+
+}
+
+
+/* ================================================================
+   CONTACT METHODS
+   ================================================================ */
+
+.oo-contact-methods {
+
+    display:
+        grid;
+
+    gap:
+        10px;
+
+    margin-top:
+        40px;
+
+}
+
+
+.oo-contact-methods button {
+
+    width:
+        100%;
+
+    padding:
+        20px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        50px 1fr auto;
+
+    align-items:
+        center;
+
+    gap:
+        17px;
+
+    border:
+        1px solid
+        rgba(16,20,23,.13);
+
+    background:
+        transparent;
+
+    text-align:
+        left;
+
+    color:
+        var(--ink, #101417);
+
+    cursor:
+        pointer;
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        border-color .3s ease;
+
+}
+
+
+.oo-contact-methods button:hover {
+
+    background:
+        rgba(16,20,23,.045);
+
+    border-color:
+        rgba(16,20,23,.28);
+
+    transform:
+        translateX(5px);
+
+}
+
+
+.oo-contact-icon {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .08em;
+
+}
+
+
+.oo-contact-methods strong {
+
+    display:
+        block;
+
+    font-size:
+        12px;
+
+}
+
+
+.oo-contact-methods small {
+
+    display:
+        block;
+
+    margin-top:
+        4px;
+
+    font-size:
+        10px;
+
+    opacity:
+        .5;
+
+}
+
+
+.oo-contact-methods b {
+
+    font-size:
+        18px;
+
+    font-weight:
+        400;
+
+    opacity:
+        .4;
+
+}
+
+
+/* ================================================================
+   SUMMARY
+   ================================================================ */
+
+.oo-consultation-summary {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        1px;
+
+    margin:
+        35px 0;
+
+    background:
+        rgba(16,20,23,.12);
+
+}
+
+
+.oo-consultation-summary div {
+
+    padding:
+        22px;
+
+    background:
+        rgba(16,20,23,.035);
+
+}
+
+
+.oo-consultation-summary small {
+
+    display:
+        block;
+
+    margin-bottom:
+        10px;
+
+    color:
+        var(--gold, #b79752);
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .16em;
+
+}
+
+
+.oo-consultation-summary strong {
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+/* ================================================================
+   FINAL ACTIONS
+   ================================================================ */
+
+.oo-final-actions {
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+    flex-wrap:
+        wrap;
+
+}
+
+
+.oo-final-actions button {
+
+    padding:
+        17px 20px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        25px;
+
+    border:
+        1px solid
+        rgba(16,20,23,.16);
+
+    background:
+        transparent;
+
+    color:
+        var(--ink, #101417);
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .12em;
+
+    cursor:
+        pointer;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.oo-final-actions button:hover {
+
+    background:
+        var(--ink, #101417);
+
+    color:
+        var(--cream, #f4f0e8);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* ================================================================
+   CONSULTATION FOOTER
+   ================================================================ */
+
+.oo-consultation-footer {
+
+    min-height:
+        70px;
+
+    flex:
+        0 0 auto;
+
+    padding:
+        0 28px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    border-top:
+        1px solid
+        rgba(16,20,23,.10);
+
+}
+
+
+.oo-consultation-footer button {
+
+    border:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        var(--ink, #101417);
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .12em;
+
+    cursor:
+        pointer;
+
+}
+
+
+.oo-consultation-footer span {
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        .18em;
+
+    opacity:
+        .4;
+
+}
+
+
+/* ================================================================
+   MOBILE
+   ================================================================ */
+
+@media (max-width: 760px) {
+
+    .oo-people-reader-panel,
+    .oo-consultation-panel {
+
+        width:
+            100vw;
+
+    }
+
+
+    .oo-people-reader-header,
+    .oo-consultation-header {
+
+        padding:
+            14px 18px;
+
+        gap:
+            12px;
+
+    }
+
+
+    .oo-people-reader-brand-name {
+
+        font-size:
+            8px;
+
+    }
+
+
+    .oo-people-reader-meta > span:first-child {
+
+        display:
+            none;
+
+    }
+
+
+    .oo-people-reader-hero {
+
+        display:
+            block;
+
+    }
+
+
+    .oo-people-reader-visual {
+
+        min-height:
+            55vh;
+
+    }
+
+
+    .oo-people-reader-intro {
+
+        padding:
+            42px 24px 50px;
+
+    }
+
+
+    .oo-people-reader-intro h1 {
+
+        font-size:
+            clamp(
+                48px,
+                14vw,
+                70px
+            );
+
+    }
+
+
+    .oo-people-reader-section {
+
+        padding:
+            45px 24px;
+
+    }
+
+
+    .oo-people-reader-two-column {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            35px;
+
+    }
+
+
+    .oo-people-reader-contact {
+
+        grid-template-columns:
+            1fr;
+
+        padding:
+            45px 24px;
+
+    }
+
+
+    .oo-people-reader-contact h2 {
+
+        font-size:
+            36px;
+
+    }
+
+
+    .oo-people-reader-consultation {
+
+        width:
+            calc(100% - 48px);
+
+        margin:
+            25px 24px;
+
+    }
+
+
+    .oo-people-reader-footer {
+
+        padding:
+            0 18px;
+
+    }
+
+
+    .oo-people-reader-footer-center {
+
+        display:
+            none;
+
+    }
+
+
+    .oo-people-reader-footer {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .oo-people-reader-nav-next {
+
+        justify-content:
+            flex-end;
+
+    }
+
+
+    .oo-consultation-screen {
+
+        padding:
+            45px 24px;
+
+    }
+
+
+    .oo-consultation-screen h1 {
+
+        font-size:
+            clamp(
+                50px,
+                14vw,
+                70px
+            );
+
+    }
+
+
+    .oo-consultation-screen h2 {
+
+        font-size:
+            clamp(
+                44px,
+                12vw,
+                65px
+            );
+
+    }
+
+
+    .oo-consultation-options {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .oo-consultation-summary {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .oo-consultation-footer {
+
+        padding:
+            0 18px;
+
+    }
+
+}
+
+
+/* ================================================================
+   REDUCED MOTION
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .oo-people-reader-panel,
+    .oo-consultation-panel,
+    .oo-people-reader-backdrop,
+    .oo-consultation-backdrop,
+    .oo-consultation-screen {
+
+        transition:
+            none !important;
+
+    }
+
+}

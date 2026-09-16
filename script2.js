@@ -571,6 +571,2071 @@ practiceItems.forEach(item => {
 
 
 
+
+
+
+/* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   PREMIUM PEOPLE + CONSULTATION EXPERIENCE
+   ============================================================
+
+   EXPERIENCE LAYER
+   ------------------------------------------------------------
+   Our People
+       ↓
+   Premium People Reader
+       ↓
+   Consultation Experience
+
+   Consultation links
+       ↓
+   Premium Consultation Experience
+
+   IMPORTANT:
+   ------------------------------------------------------------
+   This layer does NOT replace the existing team wall.
+
+   It sits above the existing page as an immersive experience,
+   exactly like the Expertise / Clients / Resources readers.
+
+   The team data is extracted from the existing HTML so that
+   names, roles, initials and supplied photographs remain the
+   source of truth.
+   ============================================================ */
+
+(() => {
+
+    /* ============================================================
+       PEOPLE READER
+       ============================================================ */
+
+    const ooPeopleCards =
+        document.querySelectorAll("[data-team-member]");
+
+    if (!ooPeopleCards.length) {
+        return;
+    }
+
+
+    /* ------------------------------------------------------------
+       BUILD PEOPLE DATA FROM EXISTING TEAM CARDS
+       ------------------------------------------------------------ */
+
+    const ooPeople = Array.from(ooPeopleCards).map(
+        (card, index) => {
+
+            const name =
+                card.querySelector(".team-info h3")
+                    ?.textContent
+                    .trim() ||
+                "Ojambo & Ojambo Advocates";
+
+            const title =
+                card.querySelector(".team-info p")
+                    ?.textContent
+                    .trim() ||
+                "";
+
+            const role =
+                card.querySelector(".team-role-label")
+                    ?.textContent
+                    .trim() ||
+                "";
+
+            const initials =
+                card.querySelector(".team-initials")
+                    ?.textContent
+                    .trim() ||
+                "";
+
+            const photo =
+                card.querySelector(".team-photo-image")
+                    ?.getAttribute("src") ||
+                card.dataset.photo ||
+                "";
+
+            const emailLink =
+                card.querySelector(
+                    'a[href^="mailto:"]'
+                );
+
+            const whatsappLink =
+                card.querySelector(
+                    'a[href*="wa.me"]'
+                );
+
+            const email =
+                emailLink
+                    ? emailLink.href
+                    : "";
+
+            const whatsapp =
+                whatsappLink
+                    ? whatsappLink.href
+                    : "";
+
+            const indexNumber =
+                String(index + 1).padStart(2, "0");
+
+            return {
+                index: indexNumber,
+                name,
+                title,
+                role,
+                initials,
+                photo,
+                email,
+                whatsapp
+            };
+
+        }
+    );
+
+
+    /* ============================================================
+       CREATE PEOPLE READER
+       ============================================================ */
+
+    const ooPeopleReader =
+        document.createElement("div");
+
+    ooPeopleReader.className =
+        "oo-people-reader";
+
+    ooPeopleReader.id =
+        "ooPeopleReader";
+
+    ooPeopleReader.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    ooPeopleReader.innerHTML = `
+
+        <div
+            class="oo-people-reader-backdrop"
+            id="ooPeopleReaderBackdrop"
+        ></div>
+
+
+        <article
+            class="oo-people-reader-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ooPeopleReaderTitle"
+        >
+
+            <!-- =================================================
+                 HEADER
+                 ================================================= -->
+
+            <header class="oo-people-reader-header">
+
+                <div class="oo-people-reader-brand">
+
+                    <div class="oo-people-reader-mark">
+                        O&O
+                    </div>
+
+                    <div>
+
+                        <div class="oo-people-reader-brand-name">
+                            OJAMBO & OJAMBO
+                        </div>
+
+                        <div class="oo-people-reader-brand-sub">
+                            ADVOCATES
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="oo-people-reader-meta">
+
+                    <span id="ooPeopleReaderRole">
+                        FOUNDING PARTNER
+                    </span>
+
+                    <span
+                        id="ooPeopleReaderIndex"
+                        class="oo-people-reader-index"
+                    >
+                        01 / 07
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="oo-people-reader-close"
+                    id="ooPeopleReaderClose"
+                    aria-label="Close people reader"
+                >
+                    ×
+                </button>
+
+            </header>
+
+
+            <!-- =================================================
+                 PROGRESS
+                 ================================================= -->
+
+            <div class="oo-people-reader-progress">
+                <span id="ooPeopleReaderProgress"></span>
+            </div>
+
+
+            <!-- =================================================
+                 SCROLLABLE CONTENT
+                 ================================================= -->
+
+            <div
+                class="oo-people-reader-content"
+                id="ooPeopleReaderContent"
+            >
+
+                <!-- HERO -->
+                <div class="oo-people-reader-hero">
+
+                    <div
+                        class="oo-people-reader-visual"
+                        id="ooPeopleReaderVisual"
+                    >
+
+                        <div
+                            class="oo-people-reader-photo-fallback"
+                            id="ooPeopleReaderFallback"
+                        >
+                            <span id="ooPeopleReaderInitials">
+                                RO
+                            </span>
+                        </div>
+
+                        <img
+                            id="ooPeopleReaderImage"
+                            src=""
+                            alt=""
+                        >
+
+                        <div class="oo-people-reader-visual-overlay"></div>
+
+                        <span
+                            class="oo-people-reader-big-number"
+                            id="ooPeopleReaderBigNumber"
+                        >
+                            01
+                        </span>
+
+                        <span class="oo-people-reader-visual-mark">
+                            O&O
+                        </span>
+
+                    </div>
+
+
+                    <div class="oo-people-reader-intro">
+
+                        <p
+                            class="oo-people-reader-kicker"
+                            id="ooPeopleReaderKicker"
+                        >
+                            FOUNDING PARTNER
+                        </p>
+
+                        <h1
+                            id="ooPeopleReaderTitle"
+                        >
+                            Robert Ojambo Mugeni
+                        </h1>
+
+                        <p
+                            class="oo-people-reader-lead"
+                            id="ooPeopleReaderLead"
+                        >
+                            Founding Partner & Advocate
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROFILE -->
+                <section class="oo-people-reader-section">
+
+                    <p class="oo-people-reader-section-label">
+                        PROFILE
+                    </p>
+
+                    <div
+                        class="oo-people-reader-body"
+                        id="ooPeopleReaderBody"
+                    ></div>
+
+                </section>
+
+
+                <!-- POSITION -->
+                <section class="oo-people-reader-section oo-people-reader-section-muted">
+
+                    <div class="oo-people-reader-two-column">
+
+                        <div>
+
+                            <p class="oo-people-reader-section-label">
+                                POSITION
+                            </p>
+
+                            <h2 id="ooPeopleReaderPosition">
+                                Founding Partner
+                            </h2>
+
+                        </div>
+
+
+                        <div>
+
+                            <p class="oo-people-reader-section-label">
+                                O&O
+                            </p>
+
+                            <p>
+                                Part of a multidisciplinary legal
+                                team serving clients navigating
+                                Uganda's legal and commercial
+                                environment.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- CONTACT -->
+                <section class="oo-people-reader-contact">
+
+                    <div>
+
+                        <p class="oo-people-reader-section-label">
+                            CONNECT
+                        </p>
+
+                        <h2>
+                            Start a conversation.
+                        </h2>
+
+                        <p>
+                            Contact the firm regarding a legal
+                            matter or request a confidential
+                            consultation.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="oo-people-reader-contact-actions"
+                        id="ooPeopleReaderActions"
+                    ></div>
+
+                </section>
+
+
+                <!-- CONSULTATION -->
+                <button
+                    type="button"
+                    class="oo-people-reader-consultation"
+                    id="ooPeopleReaderConsultation"
+                >
+
+                    <span>
+                        Discuss your matter
+                    </span>
+
+                    <strong>↗</strong>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 FOOTER NAVIGATION
+                 ================================================= -->
+
+            <footer class="oo-people-reader-footer">
+
+                <button
+                    type="button"
+                    class="oo-people-reader-nav"
+                    id="ooPeopleReaderPrev"
+                >
+
+                    <span>←</span>
+
+                    <small>PREVIOUS</small>
+
+                </button>
+
+
+                <div class="oo-people-reader-footer-center">
+                    OUR PEOPLE
+                </div>
+
+
+                <button
+                    type="button"
+                    class="oo-people-reader-nav oo-people-reader-nav-next"
+                    id="ooPeopleReaderNext"
+                >
+
+                    <small>NEXT</small>
+
+                    <span>→</span>
+
+                </button>
+
+            </footer>
+
+        </article>
+    `;
+
+    document.body.appendChild(ooPeopleReader);
+
+
+    /* ============================================================
+       PEOPLE READER ELEMENTS
+       ============================================================ */
+
+    const ooPeopleBackdrop =
+        document.getElementById(
+            "ooPeopleReaderBackdrop"
+        );
+
+    const ooPeopleContent =
+        document.getElementById(
+            "ooPeopleReaderContent"
+        );
+
+    const ooPeopleClose =
+        document.getElementById(
+            "ooPeopleReaderClose"
+        );
+
+    const ooPeopleTitle =
+        document.getElementById(
+            "ooPeopleReaderTitle"
+        );
+
+    const ooPeopleLead =
+        document.getElementById(
+            "ooPeopleReaderLead"
+        );
+
+    const ooPeopleRole =
+        document.getElementById(
+            "ooPeopleReaderRole"
+        );
+
+    const ooPeopleIndex =
+        document.getElementById(
+            "ooPeopleReaderIndex"
+        );
+
+    const ooPeopleKicker =
+        document.getElementById(
+            "ooPeopleReaderKicker"
+        );
+
+    const ooPeopleBigNumber =
+        document.getElementById(
+            "ooPeopleReaderBigNumber"
+        );
+
+    const ooPeopleInitials =
+        document.getElementById(
+            "ooPeopleReaderInitials"
+        );
+
+    const ooPeopleImage =
+        document.getElementById(
+            "ooPeopleReaderImage"
+        );
+
+    const ooPeopleFallback =
+        document.getElementById(
+            "ooPeopleReaderFallback"
+        );
+
+    const ooPeopleBody =
+        document.getElementById(
+            "ooPeopleReaderBody"
+        );
+
+    const ooPeoplePosition =
+        document.getElementById(
+            "ooPeopleReaderPosition"
+        );
+
+    const ooPeopleActions =
+        document.getElementById(
+            "ooPeopleReaderActions"
+        );
+
+    const ooPeopleProgress =
+        document.getElementById(
+            "ooPeopleReaderProgress"
+        );
+
+    const ooPeoplePrev =
+        document.getElementById(
+            "ooPeopleReaderPrev"
+        );
+
+    const ooPeopleNext =
+        document.getElementById(
+            "ooPeopleReaderNext"
+        );
+
+    const ooPeopleConsultation =
+        document.getElementById(
+            "ooPeopleReaderConsultation"
+        );
+
+
+    let ooPeopleCurrentIndex = 0;
+
+
+    /* ============================================================
+       RENDER PERSON
+       ============================================================ */
+
+    function ooRenderPerson(index) {
+
+        const person =
+            ooPeople[index];
+
+        if (!person) {
+            return;
+        }
+
+        ooPeopleCurrentIndex =
+            index;
+
+
+        ooPeopleTitle.textContent =
+            person.name;
+
+        ooPeopleLead.textContent =
+            person.title;
+
+        ooPeopleRole.textContent =
+            person.role;
+
+        ooPeopleKicker.textContent =
+            person.role;
+
+        ooPeopleIndex.textContent =
+            `${person.index} / ${String(ooPeople.length).padStart(2, "0")}`;
+
+        ooPeopleBigNumber.textContent =
+            person.index;
+
+        ooPeopleInitials.textContent =
+            person.initials;
+
+        ooPeoplePosition.textContent =
+            person.title;
+
+
+        /*
+         * Keep the biography factual.
+         *
+         * We deliberately do not manufacture individual
+         * qualifications, transactions, victories or
+         * confidential matters that are not present in the
+         * site's source material.
+         */
+
+        ooPeopleBody.innerHTML = `
+
+            <p>
+                ${person.name} is part of the
+                <strong>Ojambo & Ojambo Advocates</strong>
+                team, serving within the firm's
+                ${person.role.toLowerCase()}
+                function.
+            </p>
+
+            <p>
+                The firm's team brings together local knowledge,
+                legal experience and practical judgement to help
+                clients navigate Uganda's legal and commercial
+                environment.
+            </p>
+
+        `;
+
+
+        /* ========================================================
+           PHOTO
+           ======================================================== */
+
+        ooPeopleImage.removeAttribute("src");
+        ooPeopleImage.style.opacity = "0";
+
+        ooPeopleFallback.style.display =
+            "grid";
+
+        if (person.photo) {
+
+            ooPeopleImage.src =
+                person.photo;
+
+            ooPeopleImage.alt =
+                `${person.name} — Ojambo & Ojambo Advocates`;
+
+            ooPeopleImage.onload = () => {
+
+                ooPeopleFallback.style.display =
+                    "none";
+
+                ooPeopleImage.style.opacity =
+                    "1";
+
+            };
+
+            ooPeopleImage.onerror = () => {
+
+                ooPeopleImage.removeAttribute(
+                    "src"
+                );
+
+                ooPeopleImage.style.opacity =
+                    "0";
+
+                ooPeopleFallback.style.display =
+                    "grid";
+
+            };
+
+        }
+
+
+        /* ========================================================
+           CONTACT ACTIONS
+           ======================================================== */
+
+        ooPeopleActions.innerHTML = "";
+
+
+        if (person.email) {
+
+            const emailButton =
+                document.createElement("a");
+
+            emailButton.href =
+                person.email;
+
+            emailButton.className =
+                "oo-people-contact-button";
+
+            emailButton.innerHTML = `
+                <span>Email</span>
+                <strong>↗</strong>
+            `;
+
+            ooPeopleActions.appendChild(
+                emailButton
+            );
+
+        }
+
+
+        if (person.whatsapp) {
+
+            const whatsappButton =
+                document.createElement("a");
+
+            whatsappButton.href =
+                person.whatsapp;
+
+            whatsappButton.target =
+                "_blank";
+
+            whatsappButton.rel =
+                "noopener noreferrer";
+
+            whatsappButton.className =
+                "oo-people-contact-button";
+
+            whatsappButton.innerHTML = `
+                <span>WhatsApp</span>
+                <strong>↗</strong>
+            `;
+
+            ooPeopleActions.appendChild(
+                whatsappButton
+            );
+
+        }
+
+
+        /*
+         * Reset scroll position whenever the person changes.
+         */
+
+        ooPeopleContent.scrollTop = 0;
+
+        ooUpdatePeopleProgress();
+
+    }
+
+
+    /* ============================================================
+       OPEN
+       ============================================================ */
+
+    function ooOpenPeople(index) {
+
+        ooRenderPerson(index);
+
+        ooPeopleReader.classList.add(
+            "open"
+        );
+
+        ooPeopleReader.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "oo-people-reader-open"
+        );
+
+        document.documentElement.classList.add(
+            "oo-reader-active"
+        );
+
+    }
+
+
+    /* ============================================================
+       CLOSE
+       ============================================================ */
+
+    function ooClosePeople() {
+
+        ooPeopleReader.classList.remove(
+            "open"
+        );
+
+        ooPeopleReader.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "oo-people-reader-open"
+        );
+
+        document.documentElement.classList.remove(
+            "oo-reader-active"
+        );
+
+    }
+
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+
+    function ooOpenPreviousPerson() {
+
+        const previous =
+            (
+                ooPeopleCurrentIndex -
+                1 +
+                ooPeople.length
+            ) %
+            ooPeople.length;
+
+        ooRenderPerson(previous);
+
+    }
+
+
+    function ooOpenNextPerson() {
+
+        const next =
+            (
+                ooPeopleCurrentIndex +
+                1
+            ) %
+            ooPeople.length;
+
+        ooRenderPerson(next);
+
+    }
+
+
+    ooPeoplePrev.addEventListener(
+        "click",
+        ooOpenPreviousPerson
+    );
+
+    ooPeopleNext.addEventListener(
+        "click",
+        ooOpenNextPerson
+    );
+
+
+    /* ============================================================
+       PROGRESS
+       ============================================================ */
+
+    function ooUpdatePeopleProgress() {
+
+        const scrollable =
+            ooPeopleContent.scrollHeight -
+            ooPeopleContent.clientHeight;
+
+        if (scrollable <= 0) {
+
+            ooPeopleProgress.style.width =
+                "100%";
+
+            return;
+
+        }
+
+        const percentage =
+            (
+                ooPeopleContent.scrollTop /
+                scrollable
+            ) * 100;
+
+        ooPeopleProgress.style.width =
+            `${Math.min(
+                100,
+                Math.max(
+                    0,
+                    percentage
+                )
+            )}%`;
+
+    }
+
+
+    ooPeopleContent.addEventListener(
+        "scroll",
+        ooUpdatePeopleProgress,
+        {
+            passive: true
+        }
+    );
+
+
+    /* ============================================================
+       CLOSE EVENTS
+       ============================================================ */
+
+    ooPeopleClose.addEventListener(
+        "click",
+        ooClosePeople
+    );
+
+    ooPeopleBackdrop.addEventListener(
+        "click",
+        ooClosePeople
+    );
+
+
+    /* ============================================================
+       KEYBOARD NAVIGATION
+       ============================================================ */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                !ooPeopleReader.classList.contains(
+                    "open"
+                )
+            ) {
+                return;
+            }
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                ooClosePeople();
+
+                return;
+
+            }
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                event.preventDefault();
+
+                ooOpenPreviousPerson();
+
+                return;
+
+            }
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                event.preventDefault();
+
+                ooOpenNextPerson();
+
+            }
+
+        }
+    );
+
+
+    /* ============================================================
+       TOUCH / SWIPE
+       ============================================================ */
+
+    let ooPeopleTouchStartX = 0;
+    let ooPeopleTouchStartY = 0;
+
+
+    ooPeopleContent.addEventListener(
+        "touchstart",
+        event => {
+
+            const touch =
+                event.changedTouches[0];
+
+            ooPeopleTouchStartX =
+                touch.clientX;
+
+            ooPeopleTouchStartY =
+                touch.clientY;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    ooPeopleContent.addEventListener(
+        "touchend",
+        event => {
+
+            const touch =
+                event.changedTouches[0];
+
+            const deltaX =
+                touch.clientX -
+                ooPeopleTouchStartX;
+
+            const deltaY =
+                touch.clientY -
+                ooPeopleTouchStartY;
+
+
+            if (
+                Math.abs(deltaX) < 70 ||
+                Math.abs(deltaX) <
+                Math.abs(deltaY)
+            ) {
+                return;
+            }
+
+
+            if (deltaX < 0) {
+
+                ooOpenNextPerson();
+
+            } else {
+
+                ooOpenPreviousPerson();
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ============================================================
+       TEAM CARD CLICK
+       ------------------------------------------------------------
+       Contact links remain normal links.
+
+       Clicking the card itself opens the reader.
+       ============================================================ */
+
+    ooPeopleCards.forEach(
+        (card, index) => {
+
+            card.setAttribute(
+                "role",
+                "button"
+            );
+
+            card.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+            card.setAttribute(
+                "aria-label",
+                `View ${ooPeople[index].name}`
+            );
+
+
+            card.addEventListener(
+                "click",
+                event => {
+
+                    /*
+                     * Do NOT hijack Email / WhatsApp links.
+                     */
+
+                    if (
+                        event.target.closest("a")
+                    ) {
+                        return;
+                    }
+
+                    ooOpenPeople(index);
+
+                }
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key !== "Enter" &&
+                        event.key !== " "
+                    ) {
+                        return;
+                    }
+
+                    if (
+                        event.target.closest("a")
+                    ) {
+                        return;
+                    }
+
+                    event.preventDefault();
+
+                    ooOpenPeople(index);
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ============================================================
+       CONSULTATION EXPERIENCE
+       ============================================================ */
+
+    const ooConsultationReader =
+        document.createElement("div");
+
+    ooConsultationReader.className =
+        "oo-consultation-reader";
+
+    ooConsultationReader.id =
+        "ooConsultationReader";
+
+    ooConsultationReader.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    ooConsultationReader.innerHTML = `
+
+        <div
+            class="oo-consultation-backdrop"
+            id="ooConsultationBackdrop"
+        ></div>
+
+
+        <article
+            class="oo-consultation-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ooConsultationTitle"
+        >
+
+            <header class="oo-consultation-header">
+
+                <div class="oo-consultation-brand">
+
+                    <div class="oo-consultation-mark">
+                        O&O
+                    </div>
+
+                    <div>
+                        <strong>
+                            OJAMBO & OJAMBO
+                        </strong>
+
+                        <span>
+                            ADVOCATES
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="oo-consultation-step">
+                    <span id="ooConsultationStep">
+                        01
+                    </span>
+
+                    <small>
+                        / 04
+                    </small>
+                </div>
+
+
+                <button
+                    type="button"
+                    id="ooConsultationClose"
+                    class="oo-consultation-close"
+                    aria-label="Close consultation"
+                >
+                    ×
+                </button>
+
+            </header>
+
+
+            <div class="oo-consultation-progress">
+                <span
+                    id="ooConsultationProgress"
+                ></span>
+            </div>
+
+
+            <div
+                class="oo-consultation-content"
+                id="ooConsultationContent"
+            >
+
+                <!-- =================================================
+                     STEP 01
+                     ================================================= -->
+
+                <section
+                    class="oo-consultation-screen active"
+                    data-consultation-screen="1"
+                >
+
+                    <p class="oo-consultation-eyebrow">
+                        START A CONVERSATION
+                    </p>
+
+                    <h1 id="ooConsultationTitle">
+                        Let's discuss
+                        <span>your matter.</span>
+                    </h1>
+
+                    <p class="oo-consultation-lead">
+                        Begin a confidential conversation with
+                        Ojambo & Ojambo Advocates about your
+                        legal matter in Uganda.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="oo-consultation-primary"
+                        data-consultation-next
+                    >
+                        <span>
+                            Begin
+                        </span>
+
+                        <strong>
+                            →
+                        </strong>
+                    </button>
+
+                </section>
+
+
+                <!-- =================================================
+                     STEP 02
+                     ================================================= -->
+
+                <section
+                    class="oo-consultation-screen"
+                    data-consultation-screen="2"
+                >
+
+                    <p class="oo-consultation-eyebrow">
+                        STEP 02 · YOUR MATTER
+                    </p>
+
+                    <h2>
+                        What can we
+                        <span>help with?</span>
+                    </h2>
+
+                    <p class="oo-consultation-muted">
+                        Select the area closest to your enquiry.
+                    </p>
+
+
+                    <div class="oo-consultation-options">
+
+                        <button
+                            type="button"
+                            data-matter="Corporate & Commercial"
+                        >
+                            <span>01</span>
+                            Corporate & Commercial
+                            <strong>→</strong>
+                        </button>
+
+                        <button
+                            type="button"
+                            data-matter="Foreign Investment"
+                        >
+                            <span>02</span>
+                            Foreign Investment
+                            <strong>→</strong>
+                        </button>
+
+                        <button
+                            type="button"
+                            data-matter="Real Estate & Land"
+                        >
+                            <span>03</span>
+                            Real Estate & Land
+                            <strong>→</strong>
+                        </button>
+
+                        <button
+                            type="button"
+                            data-matter="Dispute Resolution"
+                        >
+                            <span>04</span>
+                            Dispute Resolution
+                            <strong>→</strong>
+                        </button>
+
+                        <button
+                            type="button"
+                            data-matter="Employment & Labour"
+                        >
+                            <span>05</span>
+                            Employment & Labour
+                            <strong>→</strong>
+                        </button>
+
+                        <button
+                            type="button"
+                            data-matter="Regulatory & Advisory"
+                        >
+                            <span>06</span>
+                            Regulatory & Advisory
+                            <strong>→</strong>
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     STEP 03
+                     ================================================= -->
+
+                <section
+                    class="oo-consultation-screen"
+                    data-consultation-screen="3"
+                >
+
+                    <p class="oo-consultation-eyebrow">
+                        STEP 03 · YOUR PREFERENCE
+                    </p>
+
+                    <h2>
+                        How should we
+                        <span>connect?</span>
+                    </h2>
+
+                    <p class="oo-consultation-muted">
+                        Choose how you would like to begin
+                        the conversation.
+                    </p>
+
+
+                    <div class="oo-contact-methods">
+
+                        <button
+                            type="button"
+                            data-contact-method="whatsapp"
+                        >
+                            <span class="oo-contact-icon">
+                                WA
+                            </span>
+
+                            <div>
+                                <strong>
+                                    WhatsApp
+                                </strong>
+
+                                <small>
+                                    Start a direct conversation
+                                </small>
+                            </div>
+
+                            <b>→</b>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-contact-method="email"
+                        >
+                            <span class="oo-contact-icon">
+                                @
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Email
+                                </strong>
+
+                                <small>
+                                    Send a structured enquiry
+                                </small>
+                            </div>
+
+                            <b>→</b>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-contact-method="phone"
+                        >
+                            <span class="oo-contact-icon">
+                                TEL
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Phone
+                                </strong>
+
+                                <small>
+                                    Speak with the firm
+                                </small>
+                            </div>
+
+                            <b>→</b>
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     STEP 04
+                     ================================================= -->
+
+                <section
+                    class="oo-consultation-screen"
+                    data-consultation-screen="4"
+                >
+
+                    <p class="oo-consultation-eyebrow">
+                        READY TO CONNECT
+                    </p>
+
+                    <h2>
+                        Your conversation
+                        <span>starts here.</span>
+                    </h2>
+
+                    <p
+                        class="oo-consultation-lead"
+                        id="ooConsultationSummary"
+                    >
+                        Your enquiry is ready.
+                    </p>
+
+
+                    <div class="oo-consultation-summary">
+
+                        <div>
+                            <small>
+                                MATTER
+                            </small>
+
+                            <strong id="ooSummaryMatter">
+                                General enquiry
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <small>
+                                CONTACT
+                            </small>
+
+                            <strong id="ooSummaryMethod">
+                                WhatsApp
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="oo-final-actions">
+
+                        <button
+                            type="button"
+                            id="ooFinalWhatsApp"
+                        >
+                            WhatsApp
+                            <span>↗</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            id="ooFinalEmail"
+                        >
+                            Email
+                            <span>↗</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            id="ooFinalPhone"
+                        >
+                            Call
+                            <span>↗</span>
+                        </button>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <footer class="oo-consultation-footer">
+
+                <button
+                    type="button"
+                    id="ooConsultationBack"
+                >
+                    ← Back
+                </button>
+
+                <span>
+                    CONFIDENTIAL ENQUIRY
+                </span>
+
+            </footer>
+
+        </article>
+    `;
+
+    document.body.appendChild(
+        ooConsultationReader
+    );
+
+
+    /* ============================================================
+       CONSULTATION ELEMENTS
+       ============================================================ */
+
+    const ooConsultationBackdrop =
+        document.getElementById(
+            "ooConsultationBackdrop"
+        );
+
+    const ooConsultationClose =
+        document.getElementById(
+            "ooConsultationClose"
+        );
+
+    const ooConsultationContent =
+        document.getElementById(
+            "ooConsultationContent"
+        );
+
+    const ooConsultationStep =
+        document.getElementById(
+            "ooConsultationStep"
+        );
+
+    const ooConsultationProgress =
+        document.getElementById(
+            "ooConsultationProgress"
+        );
+
+    const ooConsultationBack =
+        document.getElementById(
+            "ooConsultationBack"
+        );
+
+    const ooSummaryMatter =
+        document.getElementById(
+            "ooSummaryMatter"
+        );
+
+    const ooSummaryMethod =
+        document.getElementById(
+            "ooSummaryMethod"
+        );
+
+
+    let ooConsultationCurrentStep = 1;
+
+    let ooSelectedMatter =
+        "General legal enquiry";
+
+    let ooSelectedMethod =
+        "WhatsApp";
+
+    let ooSelectedPerson =
+        "";
+
+
+    /* ============================================================
+       CONTACT CONFIG
+       ------------------------------------------------------------
+       Use the central firm configuration when available.
+       ============================================================ */
+
+    const ooFirmContact =
+        window.FIRM_CONTACT || {
+            email: "gregmugeni2011@gmail.com",
+            phone: "+256707266256",
+            whatsapp: "256707266256"
+        };
+
+
+    /* ============================================================
+       CONSULTATION MESSAGE
+       ============================================================ */
+
+    function ooBuildConsultationMessage() {
+
+        let message =
+            "Hello Ojambo & Ojambo Advocates,\n\n";
+
+        message +=
+            "I would like to discuss a legal matter.\n\n";
+
+        message +=
+            `Matter: ${ooSelectedMatter}\n`;
+
+        if (ooSelectedPerson) {
+
+            message +=
+                `Regarding: ${ooSelectedPerson}\n`;
+
+        }
+
+        message +=
+            "\nI would like to request a confidential consultation.";
+
+        return message;
+
+    }
+
+
+    /* ============================================================
+       SHOW CONSULTATION STEP
+       ============================================================ */
+
+    function ooShowConsultationStep(
+        step
+    ) {
+
+        ooConsultationCurrentStep =
+            Math.max(
+                1,
+                Math.min(
+                    4,
+                    step
+                )
+            );
+
+
+        document
+            .querySelectorAll(
+                ".oo-consultation-screen"
+            )
+            .forEach(screen => {
+
+                const screenNumber =
+                    Number(
+                        screen.dataset.consultationScreen
+                    );
+
+                screen.classList.toggle(
+                    "active",
+                    screenNumber ===
+                    ooConsultationCurrentStep
+                );
+
+            });
+
+
+        ooConsultationStep.textContent =
+            String(
+                ooConsultationCurrentStep
+            ).padStart(2, "0");
+
+
+        ooConsultationProgress.style.width =
+            `${(
+                ooConsultationCurrentStep /
+                4
+            ) * 100}%`;
+
+
+        ooConsultationBack.style.visibility =
+            ooConsultationCurrentStep > 1
+                ? "visible"
+                : "hidden";
+
+
+        if (
+            ooConsultationCurrentStep === 4
+        ) {
+
+            ooSummaryMatter.textContent =
+                ooSelectedMatter;
+
+            ooSummaryMethod.textContent =
+                ooSelectedMethod;
+
+        }
+
+    }
+
+
+    /* ============================================================
+       OPEN CONSULTATION
+       ============================================================ */
+
+    function ooOpenConsultation(
+        context = {}
+    ) {
+
+        ooSelectedMatter =
+            context.matter ||
+            "General legal enquiry";
+
+        ooSelectedPerson =
+            context.person ||
+            "";
+
+        ooSelectedMethod =
+            "WhatsApp";
+
+
+        ooShowConsultationStep(
+            1
+        );
+
+
+        ooConsultationReader.classList.add(
+            "open"
+        );
+
+        ooConsultationReader.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "oo-consultation-open"
+        );
+
+        document.documentElement.classList.add(
+            "oo-reader-active"
+        );
+
+    }
+
+
+    /* ============================================================
+       CLOSE CONSULTATION
+       ============================================================ */
+
+    function ooCloseConsultation() {
+
+        ooConsultationReader.classList.remove(
+            "open"
+        );
+
+        ooConsultationReader.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "oo-consultation-open"
+        );
+
+        document.documentElement.classList.remove(
+            "oo-reader-active"
+        );
+
+    }
+
+
+    /* ============================================================
+       EXPOSE GLOBAL OPEN FUNCTION
+       ------------------------------------------------------------
+       This allows Expertise / Clients / Resources readers to
+       trigger the same consultation experience later.
+       ============================================================ */
+
+    window.ooOpenConsultation =
+        ooOpenConsultation;
+
+
+    /* ============================================================
+       BEGIN BUTTON
+       ============================================================ */
+
+    document
+        .querySelectorAll(
+            "[data-consultation-next]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    ooShowConsultationStep(
+                        2
+                    );
+
+                }
+            );
+
+        });
+
+
+    /* ============================================================
+       MATTER SELECTION
+       ============================================================ */
+
+    document
+        .querySelectorAll(
+            "[data-matter]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    ooSelectedMatter =
+                        button.dataset.matter;
+
+                    ooShowConsultationStep(
+                        3
+                    );
+
+                }
+            );
+
+        });
+
+
+    /* ============================================================
+       CONTACT METHOD SELECTION
+       ============================================================ */
+
+    document
+        .querySelectorAll(
+            "[data-contact-method]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const method =
+                        button.dataset.contactMethod;
+
+                    ooSelectedMethod =
+                        method === "whatsapp"
+                            ? "WhatsApp"
+                            : method === "email"
+                                ? "Email"
+                                : "Phone";
+
+
+                    ooShowConsultationStep(
+                        4
+                    );
+
+                }
+            );
+
+        });
+
+
+    /* ============================================================
+       FINAL WHATSAPP
+       ============================================================ */
+
+    document
+        .getElementById(
+            "ooFinalWhatsApp"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                const url =
+                    `https://wa.me/${ooFirmContact.whatsapp}?text=${encodeURIComponent(
+                        ooBuildConsultationMessage()
+                    )}`;
+
+                window.open(
+                    url,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+
+            }
+        );
+
+
+    /* ============================================================
+       FINAL EMAIL
+       ============================================================ */
+
+    document
+        .getElementById(
+            "ooFinalEmail"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                const subject =
+                    "Confidential Legal Consultation Request";
+
+                const body =
+                    ooBuildConsultationMessage();
+
+                window.location.href =
+                    `mailto:${ooFirmContact.email}?subject=${encodeURIComponent(
+                        subject
+                    )}&body=${encodeURIComponent(
+                        body
+                    )}`;
+
+            }
+        );
+
+
+    /* ============================================================
+       FINAL PHONE
+       ============================================================ */
+
+    document
+        .getElementById(
+            "ooFinalPhone"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    `tel:${ooFirmContact.phone}`;
+
+            }
+        );
+
+
+    /* ============================================================
+       BACK
+       ============================================================ */
+
+    ooConsultationBack.addEventListener(
+        "click",
+        () => {
+
+            if (
+                ooConsultationCurrentStep >
+                1
+            ) {
+
+                ooShowConsultationStep(
+                    ooConsultationCurrentStep - 1
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ============================================================
+       CLOSE EVENTS
+       ============================================================ */
+
+    ooConsultationClose.addEventListener(
+        "click",
+        ooCloseConsultation
+    );
+
+    ooConsultationBackdrop.addEventListener(
+        "click",
+        ooCloseConsultation
+    );
+
+
+    /* ============================================================
+       PEOPLE → CONSULTATION
+       ============================================================ */
+
+    ooPeopleConsultation.addEventListener(
+        "click",
+        () => {
+
+            const person =
+                ooPeople[
+                    ooPeopleCurrentIndex
+                ];
+
+            ooClosePeople();
+
+            ooOpenConsultation({
+                person:
+                    person
+                        ? person.name
+                        : ""
+            });
+
+        }
+    );
+
+
+    /* ============================================================
+       GLOBAL CONSULTATION LINKS
+       ------------------------------------------------------------
+       This converts existing:
+       
+           href="#contact"
+
+       buttons into the premium consultation experience.
+
+       This means we do not have to redesign every CTA in the
+       HTML individually.
+       ============================================================ */
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            const link =
+                event.target.closest(
+                    'a[href="#contact"]'
+                );
+
+            if (!link) {
+                return;
+            }
+
+
+            /*
+             * Stop the browser from jumping down to the
+             * contact section.
+             */
+
+            event.preventDefault();
+
+
+            ooOpenConsultation();
+
+        }
+    );
+
+
+    /* ============================================================
+       KEYBOARD CLOSE
+       ============================================================ */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                !ooConsultationReader.classList.contains(
+                    "open"
+                )
+            ) {
+                return;
+            }
+
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                ooCloseConsultation();
+
+            }
+
+        }
+    );
+
+
+    /* ============================================================
+       INITIALISE
+       ============================================================ */
+
+    ooRenderPerson(0);
+
+})();
+
+
+
 /* ============================================================
    O&O PREMIUM PWA INSTALL EXPERIENCE
    ============================================================ */

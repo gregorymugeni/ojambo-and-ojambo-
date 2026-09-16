@@ -2899,6 +2899,580 @@ practiceItems.forEach(item => {
 })();
 
 
+
+
+
+
+/* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   CLIENT + RESOURCE READER
+   CINEMATIC IMAGE MOTION SYSTEM
+   ============================================================
+
+   PURPOSE
+   ------------------------------------------------------------
+   Adds a subtle image sequence behind the existing editorial
+   client/resource reader.
+
+   The existing typography, wordmarks and reader structure remain
+   untouched.
+
+   Images slowly crossfade and use a very subtle Ken Burns motion
+   to make the reader feel alive without becoming distracting.
+   ============================================================ */
+
+(() => {
+
+    /* ============================================================
+       IMAGE LIBRARY
+       ------------------------------------------------------------
+       Keep these files inside the public website root or /images/
+       folder.
+
+       Recommended filenames:
+
+       /capital-logistics.jpg
+       /pioneer-bus.jpg
+       /group-photo.jpg
+       ============================================================ */
+
+    const OO_READER_IMAGES = [
+        "/capital-logistics.jpg",
+        "/pioneer-bus.jpg",
+        "/group-photo.jpg"
+    ];
+
+
+    /* ============================================================
+       SETTINGS
+       ============================================================ */
+
+    const OO_IMAGE_DURATION = 6200;
+    const OO_FADE_DURATION = 1400;
+
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+
+    const ooReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        );
+
+
+    /* ============================================================
+       READER GALLERY CLASS
+       ============================================================ */
+
+    class OOReaderGallery {
+
+        constructor(reader, visual, type) {
+
+            this.reader = reader;
+            this.visual = visual;
+            this.type = type;
+
+            this.images = [];
+            this.currentIndex = 0;
+            this.timer = null;
+            this.started = false;
+
+            this.build();
+        }
+
+
+        /* ========================================================
+           BUILD GALLERY
+           ======================================================== */
+
+        build() {
+
+            if (!this.visual) return;
+
+
+            /*
+             * Prevent duplicate galleries if this script is ever
+             * loaded twice during development.
+             */
+
+            if (
+                this.visual.querySelector(
+                    ".oo-reader-motion-gallery"
+                )
+            ) {
+                return;
+            }
+
+
+            const gallery =
+                document.createElement("div");
+
+            gallery.className =
+                "oo-reader-motion-gallery";
+
+
+            /*
+             * Accessibility:
+             * The decorative gallery is hidden from screen readers.
+             */
+
+            gallery.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            const layerA =
+                this.createLayer(0);
+
+            const layerB =
+                this.createLayer(1);
+
+
+            gallery.appendChild(layerA);
+            gallery.appendChild(layerB);
+
+
+            /*
+             * Insert the gallery as the first visual layer.
+             * Existing wordmarks remain above it.
+             */
+
+            this.visual.prepend(gallery);
+
+
+            this.gallery = gallery;
+            this.layers = [layerA, layerB];
+
+
+            /*
+             * Initial image.
+             */
+
+            this.setImage(
+                this.layers[0],
+                OO_READER_IMAGES[0]
+            );
+
+            this.layers[0].classList.add(
+                "is-active"
+            );
+
+
+            /*
+             * Second image is preloaded immediately.
+             */
+
+            if (OO_READER_IMAGES[1]) {
+
+                this.preload(
+                    OO_READER_IMAGES[1]
+                );
+
+            }
+
+
+            /*
+             * Observe reader opening / closing.
+             */
+
+            this.observeReader();
+        }
+
+
+        /* ========================================================
+           CREATE IMAGE LAYER
+           ======================================================== */
+
+        createLayer(index) {
+
+            const layer =
+                document.createElement("div");
+
+            layer.className =
+                "oo-reader-motion-layer";
+
+
+            layer.dataset.layer =
+                String(index);
+
+
+            const image =
+                document.createElement("img");
+
+
+            image.className =
+                "oo-reader-motion-image";
+
+
+            image.alt = "";
+
+
+            image.loading =
+                index === 0
+                    ? "eager"
+                    : "lazy";
+
+
+            layer.appendChild(image);
+
+
+            return layer;
+        }
+
+
+        /* ========================================================
+           SET IMAGE
+           ======================================================== */
+
+        setImage(layer, src) {
+
+            const image =
+                layer.querySelector(
+                    ".oo-reader-motion-image"
+                );
+
+            if (!image) return;
+
+            image.src = src;
+        }
+
+
+        /* ========================================================
+           PRELOAD
+           ======================================================== */
+
+        preload(src) {
+
+            const image =
+                new Image();
+
+            image.src = src;
+        }
+
+
+        /* ========================================================
+           OBSERVE READER
+           ======================================================== */
+
+        observeReader() {
+
+            const observer =
+                new MutationObserver(() => {
+
+                    const isOpen =
+                        this.reader.classList.contains(
+                            "open"
+                        );
+
+                    if (isOpen) {
+
+                        this.start();
+
+                    } else {
+
+                        this.stop();
+
+                    }
+
+                });
+
+
+            observer.observe(
+                this.reader,
+                {
+                    attributes: true,
+                    attributeFilter: ["class"]
+                }
+            );
+
+
+            /*
+             * In case the reader is already open when this
+             * gallery initializes.
+             */
+
+            if (
+                this.reader.classList.contains(
+                    "open"
+                )
+            ) {
+
+                this.start();
+
+            }
+        }
+
+
+        /* ========================================================
+           START
+           ======================================================== */
+
+        start() {
+
+            if (this.started) return;
+
+            this.started = true;
+
+
+            /*
+             * Reduced-motion users still receive the image,
+             * but not the automatic animation.
+             */
+
+            if (ooReducedMotion.matches) {
+
+                return;
+            }
+
+
+            this.timer =
+                setInterval(
+                    () => this.next(),
+                    OO_IMAGE_DURATION
+                );
+        }
+
+
+        /* ========================================================
+           STOP
+           ======================================================== */
+
+        stop() {
+
+            this.started = false;
+
+            if (this.timer) {
+
+                clearInterval(
+                    this.timer
+                );
+
+                this.timer = null;
+            }
+        }
+
+
+        /* ========================================================
+           NEXT IMAGE
+           ======================================================== */
+
+        next() {
+
+            if (!this.layers.length) return;
+
+
+            const nextIndex =
+                (
+                    this.currentIndex + 1
+                ) %
+                OO_READER_IMAGES.length;
+
+
+            const visibleLayer =
+                this.layers.find(
+                    layer =>
+                        layer.classList.contains(
+                            "is-active"
+                        )
+                );
+
+
+            const hiddenLayer =
+                this.layers.find(
+                    layer =>
+                        !layer.classList.contains(
+                            "is-active"
+                        )
+                );
+
+
+            if (
+                !visibleLayer ||
+                !hiddenLayer
+            ) {
+                return;
+            }
+
+
+            this.setImage(
+                hiddenLayer,
+                OO_READER_IMAGES[nextIndex]
+            );
+
+
+            /*
+             * Force a clean animation restart.
+             */
+
+            hiddenLayer.classList.remove(
+                "is-active"
+            );
+
+
+            void hiddenLayer.offsetWidth;
+
+
+            hiddenLayer.classList.add(
+                "is-active"
+            );
+
+
+            visibleLayer.classList.remove(
+                "is-active"
+            );
+
+
+            this.currentIndex =
+                nextIndex;
+
+
+            /*
+             * Preload the image after the next one.
+             */
+
+            const preloadIndex =
+                (
+                    nextIndex + 1
+                ) %
+                OO_READER_IMAGES.length;
+
+
+            this.preload(
+                OO_READER_IMAGES[
+                    preloadIndex
+                ]
+            );
+        }
+    }
+
+
+    /* ============================================================
+       FIND CLIENT READER
+       ============================================================ */
+
+    const clientsReader =
+        document.getElementById(
+            "clientsReader"
+        );
+
+
+    if (clientsReader) {
+
+        const clientVisual =
+            clientsReader.querySelector(
+                ".clients-reader-visual"
+            );
+
+
+        if (clientVisual) {
+
+            new OOReaderGallery(
+                clientsReader,
+                clientVisual,
+                "clients"
+            );
+
+        }
+    }
+
+
+    /* ============================================================
+       FIND RESOURCE READER
+       ============================================================ */
+
+    const resourcesReader =
+        document.getElementById(
+            "resourcesReader"
+        );
+
+
+    if (resourcesReader) {
+
+        const resourceVisual =
+            resourcesReader.querySelector(
+                ".resources-reader-visual"
+            );
+
+
+        if (resourceVisual) {
+
+            new OOReaderGallery(
+                resourcesReader,
+                resourceVisual,
+                "resources"
+            );
+
+        }
+    }
+
+
+    /* ============================================================
+       REDUCED MOTION CHANGE
+       ------------------------------------------------------------
+       If the visitor changes their OS accessibility preference
+       while the page is open, respect it immediately.
+       ============================================================ */
+
+    if (
+        typeof ooReducedMotion.addEventListener ===
+        "function"
+    ) {
+
+        ooReducedMotion.addEventListener(
+            "change",
+            event => {
+
+                document
+                    .querySelectorAll(
+                        ".oo-reader-motion-gallery"
+                    )
+                    .forEach(gallery => {
+
+                        const reader =
+                            gallery.closest(
+                                ".clients-reader, .resources-reader"
+                            );
+
+                        if (!reader) return;
+
+                        /*
+                         * The gallery instance itself owns
+                         * its timer, so simply stop animation
+                         * when reduced motion is enabled.
+                         */
+
+                        if (event.matches) {
+
+                            /*
+                             * Remove visual movement while
+                             * keeping the current image visible.
+                             */
+
+                            gallery.classList.add(
+                                "reduced-motion"
+                            );
+
+                        } else {
+
+                            gallery.classList.remove(
+                                "reduced-motion"
+                            );
+
+                        }
+
+                    });
+
+            }
+        );
+
+    }
+
+})();
+
+
+
 /* ============================================================
    OJAMBO & OJAMBO ADVOCATES
    PREMIUM EXPERTISE READER
