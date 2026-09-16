@@ -3293,7 +3293,11 @@ scrollObserver.observe(element);
    public-facing firm positioning.
    ============================================================ */
 
+/* ============================================================
+   ISOLATE CLIENTS READER SCOPE
+   ============================================================ */
 
+(() => {
     const clientCards =
         document.querySelectorAll(".client-logo:not(.legal-resource-card)");
 
@@ -4871,6 +4875,1823 @@ clientsReader.setAttribute(
         }
     );
 
+
+
+
+
+/* ============================================================
+   END CLIENTS READER SCOPE
+   ============================================================ */
+
+})();
+    /* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   PREMIUM LEGAL RESOURCES READER
+   ============================================================
+
+   RESOURCE EXPERIENCE
+   ------------------------------------------------------------
+   • Click a legal resource
+   • Cinematic backdrop appears
+   • Editorial reader slides in
+   • Large institutional identity
+   • Resource number
+   • Institutional context
+   • What the resource provides
+   • Official website CTA
+   • Consultation CTA
+   • Previous / next navigation
+   • Reading progress
+   • ESC to close
+   • Backdrop click to close
+   • Keyboard navigation
+   • Mobile swipe
+   • Reduced-motion support
+   ============================================================ */
+
+
+
+
+    /* ============================================================
+       RESOURCE CARDS
+       ------------------------------------------------------------
+       We intentionally target ONLY legal-resource-card.
+
+       This leaves the Clients Reader completely untouched.
+       ============================================================ */
+
+    const resourceCards =
+        document.querySelectorAll(
+            ".legal-resource-card"
+        );
+
+
+    if (!resourceCards.length) {
+        return;
+    }
+
+
+    /* ============================================================
+       RESOURCE DATA
+       ------------------------------------------------------------
+       The official URLs are taken directly from the existing
+       resource cards.
+       ============================================================ */
+
+    const resources = {
+
+        ursb: {
+
+            number: "01",
+
+            category:
+                "REGISTRATION · BUSINESS · CORPORATE",
+
+            name:
+                "URSB",
+
+            subtitle:
+                "UGANDA REGISTRATION SERVICES BUREAU",
+
+            title:
+                "The official gateway for business registration in Uganda.",
+
+            intro:
+                "A direct public resource for accessing information and services relating to registration and business administration in Uganda.",
+
+            mark:
+                "URSB",
+
+            description: `
+
+                <p>
+                    The Uganda Registration Services Bureau is
+                    one of the principal public institutions
+                    relevant to business registration and
+                    corporate administration in Uganda.
+                </p>
+
+                <p>
+                    Businesses, investors and organisations may
+                    need to consult official registration information
+                    when establishing, maintaining or reviewing
+                    their legal structures and corporate records.
+                </p>
+
+                <p>
+                    The official URSB website provides a direct
+                    starting point for accessing the institution's
+                    public information and online services.
+                </p>
+
+            `,
+
+            focus: [
+
+                "Business registration",
+
+                "Company information",
+
+                "Corporate records",
+
+                "Registration services",
+
+                "Business name matters",
+
+                "Official public information"
+
+            ],
+
+            contextTitle:
+                "Start with the official record.",
+
+            context:
+                "When a matter involves the legal identity, registration or corporate status of a business, the relevant official registration information can form an important part of the legal review.",
+
+            officialLabel:
+                "Visit Uganda Registration Services Bureau",
+
+            officialUrl:
+                "https://ursb.go.ug/"
+
+        },
+
+
+        ura: {
+
+            number: "02",
+
+            category:
+                "TAX · REVENUE · COMPLIANCE",
+
+            name:
+                "URA",
+
+            subtitle:
+                "UGANDA REVENUE AUTHORITY",
+
+            title:
+                "Official tax information for businesses and individuals.",
+
+            intro:
+                "A direct public resource for Uganda's tax administration, revenue information and taxpayer services.",
+
+            mark:
+                "URA",
+
+            description: `
+
+                <p>
+                    The Uganda Revenue Authority is the country's
+                    principal institution for tax administration
+                    and revenue collection.
+                </p>
+
+                <p>
+                    Businesses, investors and individuals may need
+                    to consider tax obligations as part of wider
+                    commercial, employment, investment or
+                    transactional decisions.
+                </p>
+
+                <p>
+                    The official URA website provides access to
+                    public tax information, taxpayer resources
+                    and related services.
+                </p>
+
+            `,
+
+            focus: [
+
+                "Tax information",
+
+                "Taxpayer services",
+
+                "Revenue administration",
+
+                "Business tax considerations",
+
+                "Compliance information",
+
+                "Official tax guidance"
+
+            ],
+
+            contextTitle:
+                "Tax considerations belong in the wider picture.",
+
+            context:
+                "Tax questions can intersect with commercial transactions, business structures, employment arrangements and investment decisions. The applicable position depends on the particular circumstances.",
+
+            officialLabel:
+                "Visit Uganda Revenue Authority",
+
+            officialUrl:
+                "https://ura.go.ug/"
+
+        },
+
+
+        judiciary: {
+
+            number: "03",
+
+            category:
+                "COURTS · JUSTICE · LEGAL PROCESS",
+
+            name:
+                "JUDICIARY",
+
+            subtitle:
+                "JUDICIARY OF UGANDA",
+
+            title:
+                "The public gateway to Uganda's judicial system.",
+
+            intro:
+                "A direct public resource for information concerning Uganda's courts, judicial administration and access to justice.",
+
+            mark:
+                "JUDICIARY",
+
+            description: `
+
+                <p>
+                    The Judiciary of Uganda provides the institutional
+                    framework through which the country's courts
+                    administer justice.
+                </p>
+
+                <p>
+                    Individuals, businesses and organisations involved
+                    in disputes or court-related processes may need
+                    access to official judicial information.
+                </p>
+
+                <p>
+                    The official Judiciary website provides public
+                    information about the institution, its courts,
+                    services and related judicial resources.
+                </p>
+
+            `,
+
+            focus: [
+
+                "Court information",
+
+                "Judicial services",
+
+                "Court administration",
+
+                "Access to justice",
+
+                "Judicial information",
+
+                "Public legal resources"
+
+            ],
+
+            contextTitle:
+                "Legal process depends on the right information.",
+
+            context:
+                "Court-related matters can involve procedural requirements, documents, deadlines and other considerations. The appropriate approach depends on the particular matter and stage of proceedings.",
+
+            officialLabel:
+                "Visit Judiciary of Uganda",
+
+            officialUrl:
+                "https://judiciary.go.ug/"
+
+        },
+
+
+        ulrc: {
+
+            number: "04",
+
+            category:
+                "LAW REFORM · LEGISLATION · POLICY",
+
+            name:
+                "ULRC",
+
+            subtitle:
+                "UGANDA LAW REFORM COMMISSION",
+
+            title:
+                "A public resource for understanding Uganda's legal reform work.",
+
+            intro:
+                "A direct public resource for information relating to law reform, legislative development and legal policy in Uganda.",
+
+            mark:
+                "ULRC",
+
+            description: `
+
+                <p>
+                    The Uganda Law Reform Commission is a public
+                    institution associated with the review and
+                    development of Uganda's laws.
+                </p>
+
+                <p>
+                    Legal practitioners, businesses, researchers
+                    and members of the public may find law reform
+                    information useful when examining the wider
+                    legislative environment.
+                </p>
+
+                <p>
+                    The official ULRC website provides public
+                    information concerning the Commission and
+                    its law reform work.
+                </p>
+
+            `,
+
+            focus: [
+
+                "Law reform information",
+
+                "Legislative development",
+
+                "Legal policy",
+
+                "Law reform publications",
+
+                "Public legal information",
+
+                "Legislative context"
+
+            ],
+
+            contextTitle:
+                "Good legal work begins with understanding the framework.",
+
+            context:
+                "Understanding how legislation develops and how legal frameworks evolve can provide useful context when considering a legal or regulatory question.",
+
+            officialLabel:
+                "Visit Uganda Law Reform Commission",
+
+            officialUrl:
+                "https://ulrc.go.ug/"
+
+        },
+
+
+        bou: {
+
+            number: "05",
+
+            category:
+                "FINANCE · BANKING · REGULATION",
+
+            name:
+                "BOU",
+
+            subtitle:
+                "BANK OF UGANDA",
+
+            title:
+                "Official information for Uganda's financial and monetary environment.",
+
+            intro:
+                "A direct public resource for information concerning Uganda's central bank, financial system and regulatory environment.",
+
+            mark:
+                "BOU",
+
+            description: `
+
+                <p>
+                    The Bank of Uganda is the country's central bank
+                    and an important public institution for matters
+                    involving Uganda's monetary and financial
+                    environment.
+                </p>
+
+                <p>
+                    Businesses, investors and institutions operating
+                    in regulated financial environments may need
+                    to consider official information relevant to
+                    their activities.
+                </p>
+
+                <p>
+                    The official Bank of Uganda website provides
+                    public information, institutional publications
+                    and other resources.
+                </p>
+
+            `,
+
+            focus: [
+
+                "Banking information",
+
+                "Financial regulation",
+
+                "Monetary information",
+
+                "Financial-sector resources",
+
+                "Institutional publications",
+
+                "Official regulatory information"
+
+            ],
+
+            contextTitle:
+                "Financial regulation can shape commercial decisions.",
+
+            context:
+                "Where a transaction, investment or business activity intersects with the financial sector, the applicable regulatory environment can form an important part of the legal analysis.",
+
+            officialLabel:
+                "Visit Bank of Uganda",
+
+            officialUrl:
+                "https://bou.or.ug/"
+
+        },
+
+
+        uia: {
+
+            number: "06",
+
+            category:
+                "INVESTMENT · BUSINESS · UGANDA",
+
+            name:
+                "UIA",
+
+            subtitle:
+                "UGANDA INVESTMENT AUTHORITY",
+
+            title:
+                "A public starting point for investors entering Uganda.",
+
+            intro:
+                "A direct public resource for investment information, investor services and Uganda's investment environment.",
+
+            mark:
+                "UIA",
+
+            description: `
+
+                <p>
+                    The Uganda Investment Authority provides public
+                    information and services relevant to investment
+                    and business activity in Uganda.
+                </p>
+
+                <p>
+                    International investors and businesses considering
+                    activity in Uganda may need to understand the
+                    local commercial, regulatory and institutional
+                    environment before proceeding.
+                </p>
+
+                <p>
+                    The official UIA website provides a direct source
+                    of public investment-related information and
+                    investor resources.
+                </p>
+
+            `,
+
+            focus: [
+
+                "Investment information",
+
+                "Investor services",
+
+                "Market-entry resources",
+
+                "Business establishment",
+
+                "Investment environment",
+
+                "Official investor information"
+
+            ],
+
+            contextTitle:
+                "Investment decisions benefit from local legal context.",
+
+            context:
+                "International and domestic investment decisions can involve corporate, regulatory, tax, employment, property and contractual considerations. The precise legal position depends on the investment and its circumstances.",
+
+            officialLabel:
+                "Visit Uganda Investment Authority",
+
+            officialUrl:
+                "https://ugandainvest.go.ug/"
+
+        }
+
+    };
+
+
+    /* ============================================================
+       ORDER
+       ============================================================ */
+
+    const order = [
+
+        "ursb",
+        "ura",
+        "judiciary",
+        "ulrc",
+        "bou",
+        "uia"
+
+    ];
+
+
+    /* ============================================================
+       IDENTIFY RESOURCE
+       ============================================================ */
+
+    function getResourceKey(card) {
+
+        if (
+            card.classList.contains("resource-ursb")
+        ) {
+            return "ursb";
+        }
+
+        if (
+            card.classList.contains("resource-ura")
+        ) {
+            return "ura";
+        }
+
+        if (
+            card.classList.contains("resource-judiciary")
+        ) {
+            return "judiciary";
+        }
+
+        if (
+            card.classList.contains("resource-ulrc")
+        ) {
+            return "ulrc";
+        }
+
+        if (
+            card.classList.contains("resource-bou")
+        ) {
+            return "bou";
+        }
+
+        if (
+            card.classList.contains("resource-uia")
+        ) {
+            return "uia";
+        }
+
+        return null;
+    }
+
+
+    /* ============================================================
+       BUILD READER
+       ============================================================ */
+
+    const resourcesReader =
+        document.createElement("div");
+
+
+    resourcesReader.className =
+        "resources-reader";
+
+
+    resourcesReader.id =
+        "resourcesReader";
+
+
+    resourcesReader.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    resourcesReader.innerHTML = `
+
+        <div
+            class="resources-reader-backdrop"
+        ></div>
+
+
+        <article
+            class="resources-reader-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="resourcesReaderTitle"
+        >
+
+            <!-- HEADER -->
+
+            <header
+                class="resources-reader-header"
+            >
+
+                <div
+                    class="resources-reader-brand"
+                >
+
+                    <span
+                        class="resources-reader-mark"
+                    >
+                        O&O
+                    </span>
+
+                    <span>
+                        OJAMBO & OJAMBO ADVOCATES
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="resources-reader-meta"
+                >
+
+                    <span
+                        id="resourcesReaderCategory"
+                        class="resources-reader-category"
+                    >
+                        LEGAL RESOURCE
+                    </span>
+
+                    <span
+                        id="resourcesReaderIndex"
+                        class="resources-reader-index"
+                    >
+                        01 / 06
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="resources-reader-close"
+                    id="resourcesReaderClose"
+                    aria-label="Close legal resource"
+                >
+                    ×
+                </button>
+
+            </header>
+
+
+            <!-- PROGRESS -->
+
+            <div
+                class="resources-reader-progress"
+            >
+                <span
+                    id="resourcesReaderProgress"
+                ></span>
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div
+                class="resources-reader-content"
+                id="resourcesReaderContent"
+            >
+
+
+                <!-- HERO -->
+
+                <div
+                    class="resources-reader-visual"
+                >
+
+                    <div
+                        class="resources-reader-visual-grid"
+                    ></div>
+
+
+                    <div
+                        class="resources-reader-wordmark"
+                        id="resourcesReaderWordmark"
+                    >
+                        URSB
+                    </div>
+
+
+                    <div
+                        class="resources-reader-submark"
+                        id="resourcesReaderSubmark"
+                    >
+                        UGANDA REGISTRATION SERVICES BUREAU
+                    </div>
+
+
+                    <div
+                        class="resources-reader-country"
+                        id="resourcesReaderCountry"
+                    >
+                        UGANDA
+                    </div>
+
+
+                    <span
+                        class="resources-reader-visual-label"
+                    >
+                        OFFICIAL RESOURCE / O&O
+                    </span>
+
+
+                    <span
+                        class="resources-reader-big-number"
+                        id="resourcesReaderNumber"
+                    >
+                        01
+                    </span>
+
+                </div>
+
+
+                <!-- INTRO -->
+
+                <div
+                    class="resources-reader-intro"
+                >
+
+                    <p
+                        class="resources-reader-kicker"
+                        id="resourcesReaderKicker"
+                    >
+                        REGISTRATION · BUSINESS · CORPORATE
+                    </p>
+
+
+                    <h1
+                        id="resourcesReaderTitle"
+                    ></h1>
+
+
+                    <p
+                        class="resources-reader-lead"
+                        id="resourcesReaderLead"
+                    ></p>
+
+                </div>
+
+
+                <!-- RESOURCE CONTEXT -->
+
+                <div
+                    class="resources-reader-section"
+                >
+
+                    <div
+                        class="resources-reader-section-number"
+                    >
+                        01
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="resources-reader-section-label"
+                        >
+                            RESOURCE CONTEXT
+                        </p>
+
+
+                        <div
+                            class="resources-reader-body"
+                            id="resourcesReaderBody"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WHAT YOU CAN FIND -->
+
+                <div
+                    class="resources-reader-section"
+                >
+
+                    <div
+                        class="resources-reader-section-number"
+                    >
+                        02
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="resources-reader-section-label"
+                        >
+                            WHAT YOU CAN FIND
+                        </p>
+
+
+                        <div
+                            class="resources-focus-list"
+                            id="resourcesReaderFocus"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- O&O APPROACH -->
+
+                <div
+                    class="resources-reader-context"
+                >
+
+                    <div
+                        class="resources-reader-context-number"
+                    >
+                        03
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="resources-reader-section-label"
+                        >
+                            THE O&O APPROACH
+                        </p>
+
+
+                        <h2
+                            id="resourcesReaderContextTitle"
+                        ></h2>
+
+
+                        <p
+                            id="resourcesReaderContext"
+                        ></p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OFFICIAL WEBSITE -->
+
+                <div
+                    class="resources-reader-resource"
+                >
+
+                    <div>
+
+                        <p
+                            class="resources-reader-section-label"
+                        >
+                            OFFICIAL RESOURCE
+                        </p>
+
+
+                        <h2>
+                            Visit the
+                            <span>official source.</span>
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        id="resourcesReaderResource"
+                        class="resources-official-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <span
+                            class="resources-resource-code"
+                            id="resourcesReaderResourceCode"
+                        >
+                            WEB
+                        </span>
+
+
+                        <span
+                            class="resources-resource-name"
+                            id="resourcesReaderResourceName"
+                        >
+                            Official website
+                        </span>
+
+
+                        <span
+                            class="resources-resource-arrow"
+                        >
+                            ↗
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- CTA -->
+
+                <div
+                    class="resources-reader-cta"
+                >
+
+                    <div>
+
+                        <p
+                            class="resources-reader-section-label"
+                        >
+                            DISCUSS A MATTER
+                        </p>
+
+
+                        <h2>
+                            Need legal counsel
+                            <span>around this matter?</span>
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        href="#contact"
+                        class="resources-reader-cta-button"
+                    >
+                        Book a Confidential Consultation
+                        <span>↗</span>
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <footer
+                class="resources-reader-footer"
+            >
+
+                <button
+                    type="button"
+                    class="resources-reader-nav"
+                    id="resourcesReaderPrev"
+                >
+
+                    <span
+                        class="resources-reader-nav-arrow"
+                    >
+                        ←
+                    </span>
+
+
+                    <span>
+
+                        <small>
+                            PREVIOUS
+                        </small>
+
+                        <strong
+                            id="resourcesReaderPrevName"
+                        >
+                            —
+                        </strong>
+
+                    </span>
+
+                </button>
+
+
+                <div
+                    class="resources-reader-footer-center"
+                >
+                    O&O / LEGAL RESOURCES
+                </div>
+
+
+                <button
+                    type="button"
+                    class="resources-reader-nav resources-reader-nav-next"
+                    id="resourcesReaderNext"
+                >
+
+                    <span>
+
+                        <small>
+                            NEXT
+                        </small>
+
+                        <strong
+                            id="resourcesReaderNextName"
+                        >
+                            —
+                        </strong>
+
+                    </span>
+
+
+                    <span
+                        class="resources-reader-nav-arrow"
+                    >
+                        →
+                    </span>
+
+                </button>
+
+            </footer>
+
+        </article>
+
+    `;
+
+
+    document.body.appendChild(
+        resourcesReader
+    );
+
+
+    /* ============================================================
+       ELEMENTS
+       ============================================================ */
+
+    const backdrop =
+        resourcesReader.querySelector(
+            ".resources-reader-backdrop"
+        );
+
+
+    const content =
+        document.getElementById(
+            "resourcesReaderContent"
+        );
+
+
+    const closeButton =
+        document.getElementById(
+            "resourcesReaderClose"
+        );
+
+
+    const category =
+        document.getElementById(
+            "resourcesReaderCategory"
+        );
+
+
+    const index =
+        document.getElementById(
+            "resourcesReaderIndex"
+        );
+
+
+    const number =
+        document.getElementById(
+            "resourcesReaderNumber"
+        );
+
+
+    const wordmark =
+        document.getElementById(
+            "resourcesReaderWordmark"
+        );
+
+
+    const submark =
+        document.getElementById(
+            "resourcesReaderSubmark"
+        );
+
+
+    const country =
+        document.getElementById(
+            "resourcesReaderCountry"
+        );
+
+
+    const kicker =
+        document.getElementById(
+            "resourcesReaderKicker"
+        );
+
+
+    const title =
+        document.getElementById(
+            "resourcesReaderTitle"
+        );
+
+
+    const lead =
+        document.getElementById(
+            "resourcesReaderLead"
+        );
+
+
+    const body =
+        document.getElementById(
+            "resourcesReaderBody"
+        );
+
+
+    const focus =
+        document.getElementById(
+            "resourcesReaderFocus"
+        );
+
+
+    const contextTitle =
+        document.getElementById(
+            "resourcesReaderContextTitle"
+        );
+
+
+    const context =
+        document.getElementById(
+            "resourcesReaderContext"
+        );
+
+
+    const progress =
+        document.getElementById(
+            "resourcesReaderProgress"
+        );
+
+
+    const officialResource =
+        document.getElementById(
+            "resourcesReaderResource"
+        );
+
+
+    const officialCode =
+        document.getElementById(
+            "resourcesReaderResourceCode"
+        );
+
+
+    const officialName =
+        document.getElementById(
+            "resourcesReaderResourceName"
+        );
+
+
+    const prevButton =
+        document.getElementById(
+            "resourcesReaderPrev"
+        );
+
+
+    const nextButton =
+        document.getElementById(
+            "resourcesReaderNext"
+        );
+
+
+    const prevName =
+        document.getElementById(
+            "resourcesReaderPrevName"
+        );
+
+
+    const nextName =
+        document.getElementById(
+            "resourcesReaderNextName"
+        );
+
+
+    /* ============================================================
+       CURRENT RESOURCE
+       ============================================================ */
+
+    let currentIndex = 0;
+
+    let activeResource = null;
+
+
+    /* ============================================================
+       RENDER RESOURCE
+       ============================================================ */
+
+    function renderResource(key) {
+
+        const data =
+            resources[key];
+
+
+        if (!data) {
+            return;
+        }
+
+
+        currentIndex =
+            order.indexOf(key);
+
+
+        activeResource =
+            key;
+
+
+        /* BASIC */
+
+        category.textContent =
+            data.category;
+
+
+        index.textContent =
+            `${data.number} / 06`;
+
+
+        number.textContent =
+            data.number;
+
+
+        wordmark.textContent =
+            data.mark;
+
+
+        submark.textContent =
+            data.subtitle;
+
+
+        country.textContent =
+            "UGANDA";
+
+
+        kicker.textContent =
+            data.category;
+
+
+        title.textContent =
+            data.title;
+
+
+        lead.textContent =
+            data.intro;
+
+
+        /* BODY */
+
+        body.innerHTML =
+            data.description;
+
+
+        /* FOCUS */
+
+        focus.innerHTML =
+            data.focus
+                .map((item, i) => `
+
+                    <div
+                        class="resources-focus-item"
+                    >
+
+                        <span>
+                            ${String(i + 1).padStart(2, "0")}
+                        </span>
+
+                        <strong>
+                            ${item}
+                        </strong>
+
+                        <i>
+                            ↗
+                        </i>
+
+                    </div>
+
+                `)
+                .join("");
+
+
+        /* CONTEXT */
+
+        contextTitle.textContent =
+            data.contextTitle;
+
+
+        context.textContent =
+            data.context;
+
+
+        /* OFFICIAL RESOURCE */
+
+        officialResource.href =
+            data.officialUrl;
+
+
+        officialName.textContent =
+            data.officialLabel;
+
+
+        officialCode.textContent =
+            "WEB";
+
+
+        /* NAVIGATION */
+
+        const previousIndex =
+            (
+                currentIndex - 1 + order.length
+            ) % order.length;
+
+
+        const nextIndex =
+            (
+                currentIndex + 1
+            ) % order.length;
+
+
+        prevName.textContent =
+            resources[
+                order[previousIndex]
+            ].name;
+
+
+        nextName.textContent =
+            resources[
+                order[nextIndex]
+            ].name;
+
+
+        /* RESET SCROLL */
+
+        content.scrollTop = 0;
+
+        updateProgress();
+
+    }
+
+
+    /* ============================================================
+       OPEN
+       ============================================================ */
+
+    function openResource(key) {
+
+        if (!resources[key]) {
+            return;
+        }
+
+
+        renderResource(key);
+
+
+        resourcesReader.classList.add(
+            "open"
+        );
+
+
+        resourcesReader.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.classList.add(
+            "resources-reader-open"
+        );
+
+
+        closeButton.focus();
+
+    }
+
+
+    /* ============================================================
+       CLOSE
+       ============================================================ */
+
+    function closeResource() {
+
+        resourcesReader.classList.remove(
+            "open"
+        );
+
+
+        resourcesReader.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.classList.remove(
+            "resources-reader-open"
+        );
+
+
+        if (activeResource) {
+
+            const activeCard =
+                document.querySelector(
+                    `.legal-resource-card.resource-${activeResource}`
+                );
+
+
+            if (activeCard) {
+                activeCard.focus();
+            }
+
+        }
+
+    }
+
+
+    /* ============================================================
+       PREVIOUS
+       ============================================================ */
+
+    function openPrevious() {
+
+        const previousIndex =
+            (
+                currentIndex - 1 + order.length
+            ) % order.length;
+
+
+        openResource(
+            order[previousIndex]
+        );
+
+    }
+
+
+    /* ============================================================
+       NEXT
+       ============================================================ */
+
+    function openNext() {
+
+        const nextIndex =
+            (
+                currentIndex + 1
+            ) % order.length;
+
+
+        openResource(
+            order[nextIndex]
+        );
+
+    }
+
+
+    /* ============================================================
+       RESOURCE CARD CLICK
+       ============================================================ */
+
+    resourceCards.forEach(card => {
+
+        const key =
+            getResourceKey(card);
+
+
+        if (!key) {
+            return;
+        }
+
+
+        /*
+         * The existing cards are anchors pointing directly
+         * to the official institutions.
+         *
+         * We prevent that first navigation so the visitor gets
+         * the premium O&O reader instead.
+         */
+
+        card.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                openResource(key);
+
+            }
+        );
+
+
+        card.setAttribute(
+            "role",
+            "button"
+        );
+
+
+        card.setAttribute(
+            "tabindex",
+            "0"
+        );
+
+
+        card.setAttribute(
+            "aria-haspopup",
+            "dialog"
+        );
+
+    });
+
+
+    /* ============================================================
+       KEYBOARD ACCESS ON RESOURCE CARDS
+       ============================================================ */
+
+    resourceCards.forEach(card => {
+
+        const key =
+            getResourceKey(card);
+
+
+        if (!key) {
+            return;
+        }
+
+
+        card.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    openResource(key);
+
+                }
+
+            }
+        );
+
+    });
+
+
+    /* ============================================================
+       CLOSE BUTTON
+       ============================================================ */
+
+    closeButton.addEventListener(
+        "click",
+        closeResource
+    );
+
+
+    /* ============================================================
+       BACKDROP
+       ============================================================ */
+
+    backdrop.addEventListener(
+        "click",
+        closeResource
+    );
+
+
+    /* ============================================================
+       NAVIGATION BUTTONS
+       ============================================================ */
+
+    prevButton.addEventListener(
+        "click",
+        openPrevious
+    );
+
+
+    nextButton.addEventListener(
+        "click",
+        openNext
+    );
+
+
+    /* ============================================================
+       KEYBOARD NAVIGATION
+       ============================================================ */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                !resourcesReader.classList.contains(
+                    "open"
+                )
+            ) {
+                return;
+            }
+
+
+            if (event.key === "Escape") {
+
+                closeResource();
+
+                return;
+
+            }
+
+
+            if (event.key === "ArrowLeft") {
+
+                event.preventDefault();
+
+                openPrevious();
+
+                return;
+
+            }
+
+
+            if (event.key === "ArrowRight") {
+
+                event.preventDefault();
+
+                openNext();
+
+            }
+
+        }
+    );
+
+
+    /* ============================================================
+       READING PROGRESS
+       ============================================================ */
+
+    function updateProgress() {
+
+        if (!content) {
+            return;
+        }
+
+
+        const scrollable =
+            content.scrollHeight -
+            content.clientHeight;
+
+
+        if (scrollable <= 0) {
+
+            progress.style.width =
+                "100%";
+
+            return;
+
+        }
+
+
+        const percentage =
+            (
+                content.scrollTop /
+                scrollable
+            ) * 100;
+
+
+        progress.style.width =
+            `${Math.min(100, Math.max(0, percentage))}%`;
+
+    }
+
+
+    content.addEventListener(
+        "scroll",
+        updateProgress,
+        {
+            passive: true
+        }
+    );
+
+
+    /* ============================================================
+       TOUCH / SWIPE NAVIGATION
+       ============================================================ */
+
+    let touchStartX = 0;
+
+    let touchStartY = 0;
+
+
+    content.addEventListener(
+        "touchstart",
+        event => {
+
+            const touch =
+                event.changedTouches[0];
+
+
+            touchStartX =
+                touch.clientX;
+
+
+            touchStartY =
+                touch.clientY;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    content.addEventListener(
+        "touchend",
+        event => {
+
+            const touch =
+                event.changedTouches[0];
+
+
+            const deltaX =
+                touch.clientX -
+                touchStartX;
+
+
+            const deltaY =
+                touch.clientY -
+                touchStartY;
+
+
+            /*
+             * Ignore normal vertical scrolling.
+             */
+
+            if (
+                Math.abs(deltaX) < 70 ||
+                Math.abs(deltaX) <
+                Math.abs(deltaY)
+            ) {
+
+                return;
+
+            }
+
+
+            if (deltaX < 0) {
+
+                openNext();
+
+            } else {
+
+                openPrevious();
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ============================================================
+       CONSULTATION CTA
+       ------------------------------------------------------------
+       Because this is inside a fixed reader, we close the reader
+       before allowing the normal #contact navigation to happen.
+       ============================================================ */
+
+    const consultationButton =
+        resourcesReader.querySelector(
+            ".resources-reader-cta-button"
+        );
+
+
+    if (consultationButton) {
+
+        consultationButton.addEventListener(
+            "click",
+            () => {
+
+                closeResource();
+
+            }
+        );
+
+    }
+
+
+    /* ============================================================
+       INITIAL STATE
+       ============================================================ */
+
+    renderResource(
+        order[0]
+    );
 
 
 });
