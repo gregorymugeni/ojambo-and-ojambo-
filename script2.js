@@ -2,7 +2,40 @@
    OJAMBO & OJAMBO ADVOCATES
    INTERACTION / ANIMATION SCRIPT
    ============================================================ */
+/*
+ * ============================================================
+ * O&O ADVOCATES — SERVICE WORKER REGISTRATION
+ * ============================================================
+ */
 
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker
+            .register("/service-worker.js", {
+                scope: "/"
+            })
+            .then(registration => {
+
+                console.log(
+                    "[O&O PWA] Service worker registered:",
+                    registration.scope
+                );
+
+            })
+            .catch(error => {
+
+                console.error(
+                    "[O&O PWA] Service worker registration failed:",
+                    error
+                );
+
+            });
+
+    });
+
+}
 
 /* ============================================================
    01. PAGE LOADER
@@ -537,6 +570,268 @@ practiceItems.forEach(item => {
 })();
 
 
+
+/* ============================================================
+   O&O PREMIUM PWA INSTALL EXPERIENCE
+   ============================================================ */
+
+(() => {
+
+    let deferredInstallPrompt = null;
+
+    const banner =
+        document.getElementById("ooInstallBanner");
+
+    const installButton =
+        document.getElementById("ooInstallButton");
+
+    const closeButton =
+        document.getElementById("ooInstallClose");
+
+
+    if (
+        !banner ||
+        !installButton ||
+        !closeButton
+    ) {
+        return;
+    }
+
+
+    /* ============================================================
+       CHECK WHETHER THE SITE IS ALREADY INSTALLED
+       ============================================================ */
+
+    const isStandalone =
+        window.matchMedia(
+            "(display-mode: standalone)"
+        ).matches ||
+        window.navigator.standalone === true;
+
+
+    if (isStandalone) {
+        return;
+    }
+
+
+    /* ============================================================
+       DISMISSAL MEMORY
+       ------------------------------------------------------------
+       Don't keep annoying the visitor after they close it.
+       ============================================================ */
+
+    const dismissed =
+        localStorage.getItem(
+            "oo_install_banner_dismissed"
+        );
+
+
+    /* ============================================================
+       SHOW BANNER
+       ============================================================ */
+
+    function showInstallBanner() {
+
+        if (dismissed) {
+            return;
+        }
+
+        banner.classList.add("is-visible");
+
+        banner.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+    }
+
+
+    /* ============================================================
+       HIDE BANNER
+       ============================================================ */
+
+    function hideInstallBanner(
+        remember = false
+    ) {
+
+        banner.classList.remove(
+            "is-visible"
+        );
+
+        banner.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        if (remember) {
+
+            localStorage.setItem(
+                "oo_install_banner_dismissed",
+                "1"
+            );
+
+        }
+
+    }
+
+
+    /* ============================================================
+       BROWSER MAKES PWA INSTALL AVAILABLE
+       ============================================================ */
+
+    window.addEventListener(
+        "beforeinstallprompt",
+        event => {
+
+            /*
+             * Prevent Chrome from showing its own
+             * automatic install prompt.
+             */
+
+            event.preventDefault();
+
+
+            /*
+             * Save the prompt so our branded
+             * button can trigger it later.
+             */
+
+            deferredInstallPrompt = event;
+
+
+            /*
+             * Give the page a moment before showing
+             * the banner so it feels intentional.
+             */
+
+            setTimeout(() => {
+
+                showInstallBanner();
+
+            }, 1800);
+
+        }
+    );
+
+
+    /* ============================================================
+       INSTALL BUTTON
+       ============================================================ */
+
+    installButton.addEventListener(
+        "click",
+        async () => {
+
+            if (!deferredInstallPrompt) {
+                return;
+            }
+
+
+            const promptEvent =
+                deferredInstallPrompt;
+
+
+            /*
+             * Prevent another click from trying
+             * to reuse the same prompt.
+             */
+
+            deferredInstallPrompt = null;
+
+
+            try {
+
+                await promptEvent.prompt();
+
+                const result =
+                    await promptEvent.userChoice;
+
+
+                /*
+                 * Whether accepted or dismissed,
+                 * hide our custom banner.
+                 */
+
+                hideInstallBanner(
+                    result.outcome !== "accepted"
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "O&O install prompt unavailable:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ============================================================
+       CLOSE
+       ============================================================ */
+
+    closeButton.addEventListener(
+        "click",
+        () => {
+
+            hideInstallBanner(true);
+
+        }
+    );
+
+
+    /* ============================================================
+       SUCCESSFUL INSTALL
+       ============================================================ */
+
+    window.addEventListener(
+        "appinstalled",
+        () => {
+
+            deferredInstallPrompt = null;
+
+            hideInstallBanner();
+
+            localStorage.removeItem(
+                "oo_install_banner_dismissed"
+            );
+
+        }
+    );
+
+
+    /* ============================================================
+       SAFETY CHECK
+       ------------------------------------------------------------
+       If the user installs the app through the browser menu,
+       remove our banner too.
+       ============================================================ */
+
+    window.addEventListener(
+        "pageshow",
+        () => {
+
+            const installed =
+                window.matchMedia(
+                    "(display-mode: standalone)"
+                ).matches ||
+                window.navigator.standalone === true;
+
+
+            if (installed) {
+
+                hideInstallBanner();
+
+            }
+
+        }
+    );
+
+})();
 
 
 /* =========================================================
@@ -1637,8 +1932,7 @@ kayanja: {
         `)
         .forEach(element => {
 
-            observer.observe(element);
-
+scrollObserver.observe(element);
         });
 
 
