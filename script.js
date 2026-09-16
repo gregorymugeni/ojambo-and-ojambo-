@@ -6403,6 +6403,25 @@ clientsReader.innerHTML = `
         if (!data) return;
 
 
+
+
+        /* ============================================================
+   ENTITY-SPECIFIC CLIENT IMAGES
+   ============================================================ */
+
+if (
+    window.ooClientsGallery &&
+    typeof window.ooClientsGallery.setEntity === "function"
+) {
+
+    window.ooClientsGallery.setEntity(
+        key
+    );
+
+}
+
+
+
         currentIndex =
             order.indexOf(key);
 
@@ -8160,6 +8179,23 @@ clientsReader.setAttribute(
         }
 
 
+
+
+        /* ============================================================
+   ENTITY-SPECIFIC RESOURCE IMAGES
+   ============================================================ */
+
+if (
+    window.ooResourcesGallery
+) {
+
+    window.ooResourcesGallery.setEntity(
+        key
+    );
+
+}
+
+
         currentIndex =
             order.indexOf(key);
 
@@ -8786,7 +8822,6 @@ clientsReader.setAttribute(
    • Does not modify the editorial typography
    ============================================================ */
 
-(() => {
 
     /* ============================================================
        IMAGE LIBRARY
@@ -8797,30 +8832,117 @@ clientsReader.setAttribute(
        The filenames below match the filenames currently present
        in your project configuration.
        ============================================================ */
+/* ============================================================
+   OJAMBO & OJAMBO ADVOCATES
+   ENTITY-SPECIFIC CINEMATIC READER IMAGES
+   ============================================================
 
-    const OO_READER_IMAGES = [
+   CLIENTS:
+   Each client has its own image pool.
 
-        "/capitallogistics.png",
+   RESOURCES:
+   Each legal resource has its own image pool.
 
-        "/pioneerbus.png",
+   IMPORTANT:
+   - 1 image = static image
+   - 2+ images = automatic crossfade
+   - Empty array = no cinematic image
+   - Replace placeholder paths with your real files
+   ============================================================ */
 
-        "/Christian%20Life%20Minitires.png"
+(() => {
 
-    ];
+    /* ============================================================
+       CLIENT IMAGE LIBRARIES
+       ============================================================ */
+
+    const OO_CLIENT_IMAGE_POOLS = {
+
+        kenlloyd: [
+            "/kenlloyd2.webp",
+            "/kenlloyd.jpg",
+        ],
+
+        pioneer: [
+            "/pioneerbus.png",
+            "/pioneerbus.png"
+        ],
+
+        capital: [
+            "/capitallogistics.png",
+            "/capital logistics.jpg",
+            '/capital l4.jpg',
+            '/capital L 2.jpg'
+        ],
+
+        elsmed: [
+'/eslmed 2.jpg'     ,
+'/eslmed.png',
+'wslmed3.jpg'
+   ],
+
+        returnhope: [
+'/return hope.png'    ,
+'return hope.jpg'
+    ],
+
+        christian: [
+            "/Christian Life Minitires.png",
+            "/Christ-Life-Ministries-Roanoke-Virginia-Church-Prayer-Conferences-1.jpg",
+            'christian life.webp'
+        ],
+
+        kirk: [
+'neden-karcan-img-1.png'       ,
+'garageImage.jpg'
+ ]
+
+    };
 
 
     /* ============================================================
-       TIMING
+       LEGAL RESOURCE IMAGE LIBRARIES
+       ============================================================ */
+
+    const OO_RESOURCE_IMAGE_POOLS = {
+
+        ursb: [
+            "/1663823898254.jpg",
+            "/images (6).jpg"
+        ],
+
+        ura: [
+            "/DxV2us4WsAAOr-c.jpg",
+            'images (2).jpg',
+            'f90a3f94-2527-4124-9b5b-9d6efff3bd0f.jpg'
+        ],
+
+        judiciary: [
+            "/ChatGPT Image Sep 16, 2026, 07_52_01 PM.png",
+            "/ChatGPT Image Sep 16, 2026, 07_57_09 PM.png",
+            'ChatGPT Image Sep 16, 2026, 08_04_33 PM.png'
+        ],
+
+        ulrc: [
+'l1.jpg'   
+     ],
+
+        bou: [
+'images (5).jpg'       ,
+'Bank-of-Uganda-Kampala-1.webp' ],
+
+        uia: [
+'UIA-story-photo.jpg'   ,
+'IMG_8558_0.jpg'     ]
+
+    };
+
+
+    /* ============================================================
+       SETTINGS
        ============================================================ */
 
     const OO_IMAGE_DURATION = 6000;
-
-    const OO_FADE_DURATION = 1400;
-
-
-    /* ============================================================
-       REDUCED MOTION
-       ============================================================ */
 
     const ooReducedMotion =
         window.matchMedia(
@@ -8829,31 +8951,28 @@ clientsReader.setAttribute(
 
 
     /* ============================================================
-       PRELOAD ALL IMAGES
-       ------------------------------------------------------------
-       This makes the transition much smoother.
-
-       We preload the images before the visitor needs them.
+       PRELOAD IMAGE
        ============================================================ */
 
-    function ooPreloadImages() {
+    function preloadImage(src) {
 
-        OO_READER_IMAGES.forEach(src => {
+        if (!src) {
+            return;
+        }
 
-            const image = new Image();
+        const image =
+            new Image();
 
-            image.src = src;
-
-        });
+        image.src = src;
 
     }
 
 
     /* ============================================================
-       CREATE ONE IMAGE LAYER
+       CREATE IMAGE LAYER
        ============================================================ */
 
-    function ooCreateImageLayer() {
+    function createImageLayer() {
 
         const layer =
             document.createElement("div");
@@ -8868,19 +8987,12 @@ clientsReader.setAttribute(
         image.className =
             "oo-reader-motion-image";
 
-
         image.alt = "";
 
         image.decoding = "async";
 
         image.draggable = false;
 
-
-        /*
-         * If an image fails, log the exact filename.
-         * This makes deployment problems immediately visible
-         * in DevTools.
-         */
 
         image.addEventListener(
             "error",
@@ -8903,125 +9015,276 @@ clientsReader.setAttribute(
 
 
     /* ============================================================
-       INITIALISE ONE READER
+       GALLERY CLASS
        ============================================================ */
 
-    function ooInitReaderGallery(
-        reader,
-        visual,
-        readerName
-    ) {
+    class OOReaderGallery {
 
-        if (!reader || !visual) {
+        constructor(
+            reader,
+            visual,
+            imagePools,
+            readerName
+        ) {
 
-            console.warn(
-                `[O&O Reader Images] ${readerName} reader visual not found.`
+            this.reader =
+                reader;
+
+            this.visual =
+                visual;
+
+            this.imagePools =
+                imagePools;
+
+            this.readerName =
+                readerName;
+
+
+            this.images = [];
+
+            this.currentIndex = 0;
+
+            this.timer = null;
+
+            this.running = false;
+
+
+            this.activeLayer = null;
+
+            this.hiddenLayer = null;
+
+
+            this.gallery =
+                document.createElement("div");
+
+            this.gallery.className =
+                "oo-reader-motion-gallery";
+
+            this.gallery.setAttribute(
+                "aria-hidden",
+                "true"
             );
 
-            return null;
+
+            /* ----------------------------------------------------
+               TWO CROSSFADE LAYERS
+               ---------------------------------------------------- */
+
+            const layerA =
+                createImageLayer();
+
+            const layerB =
+                createImageLayer();
+
+
+            this.gallery.appendChild(
+                layerA
+            );
+
+            this.gallery.appendChild(
+                layerB
+            );
+
+
+            this.visual.prepend(
+                this.gallery
+            );
+
+
+            this.activeLayer =
+                layerA;
+
+            this.hiddenLayer =
+                layerB;
+
+
+            /* ----------------------------------------------------
+               WATCH OPEN / CLOSE
+               ---------------------------------------------------- */
+
+            this.observer =
+                new MutationObserver(
+                    () => {
+
+                        if (
+                            this.reader.classList.contains(
+                                "open"
+                            )
+                        ) {
+
+                            this.start();
+
+                        } else {
+
+                            this.stop();
+
+                        }
+
+                    }
+                );
+
+
+            this.observer.observe(
+                this.reader,
+                {
+                    attributes: true,
+                    attributeFilter: [
+                        "class"
+                    ]
+                }
+            );
 
         }
 
 
-        /*
-         * Never create the gallery twice.
-         */
+        /* ========================================================
+           GET IMAGE POOL
+           ======================================================== */
 
-        const existingGallery =
-            visual.querySelector(
-                ".oo-reader-motion-gallery"
+        getPool(key) {
+
+            const pool =
+                this.imagePools[key];
+
+            if (!Array.isArray(pool)) {
+                return [];
+            }
+
+            return pool.filter(
+                src =>
+                    typeof src === "string" &&
+                    src.trim() !== ""
             );
-
-
-        if (existingGallery) {
-
-            return existingGallery;
 
         }
 
 
-        /* --------------------------------------------------------
-           GALLERY
-           -------------------------------------------------------- */
+        /* ========================================================
+           CHANGE ENTITY
+           ======================================================== */
 
-        const gallery =
-            document.createElement("div");
+        setEntity(key) {
 
-        gallery.className =
-            "oo-reader-motion-gallery";
+            this.stop();
 
 
-        gallery.setAttribute(
-            "aria-hidden",
-            "true"
-        );
+            this.images =
+                this.getPool(key);
 
 
-        /* --------------------------------------------------------
-           TWO CROSSFADE LAYERS
-           -------------------------------------------------------- */
-
-        const layerA =
-            ooCreateImageLayer();
-
-        const layerB =
-            ooCreateImageLayer();
+            this.currentIndex =
+                0;
 
 
-        gallery.appendChild(layerA);
+            /*
+             * Clear both existing layers.
+             */
 
-        gallery.appendChild(layerB);
-
-
-        /*
-         * Put the gallery behind the existing editorial content.
-         */
-
-        visual.prepend(gallery);
+            const layers =
+                this.gallery.querySelectorAll(
+                    ".oo-reader-motion-layer"
+                );
 
 
-        /* --------------------------------------------------------
-           STATE
-           -------------------------------------------------------- */
+            const layerA =
+                layers[0];
 
-        let currentIndex = 0;
-
-        let activeLayer = layerA;
-
-        let hiddenLayer = layerB;
-
-        let timer = null;
-
-        let running = false;
+            const layerB =
+                layers[1];
 
 
-        /* --------------------------------------------------------
-           FIRST IMAGE
-           -------------------------------------------------------- */
+            const imageA =
+                layerA.querySelector(
+                    ".oo-reader-motion-image"
+                );
 
-        const firstImage =
-            layerA.querySelector(
-                ".oo-reader-motion-image"
+            const imageB =
+                layerB.querySelector(
+                    ".oo-reader-motion-image"
+                );
+
+
+            imageA.removeAttribute(
+                "src"
+            );
+
+            imageB.removeAttribute(
+                "src"
             );
 
 
-        firstImage.src =
-            OO_READER_IMAGES[0];
+            layerA.classList.remove(
+                "is-active"
+            );
+
+            layerB.classList.remove(
+                "is-active"
+            );
 
 
-        layerA.classList.add(
-            "is-active"
-        );
+            /*
+             * No images for this entity.
+             */
+
+            if (!this.images.length) {
+
+                console.log(
+                    `[O&O Reader Images] ${this.readerName}: no images for "${key}".`
+                );
+
+                return;
+
+            }
 
 
-        /* --------------------------------------------------------
-           NEXT IMAGE
-           -------------------------------------------------------- */
+            /*
+             * First image appears immediately.
+             */
 
-        function nextImage() {
+            imageA.src =
+                this.images[0];
+
+            layerA.classList.add(
+                "is-active"
+            );
+
+
+            /*
+             * Preload the remaining images.
+             */
+
+            this.images.forEach(
+                src => preloadImage(src)
+            );
+
+
+            /*
+             * Only start automatic movement
+             * when there are at least 2 images.
+             */
 
             if (
-                !OO_READER_IMAGES.length
+                this.images.length > 1 &&
+                this.reader.classList.contains(
+                    "open"
+                )
+            ) {
+
+                this.start();
+
+            }
+
+        }
+
+
+        /* ========================================================
+           NEXT IMAGE
+           ======================================================== */
+
+        next() {
+
+            if (
+                this.images.length < 2
             ) {
 
                 return;
@@ -9029,47 +9292,41 @@ clientsReader.setAttribute(
             }
 
 
-            currentIndex =
+            this.currentIndex =
                 (
-                    currentIndex + 1
+                    this.currentIndex + 1
                 ) %
-                OO_READER_IMAGES.length;
+                this.images.length;
 
 
             const nextSrc =
-                OO_READER_IMAGES[
-                    currentIndex
+                this.images[
+                    this.currentIndex
                 ];
 
 
             const hiddenImage =
-                hiddenLayer.querySelector(
+                this.hiddenLayer.querySelector(
                     ".oo-reader-motion-image"
                 );
 
-
-            /*
-             * Set the next image before activating the layer.
-             */
 
             hiddenImage.src =
                 nextSrc;
 
 
             /*
-             * Force the browser to recognise this as
-             * a fresh transition.
+             * Restart CSS transition.
              */
 
-            void hiddenLayer.offsetWidth;
+            void this.hiddenLayer.offsetWidth;
 
 
-            hiddenLayer.classList.add(
+            this.hiddenLayer.classList.add(
                 "is-active"
             );
 
-
-            activeLayer.classList.remove(
+            this.activeLayer.classList.remove(
                 "is-active"
             );
 
@@ -9079,60 +9336,52 @@ clientsReader.setAttribute(
              */
 
             const previousActive =
-                activeLayer;
+                this.activeLayer;
 
 
-            activeLayer =
-                hiddenLayer;
+            this.activeLayer =
+                this.hiddenLayer;
 
 
-            hiddenLayer =
+            this.hiddenLayer =
                 previousActive;
 
 
             /*
-             * Preload the image after the next one.
+             * Preload next image.
              */
 
             const preloadIndex =
                 (
-                    currentIndex + 1
+                    this.currentIndex + 1
                 ) %
-                OO_READER_IMAGES.length;
+                this.images.length;
 
 
-            const preload =
-                new Image();
-
-
-            preload.src =
-                OO_READER_IMAGES[
+            preloadImage(
+                this.images[
                     preloadIndex
-                ];
+                ]
+            );
 
         }
 
 
-        /* --------------------------------------------------------
+        /* ========================================================
            START
-           -------------------------------------------------------- */
+           ======================================================== */
 
-        function start() {
+        start() {
 
-            if (running) {
+            if (
+                this.running ||
+                this.images.length < 2
+            ) {
 
                 return;
 
             }
 
-
-            running = true;
-
-
-            /*
-             * The image itself remains visible for users who
-             * prefer reduced motion, but automatic movement stops.
-             */
 
             if (
                 ooReducedMotion.matches
@@ -9143,111 +9392,50 @@ clientsReader.setAttribute(
             }
 
 
-            timer =
+            this.running =
+                true;
+
+
+            this.timer =
                 window.setInterval(
-                    nextImage,
+                    () => this.next(),
                     OO_IMAGE_DURATION
                 );
 
         }
 
 
-        /* --------------------------------------------------------
+        /* ========================================================
            STOP
-           -------------------------------------------------------- */
+           ======================================================== */
 
-        function stop() {
+        stop() {
 
-            running = false;
+            this.running =
+                false;
 
 
-            if (timer) {
+            if (this.timer) {
 
                 window.clearInterval(
-                    timer
+                    this.timer
                 );
 
-                timer = null;
+                this.timer =
+                    null;
 
             }
 
         }
-
-
-        /* --------------------------------------------------------
-           WATCH READER OPEN / CLOSE
-           -------------------------------------------------------- */
-
-        const observer =
-            new MutationObserver(() => {
-
-                const isOpen =
-                    reader.classList.contains(
-                        "open"
-                    );
-
-
-                if (isOpen) {
-
-                    start();
-
-                } else {
-
-                    stop();
-
-                }
-
-            });
-
-
-        observer.observe(
-            reader,
-            {
-                attributes: true,
-                attributeFilter: [
-                    "class"
-                ]
-            }
-        );
-
-
-        /*
-         * Handle the case where the reader is already open.
-         */
-
-        if (
-            reader.classList.contains(
-                "open"
-            )
-        ) {
-
-            start();
-
-        }
-
-
-        /* --------------------------------------------------------
-           RETURN GALLERY
-           -------------------------------------------------------- */
-
-        return gallery;
 
     }
 
 
     /* ============================================================
-       INITIALISE EVERYTHING
-       ------------------------------------------------------------
-       This is the important fix.
-
-       The previous code attempted to find the readers before
-       their IIFEs created them.
-
-       We now wait until the document has been parsed and the
-       Client + Resource Reader code has created its elements.
+       WAIT UNTIL READERS EXIST
        ============================================================ */
 
-    function ooInitCinematicReaders() {
+    function initialise() {
 
         const clientsReader =
             document.getElementById(
@@ -9262,40 +9450,43 @@ clientsReader.setAttribute(
 
 
         console.log(
-            "[O&O Reader Images] Initialising..."
+            "[O&O Reader Images] Initialising entity galleries..."
         );
 
 
-        console.log(
-            "[O&O Reader Images] Clients Reader:",
-            !!clientsReader
-        );
-
-
-        console.log(
-            "[O&O Reader Images] Resources Reader:",
-            !!resourcesReader
-        );
-
-
-        /* --------------------------------------------------------
+        /* ========================================================
            CLIENTS
-           -------------------------------------------------------- */
+           ======================================================== */
 
         if (clientsReader) {
 
-            const clientVisual =
+            const visual =
                 clientsReader.querySelector(
                     ".clients-reader-visual"
                 );
 
 
-            if (clientVisual) {
+            if (visual) {
 
-                ooInitReaderGallery(
-                    clientsReader,
-                    clientVisual,
-                    "Clients"
+                const gallery =
+                    new OOReaderGallery(
+                        clientsReader,
+                        visual,
+                        OO_CLIENT_IMAGE_POOLS,
+                        "Clients"
+                    );
+
+
+                window.ooClientsGallery =
+                    gallery;
+
+
+                /*
+                 * Start with the first client.
+                 */
+
+                gallery.setEntity(
+                    "kenlloyd"
                 );
 
             }
@@ -9303,24 +9494,39 @@ clientsReader.setAttribute(
         }
 
 
-        /* --------------------------------------------------------
+        /* ========================================================
            RESOURCES
-           -------------------------------------------------------- */
+           ======================================================== */
 
         if (resourcesReader) {
 
-            const resourceVisual =
+            const visual =
                 resourcesReader.querySelector(
                     ".resources-reader-visual"
                 );
 
 
-            if (resourceVisual) {
+            if (visual) {
 
-                ooInitReaderGallery(
-                    resourcesReader,
-                    resourceVisual,
-                    "Resources"
+                const gallery =
+                    new OOReaderGallery(
+                        resourcesReader,
+                        visual,
+                        OO_RESOURCE_IMAGE_POOLS,
+                        "Resources"
+                    );
+
+
+                window.ooResourcesGallery =
+                    gallery;
+
+
+                /*
+                 * Start with URSB.
+                 */
+
+                gallery.setEntity(
+                    "ursb"
                 );
 
             }
@@ -9328,19 +9534,15 @@ clientsReader.setAttribute(
         }
 
 
-        /*
-         * Preload the image library after the readers are ready.
-         */
-
-        ooPreloadImages();
+        console.log(
+            "[O&O Reader Images] Entity galleries ready."
+        );
 
     }
 
 
     /* ============================================================
        DOM READY
-       ------------------------------------------------------------
-       Works whether this JS file loads before or after DOMContentLoaded.
        ============================================================ */
 
     if (
@@ -9349,7 +9551,7 @@ clientsReader.setAttribute(
 
         document.addEventListener(
             "DOMContentLoaded",
-            ooInitCinematicReaders,
+            initialise,
             {
                 once: true
             }
@@ -9357,9 +9559,8 @@ clientsReader.setAttribute(
 
     } else {
 
-        ooInitCinematicReaders();
+        initialise();
 
     }
-
 
 })();
