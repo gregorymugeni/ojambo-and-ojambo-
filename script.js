@@ -5936,9 +5936,7 @@ clientsReader.innerHTML = `
 
                 <div class="clients-reader-brand">
 
-                    <span class="clients-reader-mark">
-                        O&O
-                    </span>
+               
 
                    
                 </div>
