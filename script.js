@@ -8909,7 +8909,6 @@ if (
 
         ursb: [
             'ChatGPT Image Sep 16, 2026, 08_42_30 PM.png',
-            "/1663823898254.jpg",
             "/images (6).jpg"
         ],
 
@@ -8926,16 +8925,18 @@ if (
         ],
 
         ulrc: [
-'l1.jpg'   
+'ChatGPT Image Sep 16, 2026, 11_02_23 PM.png'   
      ],
 
         bou: [
 'images (5).jpg'       ,
+'ChatGPT Image Sep 16, 2026, 10_52_47 PM.png',
 'Bank-of-Uganda-Kampala-1.webp' ],
 
         uia: [
 'UIA-story-photo.jpg'   ,
-'IMG_8558_0.jpg'     ]
+'IMG_8558_0.jpg'  ,
+'/ChatGPT Image Sep 16, 2026, 10_46_14 PM.png'   ]
 
     };
 
